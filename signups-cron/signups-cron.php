@@ -8,17 +8,20 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link              https://github.com/scottmotion/WP-Signups-Cron/
  * @since             1.0.0
  * @package           Signups_Cron
+ * @author            Scott Winn
+ * @copyright         2024 Scott Winn
+ * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
- * Plugin URI:        http://example.com/signups-cron-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       Signups Cron
+ * Plugin URI:        https://github.com/scottmotion/WP-Signups-Cron/
+ * Description:       Manage WordPress signups via WP-Cron.
  * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Author:            Scott Winn
+ * Author URI:        https://www.scottwinn.dev/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       signups-cron
