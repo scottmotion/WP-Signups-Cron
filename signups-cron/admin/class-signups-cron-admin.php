@@ -312,7 +312,7 @@ class Signups_Cron_Admin {
 	public function signups_cron_field_delete_signups_now_cb() {
 
 		?>
-		<div class="delete-signups-now_wrapper" style="display:flex;align-items:center">
+		<div class="delete-signups-now_wrapper">
 			<p>
 				<?php esc_html_e( 'Delete all ', 'signups-cron' ); ?>
 				<?php esc_html_e( '<SELECT>', 'signups-cron' ); ?>
