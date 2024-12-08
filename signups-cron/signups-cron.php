@@ -11,7 +11,7 @@
  * @link              https://github.com/scottmotion/WP-Signups-Cron/
  * @since             1.0.0
  * @package           Signups_Cron
- * @author            Scott Winn
+ * @author            Scott Winn <hello@scottwinn.dev>
  * @copyright         2024 Scott Winn
  * @license           GPL-2.0-or-later
  *
