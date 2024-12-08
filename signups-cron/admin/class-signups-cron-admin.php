@@ -320,7 +320,7 @@ class Signups_Cron_Admin {
 				<?php esc_html_e( '<NUMBER>', 'signups-cron' ); ?>
 				<?php esc_html_e( ' days old.', 'signups-cron' ); ?>
 			</p>
-			<div style="padding-left:1rem">
+			<div class="delete-signups-now_submit-wrapper">
 				<button class="button button-primary">Submit</button>
 			</div>
 		</div>
