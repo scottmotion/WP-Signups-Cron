@@ -30,6 +30,7 @@
 	 */
 
 	$(function () {
+
 		checkbox_active = $("#ucron_field_active_enabled");
 		text_active = $("#text_for_ucron_field_active_threshold");
 		input_active = $("#ucron_field_active_threshold");
@@ -51,28 +52,29 @@
 				input_active.prop('readonly', true);
 			}
 		});
-	});
 
-	checkbox_pending = $("#ucron_field_pending_enabled");
-	text_pending = $("#text_for_ucron_field_pending_threshold");
-	input_pending = $("#ucron_field_pending_threshold");
+		checkbox_pending = $("#ucron_field_pending_enabled");
+		text_pending = $("#text_for_ucron_field_pending_threshold");
+		input_pending = $("#ucron_field_pending_threshold");
 
-	if (checkbox_pending.is(':checked')) {      // document ready
-		text_pending.removeClass("text-disabled");
-		input_pending.prop('readonly', false);
-	} else {
-		text_pending.addClass("text-disabled");
-		input_pending.prop('readonly', true);
-	}
-
-	checkbox_pending.change(function () {        //event
-		if (checkbox_pending.is(':checked')) {
+		if (checkbox_pending.is(':checked')) {      // document ready
 			text_pending.removeClass("text-disabled");
 			input_pending.prop('readonly', false);
 		} else {
 			text_pending.addClass("text-disabled");
 			input_pending.prop('readonly', true);
 		}
+
+		checkbox_pending.change(function () {        //event
+			if (checkbox_pending.is(':checked')) {
+				text_pending.removeClass("text-disabled");
+				input_pending.prop('readonly', false);
+			} else {
+				text_pending.addClass("text-disabled");
+				input_pending.prop('readonly', true);
+			}
+		});
+
 	});
 
 })(jQuery);
