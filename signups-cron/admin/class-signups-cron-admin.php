@@ -154,8 +154,8 @@ class Signups_Cron_Admin {
 		
 		 add_settings_section(
 			'signups_cron_section_information',
-			__( 'Table Information', 'signups_cron' ),
-			'signups_cron_section_information_cb',
+			__( 'Table Information', 'signups-cron' ),
+			array( $this, 'signups_cron_section_information_cb' ),
 			'signups_cron_information',
 			array(
 				'before_section'        => '<div class="%s">',
@@ -166,15 +166,15 @@ class Signups_Cron_Admin {
 	
 		add_settings_section(
 			'signups_cron_section_settings',
-			__( 'Cron Settings', 'signups_cron' ),
-			'signups_cron_section_settings_cb',
+			__( 'Cron Settings', 'signups-cron' ),
+			array( $this, 'signups_cron_section_settings_cb' ),
 			'signups_cron_settings'
 		);
 	
 		add_settings_section(
 			'signups_cron_section_tools',
-			__( 'Signups Tools', 'signups_cron' ),
-			'signups_cron_section_tools_cb',
+			__( 'Signups Tools', 'signups-cron' ),
+			array( $this, 'signups_cron_section_tools_cb' ),
 			'signups_cron_tools'
 		);
 		
@@ -185,9 +185,9 @@ class Signups_Cron_Admin {
 	 *
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
 	 */
-	function signups_cron_section_information_cb( $args ) {
+	public function signups_cron_section_information_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups table information.', 'signups_cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups table information.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -196,9 +196,9 @@ class Signups_Cron_Admin {
 	 *
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
 	 */
-	function signups_cron_section_settings_cb( $args ) {
+	public function signups_cron_section_settings_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups cron settings.', 'signups_cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups cron settings.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -207,9 +207,9 @@ class Signups_Cron_Admin {
 	 *
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
 	 */
-	function signups_cron_section_tools_cb( $args ) {
+	public function signups_cron_section_tools_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups tools.', 'signups_cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups tools.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -234,8 +234,8 @@ class Signups_Cron_Admin {
 		// Register a new field in the "signups_cron_section_information" section, inside the "signups_cron_information" page.
 		add_settings_field(
 			'signups_cron_field_signups_information',  // As of WP 4.6 this value is used only internally.
-			__( 'Signups Table Information', 'signups_cron' ),
-			'signups_cron_field_signups_information_cb',
+			__( 'Signups Table Information', 'signups-cron' ),
+			array( $this, 'signups_cron_field_signups_information_cb' ),
 			'signups_cron_information',
 			'signups_cron_section_information',
 			array(
@@ -247,8 +247,8 @@ class Signups_Cron_Admin {
 		// Register a new field in the "signups_cron_section_settings" section, inside the "signups_cron_settings" page.
 		add_settings_field(
 			'signups_cron_field_active_enabled',
-			__( 'Active Signups Cron', 'signups_cron' ),
-			'signups_cron_field_active_enabled_cb',
+			__( 'Active Signups Cron', 'signups-cron' ),
+			array( $this, 'signups_cron_field_active_enabled_cb' ),
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
@@ -259,8 +259,8 @@ class Signups_Cron_Admin {
 		// Register a new field in the "signups_cron_section_information" section, inside the "signups_cron_information" page.
 	    add_settings_field(
 			'signups_cron_field_delete_signups_now',
-			__( 'Delete Signups Now', 'signups_cron' ),
-			'signups_cron_field_delete_signups_now_cb',
+			__( 'Delete Signups Now', 'signups-cron' ),
+			array( $this, 'signups_cron_field_delete_signups_now_cb' ),
 			'signups_cron_tools',
 			'signups_cron_section_tools',
 			array(
@@ -268,6 +268,67 @@ class Signups_Cron_Admin {
 			)
 		);
 	
+	}
+
+	/**
+	 * Signups Information field callback function.
+	 *
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_signups_information_cb() {
+
+		?>
+		<table class="signups-table-info">
+			<tr>
+				<td class="signups-table-info_size">Signups Table Size:</td>
+				<td>SOME DB VALUE MB</td>
+			</tr>
+		</table>
+		<?php
+
+	}
+
+	/**
+	 * Active Signups Delete Enabled field callback function.
+	 * 
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_active_enabled_cb() {
+
+		?>
+		<p>
+			<?php esc_html_e( 'Enable Active Signups cron ', 'signups-cron' ); ?>
+			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+		</p>
+		<?php
+
+	}
+
+	/**
+	 * Delete Signups Now field callback function.
+	 *
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_delete_signups_now_cb() {
+
+		?>
+		<div class="delete-signups-now_wrapper" style="display:flex;align-items:center">
+			<p>
+				<?php esc_html_e( 'Delete all ', 'signups-cron' ); ?>
+				<?php esc_html_e( '<SELECT>', 'signups-cron' ); ?>
+				<?php esc_html_e( ' signups more than ', 'signups-cron' ); ?>
+				<?php esc_html_e( '<NUMBER>', 'signups-cron' ); ?>
+				<?php esc_html_e( ' days old.', 'signups-cron' ); ?>
+			</p>
+			<div style="padding-left:1rem">
+				<button class="button button-primary">Submit</button>
+			</div>
+		</div>
+		<p style="color:red">
+			<?php esc_html_e( '*WARNING! This action cannot be undone. Proceed with caution.*', 'signups-cron' ); ?>
+		</p>
+		<?php
+
 	}
 
 	/**
