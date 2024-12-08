@@ -180,6 +180,45 @@ class Signups_Cron_Admin {
 		
 	}
 
+	/**
+	 * Add settings fields for Signups Cron.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_settings_fields() {
+
+		/**
+		 * add_settings_field( string $id, string $title, callable $callback, string $page, string $section = ‘default’, array $args = array() )
+		 * 
+		 * @param string    $id
+		 * @param string    &title
+		 * @param callable  $callback
+		 * @param string    $page
+		 * @param string	$section
+		 * @param array     $args
+		 */
+
+		add_settings_field(
+			'signups_cron_field_signups_information',  // As of WP 4.6 this value is used only internally.
+			__( 'Signups Table Information', 'signups_cron' ),
+			'signups_cron_field_signups_information_cb',
+			'signups_cron_information',
+			'signups_cron_section_information'
+		);
+
+		add_settings_field(
+			'signups_cron_field_active_enabled',
+			__( 'Active Signups Cron', 'signups_cron' ),
+			'signups_cron_field_active_enabled_cb',
+			'signups_cron_settings',
+			'signups_cron_section_settings',
+			array(
+				'label_for'		=> 'signups_cron_field_active_enabled', // Use $args' label_for to populate the id inside the callback.
+			)
+		);
+	
+	
+	}
 
 	/**
 	 * Register the stylesheets for the admin area.
