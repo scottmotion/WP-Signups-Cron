@@ -8,6 +8,12 @@
     padding-right: 3rem
 }
 
+/* Delete Signups Now fields */
+.delete-signups-now_wrapper {
+    display: flex;
+    align-items: center
+}
+
 /* Text on disabled inputs */
 .text-disabled {
     opacity: 50%;
