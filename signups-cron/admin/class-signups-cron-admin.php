@@ -55,6 +55,67 @@ class Signups_Cron_Admin {
 	}
 
 	/**
+	 * Register the admin page for managing pending signups.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_admin_page() {
+
+		add_submenu_page(
+			'users.php',								// $parent_slug string required - The slug name for the parent menu (or the file name of a standard WordPress admin page).
+			__('Signups Cron Home', 'signups-cron'),	// $page_title string required - The text to be displayed in the title tags of the page when the menu is selected.
+			__('Signups Cron', 'signups-cron'),			// $menu_title string required - The text to be used for the menu.
+			'manage_options',							// $capability string required - The capability required for this menu to be displayed to the user.
+			'signups-cron',								// $menu_slug string required - The slug name to refer to this menu by.
+			array( $this, 'render_admin_page' ),		// $callback callable optional - The function to be called to output the content for this page.
+			null										// $position int|float optional - The position in the menu order this item should appear.
+		);
+	
+	}
+
+	/**
+	 * Render the admin page for viewing and managing pending signups.
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_admin_page() {
+
+			// check user capabilities
+			// if ( ! current_user_can( 'manage_options' ) ) {
+			// 	return;
+			// }
+		
+			?>
+			<div class="wrap">
+				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+				<hr>
+				<?php
+					// // settings_fields( 'signups_cron_information' );
+					// do_settings_sections( 'signups_cron_information' );
+				?>
+				<hr>
+				<form name="settings" action="options.php" method="post">
+					<?php
+					// // output security fields for the registered setting "signups_cron"
+					// settings_fields( 'signups_cron_settings' );
+					// // output setting sections and their fields
+					// do_settings_sections( 'signups_cron_settings' );
+					// // output save settings button
+					// submit_button( 'Save Settings' );
+					?>
+				</form>
+				<hr>
+				<?php
+					// settings_fields( 'signups_cron_tools' );
+					// do_settings_sections( 'signups_cron_tools' );
+				?>
+			</div>
+			<?php		
+
+	}
+
+
+	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
