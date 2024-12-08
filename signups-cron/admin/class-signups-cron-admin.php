@@ -90,24 +90,24 @@ class Signups_Cron_Admin {
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<hr>
 			<?php
-				// // settings_fields( 'signups_cron_information' );
-				// do_settings_sections( 'signups_cron_information' );
+				// settings_fields( 'signups_cron_information' );
+				do_settings_sections( 'signups_cron_information' );
 			?>
 			<hr>
 			<form name="settings" action="options.php" method="post">
 				<?php
-				// // output security fields for the registered setting "signups_cron"
-				// settings_fields( 'signups_cron_settings' );
-				// // output setting sections and their fields
-				// do_settings_sections( 'signups_cron_settings' );
-				// // output save settings button
-				// submit_button( 'Save Settings' );
+				// output security fields for the registered setting "signups_cron"
+				settings_fields( 'signups_cron_settings' );
+				// output setting sections and their fields
+				do_settings_sections( 'signups_cron_settings' );
+				// output save settings button
+				submit_button( 'Save Settings' );
 				?>
 			</form>
 			<hr>
 			<?php
-				// settings_fields( 'signups_cron_tools' );
-				// do_settings_sections( 'signups_cron_tools' );
+				settings_fields( 'signups_cron_tools' );
+				do_settings_sections( 'signups_cron_tools' );
 			?>
 		</div>
 		<?php		
@@ -237,7 +237,11 @@ class Signups_Cron_Admin {
 			__( 'Signups Table Information', 'signups_cron' ),
 			'signups_cron_field_signups_information_cb',
 			'signups_cron_information',
-			'signups_cron_section_information'
+			'signups_cron_section_information',
+			array(
+				'label_for'		=> 'signups_cron_field_signups_information' // Use $args' label_for to populate the id inside the callback.
+			)
+
 		);
 		
 		// Register a new field in the "signups_cron_section_settings" section, inside the "signups_cron_settings" page.
