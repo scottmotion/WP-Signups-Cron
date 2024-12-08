@@ -55,7 +55,7 @@ class Signups_Cron_Admin {
 	}
 
 	/**
-	 * Register the admin page for managing pending signups.
+	 * Register the admin submenu item for 'Signups Cron' under 'Users'.
 	 *
 	 * @since 1.0.0
 	 */
@@ -74,43 +74,43 @@ class Signups_Cron_Admin {
 	}
 
 	/**
-	 * Render the admin page for viewing and managing pending signups.
+	 * Render the admin page for Signups Cron.
 	 *
 	 * @since 1.0.0
 	 */
 	public function render_admin_page() {
 
-			// check user capabilities
-			// if ( ! current_user_can( 'manage_options' ) ) {
-			// 	return;
-			// }
-		
+		// check user capabilities
+		// if ( ! current_user_can( 'manage_options' ) ) {
+		// 	return;
+		// }
+	
+		?>
+		<div class="wrap">
+			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+			<hr>
+			<?php
+				// // settings_fields( 'signups_cron_information' );
+				// do_settings_sections( 'signups_cron_information' );
 			?>
-			<div class="wrap">
-				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-				<hr>
+			<hr>
+			<form name="settings" action="options.php" method="post">
 				<?php
-					// // settings_fields( 'signups_cron_information' );
-					// do_settings_sections( 'signups_cron_information' );
+				// // output security fields for the registered setting "signups_cron"
+				// settings_fields( 'signups_cron_settings' );
+				// // output setting sections and their fields
+				// do_settings_sections( 'signups_cron_settings' );
+				// // output save settings button
+				// submit_button( 'Save Settings' );
 				?>
-				<hr>
-				<form name="settings" action="options.php" method="post">
-					<?php
-					// // output security fields for the registered setting "signups_cron"
-					// settings_fields( 'signups_cron_settings' );
-					// // output setting sections and their fields
-					// do_settings_sections( 'signups_cron_settings' );
-					// // output save settings button
-					// submit_button( 'Save Settings' );
-					?>
-				</form>
-				<hr>
-				<?php
-					// settings_fields( 'signups_cron_tools' );
-					// do_settings_sections( 'signups_cron_tools' );
-				?>
-			</div>
-			<?php		
+			</form>
+			<hr>
+			<?php
+				// settings_fields( 'signups_cron_tools' );
+				// do_settings_sections( 'signups_cron_tools' );
+			?>
+		</div>
+		<?php		
 
 	}
 
