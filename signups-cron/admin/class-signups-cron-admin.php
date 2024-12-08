@@ -155,7 +155,7 @@ class Signups_Cron_Admin {
 		 add_settings_section(
 			'signups_cron_section_information',
 			__( 'Table Information', 'signups_cron' ),
-			'signups_cron_section_information_callback',
+			'signups_cron_section_information_cb',
 			'signups_cron_information',
 			array(
 				'before_section'        => '<div class="%s">',
@@ -167,17 +167,50 @@ class Signups_Cron_Admin {
 		add_settings_section(
 			'signups_cron_section_settings',
 			__( 'Cron Settings', 'signups_cron' ),
-			'signups_cron_section_settings_callback',
+			'signups_cron_section_settings_cb',
 			'signups_cron_settings'
 		);
 	
 		add_settings_section(
 			'signups_cron_section_tools',
 			__( 'Signups Tools', 'signups_cron' ),
-			'signups_cron_section_tools_callback',
+			'signups_cron_section_tools_cb',
 			'signups_cron_tools'
 		);
 		
+	}
+
+	/**
+	 * Information section callback function.
+	 *
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
+	 */
+	function signups_cron_section_information_cb( $args ) {
+		?>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups table information.', 'signups_cron' ); ?></p>
+		<?php
+	}
+
+	/**
+	 * Settings section callback function.
+	 *
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
+	 */
+	function signups_cron_section_settings_cb( $args ) {
+		?>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups cron settings.', 'signups_cron' ); ?></p>
+		<?php
+	}
+
+	/**
+	 * Tools section callback function.
+	 *
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
+	 */
+	function signups_cron_section_tools_cb( $args ) {
+		?>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups tools.', 'signups_cron' ); ?></p>
+		<?php
 	}
 
 	/**
@@ -216,7 +249,6 @@ class Signups_Cron_Admin {
 				'label_for'		=> 'signups_cron_field_active_enabled', // Use $args' label_for to populate the id inside the callback.
 			)
 		);
-	
 	
 	}
 
