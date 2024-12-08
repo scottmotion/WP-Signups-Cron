@@ -295,19 +295,19 @@ class Signups_Cron_Admin {
 		<table class="signups-table-info">
 			<tr>
                 <td>Signups Table Size:</td>
-                <td><?= number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
+                <td><?php number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
             </tr>
             <tr>
                 <td>Total Signups Count:</td>
-                <td><?= number_format( $data["signups_count_total"] ); ?></td>
+                <td><?php number_format( $data["signups_count_total"] ); ?></td>
             </tr>
             <tr>
                 <td>Active Signups Count:</td>
-                <td><?= number_format( $data["signups_count_active"] ); ?></td>
+                <td><?php number_format( $data["signups_count_active"] ); ?></td>
             </tr>
             <tr>
                 <td>Pending Signups Count:</td>
-                <td><?= number_format( $data["signups_count_pending"] ); ?></td>
+                <td><?php number_format( $data["signups_count_pending"] ); ?></td>
             </tr>
 		</table>
 		<?php
