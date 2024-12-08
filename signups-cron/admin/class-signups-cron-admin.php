@@ -128,12 +128,58 @@ class Signups_Cron_Admin {
     	 * @param string $option_name   Setting name.
     	 * @param array  $args          Array of setting registration arguments.
 		 */
-		
+
 		register_setting( 'signups_cron_information', 'signups_cron_information' );
-		register_setting( 'signups_cron_settings', 'signups_cron_options' );
+		register_setting( 'signups_cron_settings', 'signups_cron_settings' );
 		register_setting( 'signups_cron_tools', 'signups_cron_tools' );
 	
 	}
+
+	/**
+	 * Add settings sections for Signups Cron.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_settings_sections() {
+
+		/**
+    	 * add_settings_section( string $id, string $title, callable $callback, string $page, array $args = array() )
+		 * 
+		 * @param string    $id
+		 * @param string    &title
+		 * @param callable  $callback
+		 * @param string    $page
+		 * @param array     $args
+		 */
+		
+		 add_settings_section(
+			'signups_cron_section_information',
+			__( 'Table Information', 'signups_cron' ),
+			'signups_cron_section_information_callback',
+			'signups_cron_information',
+			array(
+				'before_section'        => '<div class="%s">',
+				'section_class'         => 'my_cool_class',
+				'after_section'         => '</div>',
+			)
+		);
+	
+		add_settings_section(
+			'signups_cron_section_settings',
+			__( 'Cron Settings', 'signups_cron' ),
+			'signups_cron_section_settings_callback',
+			'signups_cron_settings'
+		);
+	
+		add_settings_section(
+			'signups_cron_section_tools',
+			__( 'Signups Tools', 'signups_cron' ),
+			'signups_cron_section_tools_callback',
+			'signups_cron_tools'
+		);
+		
+	}
+
 
 	/**
 	 * Register the stylesheets for the admin area.
