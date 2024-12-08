@@ -22,6 +22,16 @@
  */
 class Signups_Cron_Admin {
 
+    /**
+	 * The name of the signups table.
+	 *
+	 * @since	1.0.0
+	 * @access	private
+	 * @var		Signups_Cron_Table_Info		$table_info		Provides information about the signups table.
+	 */
+	private $signups_table_info;
+
+
 	/**
 	 * The ID of this plugin.
 	 *
@@ -51,6 +61,7 @@ class Signups_Cron_Admin {
 
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';
 
 	}
 
@@ -276,13 +287,28 @@ class Signups_Cron_Admin {
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_signups_information_cb() {
+		
+		$signups_table_info = new Signups_Cron_Table_Info();
+		$data = $signups_table_info->get_signups_table_info();
 
 		?>
 		<table class="signups-table-info">
 			<tr>
-				<td class="signups-table-info_size">Signups Table Size:</td>
-				<td>SOME DB VALUE MB</td>
-			</tr>
+                <td class="signups-table-info_size">Signups Table Size:</td>
+                <td><?= number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
+            </tr>
+            <tr>
+                <td>Total Signups Count:</td>
+                <td><?= number_format( $data["signups_count_total"] ); ?></td>
+            </tr>
+            <tr>
+                <td>Active Signups Count:</td>
+                <td><?= number_format( $data["signups_count_active"] ); ?></td>
+            </tr>
+            <tr>
+                <td>Pending Signups Count:</td>
+                <td><?= number_format( $data["signups_count_pending"] ); ?></td>
+            </tr>
 		</table>
 		<?php
 
