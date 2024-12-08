@@ -44,8 +44,8 @@ class Signups_Cron_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $signups_cron       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string    $signups_cron      The name of this plugin.
+	 * @param      string    $version    		The version of this plugin.
 	 */
 	public function __construct( $signups_cron, $version ) {
 
@@ -114,6 +114,26 @@ class Signups_Cron_Admin {
 
 	}
 
+	/**
+	 * Register the settings (options groups and options names) for Signups Cron.
+	 *
+	 * @since 1.0.0
+	 */
+	public function register_settings() {
+
+		/**
+		 * register_setting( string $option_group, string $option_name, array $args = array() )
+		 * 
+		 * @param string $option_group  Setting group. (Page)
+    	 * @param string $option_name   Setting name.
+    	 * @param array  $args          Array of setting registration arguments.
+		 */
+		
+		register_setting( 'signups_cron_information', 'signups_cron_information' );
+		register_setting( 'signups_cron_settings', 'signups_cron_options' );
+		register_setting( 'signups_cron_tools', 'signups_cron_tools' );
+	
+	}
 
 	/**
 	 * Register the stylesheets for the admin area.

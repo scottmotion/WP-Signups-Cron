@@ -155,6 +155,7 @@ class Signups_Cron {
 		$plugin_admin = new Signups_Cron_Admin( $this->get_signups_cron(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_page' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
