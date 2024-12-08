@@ -294,7 +294,7 @@ class Signups_Cron_Admin {
 		?>
 		<table class="signups-table-info">
 			<tr>
-                <td class="signups-table-info_size">Signups Table Size:</td>
+                <td>Signups Table Size:</td>
                 <td><?= number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
             </tr>
             <tr>
