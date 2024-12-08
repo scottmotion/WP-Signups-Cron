@@ -231,6 +231,7 @@ class Signups_Cron_Admin {
 		 * @param array     $args
 		 */
 
+		// Register a new field in the "signups_cron_section_information" section, inside the "signups_cron_information" page.
 		add_settings_field(
 			'signups_cron_field_signups_information',  // As of WP 4.6 this value is used only internally.
 			__( 'Signups Table Information', 'signups_cron' ),
@@ -238,7 +239,8 @@ class Signups_Cron_Admin {
 			'signups_cron_information',
 			'signups_cron_section_information'
 		);
-
+		
+		// Register a new field in the "signups_cron_section_settings" section, inside the "signups_cron_settings" page.
 		add_settings_field(
 			'signups_cron_field_active_enabled',
 			__( 'Active Signups Cron', 'signups_cron' ),
@@ -246,7 +248,19 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'		=> 'signups_cron_field_active_enabled', // Use $args' label_for to populate the id inside the callback.
+				'label_for'		=> 'signups_cron_field_active_enabled' // Use $args' label_for to populate the id inside the callback.
+			)
+		);
+
+		// Register a new field in the "signups_cron_section_information" section, inside the "signups_cron_information" page.
+	    add_settings_field(
+			'signups_cron_field_delete_signups_now',
+			__( 'Delete Signups Now', 'signups_cron' ),
+			'signups_cron_field_delete_signups_now_cb',
+			'signups_cron_tools',
+			'signups_cron_section_tools',
+			array(
+				'label_for'		=> 'signups_cron_field_delete_signups_now' // Use $args' label_for to populate the id inside the callback.
 			)
 		);
 	
