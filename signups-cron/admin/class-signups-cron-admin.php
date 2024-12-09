@@ -388,7 +388,6 @@ class Signups_Cron_Admin {
 				type="number"
 				min="0"
 				max="999"
-				style="width:4.5em; text-align:center"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
 				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
@@ -445,7 +444,6 @@ class Signups_Cron_Admin {
 				type="number"
 				min="0"
 				max="999"
-				style="width:4.5em; text-align:center"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
 				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
