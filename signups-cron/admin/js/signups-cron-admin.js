@@ -31,9 +31,9 @@
 
 	$(function () {
 
-		checkbox_active = $("#signups_cron_field_active_enabled");
-		text_active = $("#text_for_signups_cron_field_active_threshold");
-		input_active = $("#signups_cron_field_active_threshold");
+		const checkbox_active = $("#signups_cron_field_active_enabled");
+		const text_active = $("#text_for_signups_cron_field_active_threshold");
+		const input_active = $("#signups_cron_field_active_threshold");
 
 		if (checkbox_active.is(':checked')) {      // document ready
 			text_active.removeClass("text-disabled");
@@ -53,9 +53,9 @@
 			}
 		});
 
-		checkbox_pending = $("#signups_cron_field_pending_enabled");
-		text_pending = $("#text_for_signups_cron_field_pending_threshold");
-		input_pending = $("#signups_cron_field_pending_threshold");
+		const checkbox_pending = $("#signups_cron_field_pending_enabled");
+		const text_pending = $("#text_for_signups_cron_field_pending_threshold");
+		const input_pending = $("#signups_cron_field_pending_threshold");
 
 		if (checkbox_pending.is(':checked')) {      // document ready
 			text_pending.removeClass("text-disabled");
