@@ -157,6 +157,7 @@ class Signups_Cron_Admin {
 		 * @param array     $args
 		 */
 		
+		// Signups Table Information Section
 		 add_settings_section(
 			'signups_cron_section_information',
 			__( 'Table Information', 'signups-cron' ),
@@ -169,6 +170,7 @@ class Signups_Cron_Admin {
 			)
 		);
 	
+		// Cron Settings Section (form name="settings" action="options.php" method="post")
 		add_settings_section(
 			'signups_cron_section_settings',
 			__( 'Cron Settings', 'signups-cron' ),
@@ -228,7 +230,6 @@ class Signups_Cron_Admin {
 			array(
 				'label_for'		=> 'signups_cron_field_signups_information' // Use $args' label_for to populate the id inside the callback.
 			)
-
 		);
 		
 		// Register a new field in the "signups_cron_section_settings" section, inside the "signups_cron_settings" page.
@@ -239,10 +240,65 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'		=> 'signups_cron_field_active_enabled' // Use $args' label_for to populate the id inside the callback.
+				'label_for'		=> 'signups_cron_field_active_enabled'
 			)
 		);
 
+		add_settings_field(
+			'signups_cron_field_active_threshold',
+			__( 'Active Signups Threshold', 'signups-cron' ),
+			array( $this, 'signups_cron_field_active_threshold_cb' ),
+			'signups_cron_settings',
+			'signups_cron_section_settings',
+			array(
+				'label_for'         => 'signups_cron_field_active_threshold'
+			)
+		);
+
+		add_settings_field(
+			'signups_cron_field_pending_enabled',
+			__( 'Pending Signups Cron', 'signups-cron' ),
+			array( $this, 'signups_cron_field_pending_enabled_cb' ),
+			'signups_cron_settings',
+			'signups_cron_section_settings',
+			array(
+				'label_for'         => 'signups_cron_field_pending_enabled'
+			)
+		);
+	
+		add_settings_field(
+			'signups_cron_field_pending_threshold',
+			__( 'Pending Signups Threshold', 'signups-cron' ),
+			array( $this, 'signups_cron_field_pending_threshold_cb' ),
+			'signups_cron_settings',
+			'signups_cron_section_settings',
+			array(
+				'label_for'         => 'signups_cron_field_pending_threshold'
+			)
+		);
+	
+		add_settings_field(
+			'signups_cron_field_send_email',
+			__( 'Cron Email Report', 'signups-cron' ),
+			array( $this, 'signups_cron_field_send_email_cb' ),
+			'signups_cron_settings',
+			'signups_cron_section_settings',
+			array(
+				'label_for'         => 'signups_cron_field_send_email'
+			)
+		);
+		
+		add_settings_field(
+			'signups_cron_field_cron_schedule',
+			__( 'Cron Schedule Recurrence', 'signups-cron' ),
+			array( $this, 'signups_cron_field_cron_schedule_cb' ),
+			'signups_cron_settings',
+			'signups_cron_section_settings',
+			array(
+				'label_for'         => 'signups_cron_field_cron_schedule'
+			)
+		);
+	
 	}
 
 	/**
@@ -289,6 +345,94 @@ class Signups_Cron_Admin {
 		<p>
 			<?php esc_html_e( 'Enable Active Signups cron ', 'signups-cron' ); ?>
 			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+		</p>
+		<?php
+
+	}
+
+	/**
+	 * Active Signups Threshold field callback function.
+	 * 
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_active_threshold_cb() {
+
+		?>
+		<p id="text_for_signups_cron_field_active_threshold">
+        	<?php esc_html_e( 'Delete Active Signups after ', 'signups-cron' ); ?>
+			<?php esc_html_e( '<NUMBER>', 'signups-cron' ); ?>
+			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
+		</p>
+		<?php
+
+	}
+	
+	/**
+	 * Pending Signups Delete Enabled field callback function.
+	 * 
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_pending_enabled_cb() {
+
+		?>
+		<p>
+			<?php esc_html_e( 'Enable Pending Signups cron ', 'signups-cron' ); ?>
+			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+		</p>
+		<?php
+
+	}
+
+	/**
+	 * Pending Signups Threshold field callback function.
+	 * 
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_pending_threshold_cb() {
+
+		?>
+		<p id="text_for_signups_cron_field_pending_threshold">
+        	<?php esc_html_e( 'Delete Pending Signups after ', 'signups-cron' ); ?>
+			<?php esc_html_e( '<NUMBER>', 'signups-cron' ); ?>
+			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
+		</p>
+		<?php
+
+	}
+
+	/**
+	 * Signups Send Email field callback function.
+	 * 
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_send_email_cb() {
+
+		?>
+		<p>
+			<?php esc_html_e( 'Email cron report to Site Admin (ADMIN EMAIL) ', 'signups-cron' ); ?>
+			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+		</p>
+		<?php
+
+	}
+
+	/**
+	 * Signups Send Email field callback function.
+	 * 
+	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 */
+	public function signups_cron_field_cron_schedule_cb() {
+
+		?>
+		<p>
+			<?php esc_html_e( 'Schedule cron to run ', 'signups-cron' ); ?>
+			<?php esc_html_e( '<SELECT>', 'signups-cron' ); ?>
+			<?php esc_html_e( ' starting now.', 'signups-cron' ); ?>
+		</p>
+		<p>
+			<?php esc_html_e( "Next cron scheduled for {DATE} {RECURRENCE}", 'signups-cron' ); ?>
+			<?php esc_html_e( "{or}", 'signups-cron' ); ?>
+			<?php esc_html_e( "Cron is not currently scheduled.", 'signups-cron' ); ?>
 		</p>
 		<?php
 
