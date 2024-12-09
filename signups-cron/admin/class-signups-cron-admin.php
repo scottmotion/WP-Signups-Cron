@@ -29,7 +29,7 @@ class Signups_Cron_Admin {
 	 * @access	private
 	 * @var		Signups_Cron_Table_Info		$table_info		Provides information about the signups table.
 	 */
-	private $signups_table_info;
+	private $signups_table_info; // TODO: Unused? Not referenced properly?
 
     /**
 	 * The Signups Cron options from WP options table.
