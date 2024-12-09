@@ -31,6 +31,14 @@ class Signups_Cron_Admin {
 	 */
 	private $signups_table_info;
 
+    /**
+	 * The Signups Cron options from WP options table.
+	 *
+	 * @since	1.0.0
+	 * @access	private
+	 * @var		array		$options		The plugin options.
+	 */
+	private $options;
 
 	/**
 	 * The ID of this plugin.
@@ -62,6 +70,7 @@ class Signups_Cron_Admin {
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';
+		$this->options = get_option( 'signups_cron_settings' );
 
 	}
 
@@ -306,7 +315,7 @@ class Signups_Cron_Admin {
 	 *
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_signups_information_cb() {
+	public function signups_cron_field_signups_information_cb( $args ) {
 		
 		$signups_table_info = new Signups_Cron_Table_Info();
 		$data = $signups_table_info->get_signups_table_info();
@@ -339,12 +348,25 @@ class Signups_Cron_Admin {
 	 * 
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_active_enabled_cb() {
+	public function signups_cron_field_active_enabled_cb( $args ) {
+
+		$options = $this->options;
+
+		if ( ! isset( $options[ $args['label_for'] ] ) ) {
+			$options[ $args['label_for'] ] = '0';
+		}
 
 		?>
 		<p>
-			<?php esc_html_e( 'Enable Active Signups cron ', 'signups-cron' ); ?>
-			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Enable Active signups cron ', 'signups-cron' ); ?>
+			<input
+				type="checkbox"
+				id="<?php echo esc_attr( $args['label_for'] ); ?>"
+				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
+				value="1"
+				<?php checked( $options[ $args['label_for'] ], 1 ) ?>
+			>
+			</input>
 		</p>
 		<?php
 
@@ -355,12 +377,23 @@ class Signups_Cron_Admin {
 	 * 
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_active_threshold_cb() {
+	public function signups_cron_field_active_threshold_cb( $args ) {
+
+		$options = $this->options;
 
 		?>
 		<p id="text_for_signups_cron_field_active_threshold">
-        	<?php esc_html_e( 'Delete Active Signups after ', 'signups-cron' ); ?>
-			<?php esc_html_e( '<NUMBER>', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Delete Active signups after ', 'signups-cron' ); ?>
+			<input
+				type="number"
+				min="0"
+				max="999"
+				style="width:4.5em; text-align:center"
+				id="<?php echo esc_attr( $args['label_for'] ); ?>"
+				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
+				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
+			>
+			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
 		</p>
 		<?php
@@ -372,12 +405,25 @@ class Signups_Cron_Admin {
 	 * 
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_pending_enabled_cb() {
+	public function signups_cron_field_pending_enabled_cb( $args ) {
+
+		$options = $this->options;
+
+		if ( ! isset( $options[ $args['label_for'] ] ) ) {
+			$options[ $args['label_for'] ] = '0';
+		}
 
 		?>
 		<p>
-			<?php esc_html_e( 'Enable Pending Signups cron ', 'signups-cron' ); ?>
-			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Enable Pending signups cron ', 'signups-cron' ); ?>
+			<input
+				type="checkbox"
+				id="<?php echo esc_attr( $args['label_for'] ); ?>"
+				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
+				value="1"
+				<?php checked( $options[ $args['label_for'] ], 1 ) ?>
+			>
+			</input>
 		</p>
 		<?php
 
@@ -388,12 +434,23 @@ class Signups_Cron_Admin {
 	 * 
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_pending_threshold_cb() {
+	public function signups_cron_field_pending_threshold_cb( $args ) {
+
+		$options = $this->options;
 
 		?>
 		<p id="text_for_signups_cron_field_pending_threshold">
-        	<?php esc_html_e( 'Delete Pending Signups after ', 'signups-cron' ); ?>
-			<?php esc_html_e( '<NUMBER>', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Delete Pending signups after ', 'signups-cron' ); ?>
+			<input
+				type="number"
+				min="0"
+				max="999"
+				style="width:4.5em; text-align:center"
+				id="<?php echo esc_attr( $args['label_for'] ); ?>"
+				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
+				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
+			>
+			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
 		</p>
 		<?php
@@ -405,12 +462,27 @@ class Signups_Cron_Admin {
 	 * 
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_send_email_cb() {
+	public function signups_cron_field_send_email_cb( $args ) {
+
+		$options = $this->options;
+
+		if ( ! isset( $options[ $args['label_for'] ] ) ) {
+			$options[ $args['label_for'] ] = '0';
+		}
+		// Get admin email
+		$admin_email = get_option('admin_email');
 
 		?>
 		<p>
-			<?php esc_html_e( 'Email cron report to Site Admin (ADMIN EMAIL) ', 'signups-cron' ); ?>
-			<?php esc_html_e( '<CHECKBOX>', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Email cron report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
+			<input
+				type="checkbox"
+				id="<?php echo esc_attr( $args['label_for'] ); ?>"
+				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
+				value="1"
+				<?php checked( $options[ $args['label_for'] ], 1 ) ?>
+			>
+			</input>
 		</p>
 		<?php
 
@@ -421,18 +493,49 @@ class Signups_Cron_Admin {
 	 * 
 	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_cron_schedule_cb() {
+	public function signups_cron_field_cron_schedule_cb( $args ) {
+
+		$options = $this->options;
+
+		if ( ! isset( $options[ $args['label_for'] ] ) ) {
+			$options[ $args['label_for'] ] = 'daily';
+		}
 
 		?>
 		<p>
 			<?php esc_html_e( 'Schedule cron to run ', 'signups-cron' ); ?>
-			<?php esc_html_e( '<SELECT>', 'signups-cron' ); ?>
+			<select
+				id="<?php echo esc_attr( $args['label_for'] ); ?>"
+				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]">
+				<option value="hourly" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'hourly', false ) ) : ( '' ); ?>>
+					<?php esc_html_e( 'Hourly', 'signups-cron' ); ?>
+				</option>
+				<option value="twicedaily" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'twicedaily', false ) ) : ( '' ); ?>>
+					<?php esc_html_e( 'Twice Daily', 'signups-cron' ); ?>
+				</option>
+				<option value="daily" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'daily', false ) ) : ( '' ); ?>>
+					<?php esc_html_e( 'Daily', 'signups-cron' ); ?>
+				</option>
+				<option value="weekly" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'weekly', false ) ) : ( '' ); ?>>
+					<?php esc_html_e( 'Weekly', 'signups-cron' ); ?>
+				</option>
+			</select>
 			<?php esc_html_e( ' starting now.', 'signups-cron' ); ?>
 		</p>
 		<p>
-			<?php esc_html_e( "Next cron scheduled for {DATE} {RECURRENCE}", 'signups-cron' ); ?>
-			<?php esc_html_e( "{or}", 'signups-cron' ); ?>
-			<?php esc_html_e( "Cron is not currently scheduled.", 'signups-cron' ); ?>
+			<?php
+				// get timestamp of next cron
+				$timestamp = wp_next_scheduled( 'signups_cron_delete_signups_cron_hook' );
+
+				if ($timestamp) {
+					date_default_timezone_set(wp_timezone_string());
+					// get scheduled event display name
+					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_delete_signups_cron_hook' )->schedule]['display'];
+					echo esc_html_e( "Next cron scheduled for " . date('F j, Y, g:i a', $timestamp) . " (" . $scheduled_event_display . ")", 'signups_cron' );
+				} else {
+					echo esc_html_e( "Cron is not currently scheduled.", 'signups-cron' );
+				}
+			?>
 		</p>
 		<?php
 
