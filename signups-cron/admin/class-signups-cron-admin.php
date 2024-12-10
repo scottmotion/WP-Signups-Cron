@@ -526,7 +526,10 @@ class Signups_Cron_Admin {
 				$timestamp = wp_next_scheduled( 'signups_cron_delete_signups_cron_hook' );
 
 				if ($timestamp) {
-					date_default_timezone_set(wp_timezone_string());  // Set timezone to WP options timezone. TODO: Check if site options uses timezone_string or gmt_offset
+					// Set timezone to WP options timezone.
+					// TODO: Check if site options uses timezone_string or gmt_offset.
+                	// TODO: May be setting timezone for entire script and interferring with ucron_delete_signups()
+					date_default_timezone_set(wp_timezone_string());
 					// get scheduled event display name
 					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_delete_signups_cron_hook' )->schedule]['display'];
 					echo esc_html_e( "Next cron scheduled for " . date('F j, Y, g:i a T', $timestamp) . " (" . $scheduled_event_display . ")", 'signups_cron' );
