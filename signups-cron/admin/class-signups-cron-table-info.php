@@ -33,6 +33,11 @@ class Signups_Cron_Table_Info {
 
 	}
 
+    /**
+	 * Get the signups table from the WordPress database.
+	 *
+	 * @since    1.0.0
+	 */
     public function get_signups_table_info() {
 
         global $wpdb;
