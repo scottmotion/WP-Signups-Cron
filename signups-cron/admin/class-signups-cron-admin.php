@@ -36,7 +36,7 @@ class Signups_Cron_Admin {
 	 *
 	 * @since	1.0.0
 	 * @access	private
-	 * @var		array		$options		The plugin options.
+	 * @var		array		$options	The plugin options.
 	 */
 	private $options;
 
@@ -61,9 +61,9 @@ class Signups_Cron_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
-	 * @param      string    $signups_cron      The name of this plugin.
-	 * @param      string    $version    		The version of this plugin.
+	 * @since	1.0.0
+	 * @param   string    $signups_cron      The name of this plugin.
+	 * @param   string    $version    		The version of this plugin.
 	 */
 	public function __construct( $signups_cron, $version ) {
 
@@ -97,7 +97,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Render the admin page for Signups Cron.
 	 *
-	 * @since 1.0.0
+	 * @since	1.0.0
 	 */
 	public function render_admin_page() {
 
@@ -133,7 +133,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Register the settings (options groups and options names) for Signups Cron.
 	 *
-	 * @since 1.0.0
+	 * @since	1.0.0
 	 */
 	public function register_settings() {
 
@@ -153,7 +153,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Add settings sections for Signups Cron.
 	 *
-	 * @since 1.0.0
+	 * @since	1.0.0
 	 */
 	public function add_settings_sections() {
 
@@ -192,8 +192,9 @@ class Signups_Cron_Admin {
 
 	/**
 	 * Information section callback function.
-	 *
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
+	 * 
+	 * @since	1.0.0
+	 * @param	array	$args  The settings array ($id, $title, $callback, $page, $args).
 	 */
 	public function signups_cron_section_information_cb( $args ) {
 		?>
@@ -204,7 +205,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Settings section callback function.
 	 *
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $args).
+	 * @since   1.0.0
+	 * @param	array	$args	The settings array ($id, $title, $callback, $page, $args).
 	 */
 	public function signups_cron_section_settings_cb( $args ) {
 		?>
@@ -215,7 +217,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Add settings fields for Signups Cron.
 	 *
-	 * @since 1.0.0
+	 * @since	1.0.0
 	 */
 	public function add_settings_fields() {
 
@@ -314,7 +316,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Signups Information field callback function.
 	 *
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_signups_information_cb( $args ) {
 		
@@ -347,7 +350,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Active Signups Delete Enabled field callback function.
 	 * 
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_active_enabled_cb( $args ) {
 
@@ -376,7 +380,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Active Signups Threshold field callback function.
 	 * 
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_active_threshold_cb( $args ) {
 
@@ -403,7 +408,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Pending Signups Delete Enabled field callback function.
 	 * 
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_pending_enabled_cb( $args ) {
 
@@ -432,7 +438,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Pending Signups Threshold field callback function.
 	 * 
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_pending_threshold_cb( $args ) {
 
@@ -459,7 +466,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Signups Send Email field callback function.
 	 * 
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param 	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_send_email_cb( $args ) {
 
@@ -490,7 +498,8 @@ class Signups_Cron_Admin {
 	/**
 	 * Signups Send Email field callback function.
 	 * 
-	 * @param array $args  The settings array ($id, $title, $callback, $page, $section, $args).
+	 * @since	1.0.0
+	 * @param 	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_cron_schedule_cb( $args ) {
 
@@ -546,7 +555,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since	1.0.0
 	 */
 	public function enqueue_styles() {
 
@@ -569,7 +578,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since	1.0.0
 	 */
 	public function enqueue_scripts() {
 
