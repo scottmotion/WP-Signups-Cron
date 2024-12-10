@@ -29,7 +29,7 @@ class Signups_Cron_Admin {
 	 * @access	private
 	 * @var		Signups_Cron_Table_Info		$table_info		Provides information about the signups table.
 	 */
-	private $signups_table_info; // TODO: Unused? Not referenced properly?
+	private $signups_table_info;
 
     /**
 	 * The Signups Cron options from WP options table.
@@ -70,6 +70,7 @@ class Signups_Cron_Admin {
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';
+		$this->signups_table_info = new Signups_Cron_Table_Info();
 		$this->options = get_option( 'signups_cron_settings' );
 
 	}
@@ -317,8 +318,8 @@ class Signups_Cron_Admin {
 	 */
 	public function signups_cron_field_signups_information_cb( $args ) {
 		
-		$signups_table_info = new Signups_Cron_Table_Info();
-		$data = $signups_table_info->get_signups_table_info();
+		// $signups_table_info = new Signups_Cron_Table_Info();
+		$data = $this->signups_table_info->get_signups_table_info();
 
 		?>
 		<table class="signups-table-info">
