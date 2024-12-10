@@ -156,7 +156,7 @@ class Signups_Cron_Event_Exec {
             $admin_email = get_option('admin_email');
             $blog_name = get_option( 'blogname' );
 
-            date_default_timezone_set(wp_timezone_string());
+            date_default_timezone_set(wp_timezone_string());  // Set timezone to WP options timezone. TODO: Check if site options uses timezone_string or gmt_offset
             $event_date_time = date('F j, Y, g:i a T', time());
 
             $message = "Signups Cron successfully ran on {$event_date_time}.";
