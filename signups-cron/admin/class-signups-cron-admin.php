@@ -529,7 +529,7 @@ class Signups_Cron_Admin {
 					date_default_timezone_set(wp_timezone_string());
 					// get scheduled event display name
 					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_delete_signups_cron_hook' )->schedule]['display'];
-					echo esc_html_e( "Next cron scheduled for " . date('F j, Y, g:i a', $timestamp) . " (" . $scheduled_event_display . ")", 'signups_cron' );
+					echo esc_html_e( "Next cron scheduled for " . date('F j, Y, g:i a T', $timestamp) . " (" . $scheduled_event_display . ")", 'signups_cron' );
 				} else {
 					echo esc_html_e( "Cron is not currently scheduled.", 'signups-cron' );
 				}

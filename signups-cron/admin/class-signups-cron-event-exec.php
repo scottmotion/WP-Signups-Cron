@@ -155,9 +155,9 @@ class Signups_Cron_Event_Exec {
             // start building message
             $admin_email = get_option('admin_email');
             $blog_name = get_option( 'blogname' );
-            
+
             date_default_timezone_set(wp_timezone_string());
-            $event_date_time = date('F j, Y, g:i a', time());
+            $event_date_time = date('F j, Y, g:i a T', time());
 
             $message = "Signups Cron successfully ran on {$event_date_time}.";
 
