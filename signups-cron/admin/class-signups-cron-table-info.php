@@ -36,7 +36,8 @@ class Signups_Cron_Table_Info {
     /**
 	 * Get the signups table from the WordPress database.
 	 *
-	 * @since    1.0.0
+	 * @since   1.0.0
+     * @return  array   $signups_table_info     Info requested about the signups table.
 	 */
     public function get_signups_table_info() {
 
