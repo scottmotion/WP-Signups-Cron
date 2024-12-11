@@ -49,6 +49,7 @@ class Signups_Cron_Event_Exec {
      * Delete Signups from WordPress database
      * 
      * @since   1.0.0
+     * @access  private
      * @param   int     $status                 From _signups['active'] Pending = 0, Active = 1
      * @param   int     $threshold              Number of days for delete threshold
      * @return  int     $count_deleted_signups  Number of signups deleted.
@@ -114,7 +115,8 @@ class Signups_Cron_Event_Exec {
     /**
      * Function that gets executed when the scheduled cron event runs.
      * 
-     * @since    1.0.0
+     * @since   1.0.0
+     * @access  private
      */
     private function cron_event_exec() {
 
