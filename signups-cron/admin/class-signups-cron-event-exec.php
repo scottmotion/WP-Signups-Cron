@@ -173,6 +173,28 @@ class Signups_Cron_Event_Exec {
             wp_mail( $admin_email, "[$blog_name] Signups Cron Report", $message  );
         }
     }
-    // add_action( 'signups_cron_event_hook', 'cron_event_exec' );
+
+    /**
+     * See 'class-signups-cron.php' & 'class-signups-cron-loader.php' for how the plugin adds actions & filters
+     * 
+     * Example:
+     * 
+     * require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-loader.php';
+     * $this->loader = new Signups_Cron_Loader();
+     * $plugin_admin = new Signups_Cron_Admin( $this->get_signups_cron(), $this->get_version() );
+     * $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_page' );
+     * 
+     * So...
+     * 
+     * $plugin_cron_event_exec = Signups_Cron_Event_Exec();
+     * $this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
+     * 
+     * 
+     * Others useful examples:
+     * 
+     * add_action( 'signups_cron_event_hook', 'cron_event_exec' ); // Standard way
+     * add_action( 'signups_cron_event_hook', array( $this, 'cron_event_exec' ) ); // Inside $this class
+     * 
+     */
 
 }
