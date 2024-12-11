@@ -532,17 +532,15 @@ class Signups_Cron_Admin {
 		</p>
 		<p>
 			<?php
-				// get timestamp of next cron
-				$timestamp = wp_next_scheduled( 'signups_cron_delete_signups_cron_hook' );
+				// get timestamp of next cron event
+				$event_timestamp = wp_next_scheduled( 'signups_cron_delete_signups_cron_hook' );
 
-				if ($timestamp) {
-					// Set timezone to WP options timezone.
-					// TODO: Check if site options uses timezone_string or gmt_offset.
-                	// TODO: May be setting timezone for entire script and interferring with ucron_delete_signups()
-					date_default_timezone_set(wp_timezone_string());
+				if ($event_timestamp) {
 					// get scheduled event display name
 					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_delete_signups_cron_hook' )->schedule]['display'];
-					echo esc_html_e( "Next cron scheduled for " . date('F j, Y, g:i a T', $timestamp) . " (" . $scheduled_event_display . ")", 'signups_cron' );
+					$scheduled_event_datetime = date_format(date_create()->setTimestamp($event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T'); // TODO: Check if site options uses timezone_string or gmt_offset
+
+					echo esc_html_e( "Next cron scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' );
 				} else {
 					echo esc_html_e( "Cron is not currently scheduled.", 'signups-cron' );
 				}

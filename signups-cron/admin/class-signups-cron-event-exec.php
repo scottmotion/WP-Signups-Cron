@@ -158,11 +158,11 @@ class Signups_Cron_Event_Exec {
             $admin_email = get_option('admin_email');
             $blog_name = get_option( 'blogname' );
 
-            date_default_timezone_set(wp_timezone_string());  // Set timezone to WP options timezone. TODO: Check if site options uses timezone_string or gmt_offset. // TODO: May be setting timezone for entire script and interferring with ucron_delete_signups()
+            // $event_date_time = date('F j, Y, g:i a T', time());
 
-            $event_date_time = date('F j, Y, g:i a T', time());
+            $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T'); // TODO: Check if site options uses timezone_string or gmt_offset
 
-            $message = "Signups Cron successfully ran on {$event_date_time}.";
+            $message = "Signups Cron successfully ran on {$event_date_now}.";
 
             if (isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1)) {
                 $message .= "\nDeleted {$count_deleted_signups_active} Active Signups older than {$options['signups_cron_field_active_threshold']} days.";
