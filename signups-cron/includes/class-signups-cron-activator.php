@@ -53,6 +53,12 @@ class Signups_Cron_Activator {
 	 */
 	public static function activate() {
 
+		/**
+		 * TODO:
+		 * [] set option defaults in Signups_Cron_Admin
+		 * [?] Do we need to set empty ('0') values?
+		 */
+
 		add_option(
 			'signups_cron_settings',				// Name of the option to add.
 			array(									// Option value. 
