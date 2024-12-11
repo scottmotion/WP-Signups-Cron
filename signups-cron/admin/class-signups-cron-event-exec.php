@@ -173,5 +173,6 @@ class Signups_Cron_Event_Exec {
             wp_mail( $admin_email, "[$blog_name] Signups Cron Report", $message  );
         }
     }
+    // add_action( 'signups_cron_event_hook', 'cron_event_exec' );
 
 }
