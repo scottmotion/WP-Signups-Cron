@@ -172,12 +172,7 @@ class Signups_Cron_Admin {
 			'signups_cron_section_information',
 			__( 'Table Information', 'signups-cron' ),
 			array( $this, 'signups_cron_section_information_cb' ),
-			'signups_cron_information',
-			array(
-				'before_section'        => '<div class="%s">',
-				'section_class'         => 'my_cool_class',
-				'after_section'         => '</div>',
-			)
+			'signups_cron_information'
 		);
 	
 		// Cron Settings Section (form name="settings" action="options.php" method="post")
