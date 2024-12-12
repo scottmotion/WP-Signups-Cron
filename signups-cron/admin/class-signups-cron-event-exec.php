@@ -96,9 +96,6 @@ class Signups_Cron_Event_Exec {
                 // Get the signup id
                 $signup_id = $x['signup_id'];
 
-                // Define the signups table
-                // $table = $wpdb->prefix . 'signups';
-
                 // Remove old signups from signups table
                 $wpdb->query(
                     $wpdb->prepare(
