@@ -23,41 +23,8 @@
 class Signups_Cron_Activator {
 
 	/**
-	 * The array of default options set during plugin activation.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      array    $default_options    The array of default options set during plugin activation.
-	 */
-	// protected $default_options;
-
-	/**
-	 * Initialize the collection used to set the default options during plugin activation.
-	 *
-	 * @since    1.0.0
-	 */
-	public function __construct() {
-
-		// $this->default_options = array(
-		// 	'signups_cron_settings',				// Name of the option to add.
-		// 	array(									// Option value. 
-		// 		'signups_cron_field_active_enabled'			=> '0',		// Active Signups cron enabled.
-		// 		'signups_cron_field_active_threshold'		=> '365',	// Active Signups cron threshold.
-		// 		'signups_cron_field_pending_enabled'		=> '0',		// Pending Signups cron enabled.
-		// 		'signups_cron_field_pending_threshold'		=> '365',	// Pending Signups cron threshold.
-		// 		'signups_cron_field_send_email_report'		=> '0',		// Send cron email report enabled.
-		// 		'signups_cron_field_cron_schedule'			=> 'daily'	// Cron schedule recurrence.
-		// 	),
-		// 	'',										// Description (Deprecated).
-		// 	'off'									// Whether to load the option when WordPress starts up.
-		// );
-
-	}
-
-
-	/**
 	 * The code that runs during plugin activation.
-	 *	 *
+	 *
 	 * @since    1.0.0
 	 */
 	public static function activate() {
@@ -67,7 +34,6 @@ class Signups_Cron_Activator {
 		 * [] set option defaults in Signups_Cron_Admin
 		 * [?] Do we need to set empty ('0') values?
 		 */
-
 		add_option(
 			'signups_cron_settings',				// Name of the option to add.
 			array(									// Option value. 
@@ -82,9 +48,6 @@ class Signups_Cron_Activator {
 			'off'									// Whether to load the option when WordPress starts up.
 		);
 
-		// add_option(array($this, 'default_options'));
-		// $defaults = self::$default_options;
-		// add_option($defaults);
 	}
 
 }
