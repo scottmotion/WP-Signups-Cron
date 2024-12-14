@@ -102,9 +102,9 @@ class Signups_Cron_Admin {
 	public function render_admin_page() {
 
 		// check user capabilities
-		// if ( ! current_user_can( 'manage_options' ) ) {
-		// 	return;
-		// }
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 	
 		?>
 		<div class="wrap">
