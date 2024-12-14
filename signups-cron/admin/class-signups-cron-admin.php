@@ -83,13 +83,13 @@ class Signups_Cron_Admin {
 	public function add_admin_page() {
 
 		add_submenu_page(
-			'users.php',								// $parent_slug string required - The slug name for the parent menu (or the file name of a standard WordPress admin page).
-			__('Signups Cron Home', 'signups-cron'),	// $page_title string required - The text to be displayed in the title tags of the page when the menu is selected.
-			__('Signups Cron', 'signups-cron'),			// $menu_title string required - The text to be used for the menu.
-			'manage_options',							// $capability string required - The capability required for this menu to be displayed to the user.
-			'signups-cron',								// $menu_slug string required - The slug name to refer to this menu by.
-			array( $this, 'render_admin_page' ),		// $callback callable optional - The function to be called to output the content for this page.
-			null										// $position int|float optional - The position in the menu order this item should appear.
+			'users.php',								// $parent_slug	string		required - The slug name for the parent menu (or the file name of a standard WordPress admin page).
+			__('Signups Cron Home', 'signups-cron'),	// $page_title	string		required - The text to be displayed in the title tags of the page when the menu is selected.
+			__('Signups Cron', 'signups-cron'),			// $menu_title	string		required - The text to be used for the menu.
+			'manage_options',							// $capability	string		required - The capability required for this menu to be displayed to the user.
+			'signups-cron',								// $menu_slug	string		required - The slug name to refer to this menu by.
+			array( $this, 'render_admin_page' ),		// $callback	callable	optional - The function to be called to output the content for this page.
+			null										// $position	int|float	optional - The position in the menu order this item should appear.
 		);
 	
 	}
@@ -117,11 +117,13 @@ class Signups_Cron_Admin {
 			<hr>
 			<form name="settings" action="options.php" method="post">
 				<?php
-				// output security fields for the registered setting "signups_cron"
+				// output security fields for the registered setting
 				settings_fields( 'signups_cron_settings' );
+
 				// output setting sections and their fields
 				do_settings_sections( 'signups_cron_settings' );
-				// output save settings button
+
+				// output save settings button for this form.
 				submit_button( 'Save Settings' );
 				?>
 			</form>
@@ -138,11 +140,19 @@ class Signups_Cron_Admin {
 	public function register_settings() {
 
 		/**
-		 * register_setting( string $option_group, string $option_name, array $args = array() )
+		 * Registers a setting and its data.
 		 * 
-		 * @param string $option_group  Setting group. (Page)
-    	 * @param string $option_name   Setting name.
-    	 * @param array  $args          Array of setting registration arguments.
+		 * register_setting( $option_group, $option_name, $args = array() )
+		 * 
+		 * @param   string      $option_group               Setting group. (Page)
+		 * @param   string      $option_name                Setting name.
+		 * @param   array       $args                       Array of setting registration arguments.
+		 * @param   string      $args['type']               The type of data associated with this setting.
+		 * @param   string      $args['label']              A label of the data attached to this setting.
+		 * @param   string      $args['description']        A description of the data attached to this setting.
+		 * @param   callable    $args['sanitize_callback']  A callback function that sanitizes the option’s value.
+		 * @param   bool|array  $args['show_in_rest']       Whether data associated with this setting should be included in the REST API.
+		 * @param   mixed       $args['default']            Default value when calling get_option().
 		 */
 
 		register_setting( 'signups_cron_information', 'signups_cron_information' );
@@ -158,27 +168,33 @@ class Signups_Cron_Admin {
 	public function add_settings_sections() {
 
 		/**
-    	 * add_settings_section( string $id, string $title, callable $callback, string $page, array $args = array() )
+		 * Adds a new section to a settings page.
 		 * 
-		 * @param string    $id
-		 * @param string    &title
-		 * @param callable  $callback
-		 * @param string    $page
-		 * @param array     $args
+    	 * add_settings_section( $id, $title, $callback, $page, $args = array( 'before_section', 'after_section', 'section_class' ) )
+		 * 
+		 * @param 	string    	$id							Slug-name to identify the section. Used in the 'id' attribute of tags.
+		 * @param 	string    	&title						Formatted title of the section. Shown as the heading for the section.
+		 * @param 	callable 	$callback					Function that echos out any content at the top of the section (between heading and fields).
+		 * @param 	string    	$page						The slug-name of the settings page on which to show the section.
+		 * @param 	array     	$args						Arguments used to create the settings section.
+		 * @param 	string		$args['before_section']		HTML content to prepend to the section’s HTML output. Receives the section’s class name as '%s'.
+		 * @param 	string		$args['after_section']		HTML content to append to the section’s HTML output.
+		 * @param 	string		$args['section_class']		The class name to use for the section.
 		 */
 		
 		// Signups Table Information Section
 		 add_settings_section(
 			'signups_cron_section_information',
 			__( 'Table Information', 'signups-cron' ),
-			array( $this, 'signups_cron_section_information_cb' ),
+			array( $this, 'signups_cron_section_information_cb' ), // Called internally by do_settings_sections()->call_user_func()
 			'signups_cron_information'
 		);
 	
-		// Cron Settings Section (form name="settings" action="options.php" method="post")
+		// Cron Settings Section 
+		// Called as child of <form name="settings" action="options.php" method="post")>
 		add_settings_section(
 			'signups_cron_section_settings',
-			__( 'Cron Settings', 'signups-cron' ),
+			__( 'Cron Event Settings', 'signups-cron' ),
 			array( $this, 'signups_cron_section_settings_cb' ),
 			'signups_cron_settings'
 		);
@@ -188,8 +204,10 @@ class Signups_Cron_Admin {
 	/**
 	 * Information section callback function.
 	 * 
+	 * Function that echos out any content at the top of the section (between heading and fields).
+	 * 
 	 * @since	1.0.0
-	 * @param	array	$args  The settings array ($id, $title, $callback, $page, $args).
+	 * @param	array	$args  The settings array ( 'id', 'title', 'callback', 'before_section', 'after_section', 'section_class' ).
 	 */
 	public function signups_cron_section_information_cb( $args ) {
 		?>
@@ -199,13 +217,15 @@ class Signups_Cron_Admin {
 
 	/**
 	 * Settings section callback function.
+	 * 
+	 * Function that echos out any content at the top of the section (between heading and fields).
 	 *
 	 * @since   1.0.0
-	 * @param	array	$args	The settings array ($id, $title, $callback, $page, $args).
+	 * @param	array	$args	The settings array ( 'id', 'title', 'callback', 'before_section', 'after_section', 'section_class' ).
 	 */
 	public function signups_cron_section_settings_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups cron settings.', 'signups-cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups cron event settings.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -217,29 +237,33 @@ class Signups_Cron_Admin {
 	public function add_settings_fields() {
 
 		/**
-		 * add_settings_field( string $id, string $title, callable $callback, string $page, string $section = ‘default’, array $args = array() )
+		 * Adds a new field to a section of a settings page.
 		 * 
-		 * @param string    $id
-		 * @param string    &title
-		 * @param callable  $callback
-		 * @param string    $page
-		 * @param string	$section
-		 * @param array     $args
+		 * add_settings_field( string $id, string $title, callable $callback, string $page, string $section = ‘default’, array $args = array( 'label_for', 'class') )
+		 * 
+		 * @param string    $id					Slug-name to identify the field. Used in the 'id' attribute of tags.
+		 * @param string    &title				Formatted title of the field. Shown as the label for the field during output.
+		 * @param callable  $callback			Function that fills the field with the desired form inputs. The function should echo its output.
+		 * @param string    $page				The slug-name of the settings page on which to show the section.
+		 * @param string	$section			The slug-name of the section of the settings page in which to show the box.
+		 * @param array     $args				Extra arguments that get passed to the callback function.
+		 * @param string	$args['label_for']	When supplied, the setting title will be wrapped in a <label> element, its 'for' attribute populated with this value.
+		 * @param string	$args['class]		CSS Class to be added to the <tr> element when the field is output.
 		 */
 
-		// Register a new field in the "signups_cron_section_information" section, inside the "signups_cron_information" page.
+		// Information section fields.
 		add_settings_field(
-			'signups_cron_field_signups_information',  // As of WP 4.6 this value is used only internally.
+			'signups_cron_field_signups_information',						// As of WP 4.6 this value is used only internally.
 			__( 'Signups Table Information', 'signups-cron' ),
-			array( $this, 'signups_cron_field_signups_information_cb' ),
+			array( $this, 'signups_cron_field_signups_information_cb' ),	// Called internally by do_settings_sections()->do_settings_fields()->call_user_func()
 			'signups_cron_information',
 			'signups_cron_section_information',
 			array(
-				'label_for'		=> 'signups_cron_field_signups_information' // Use $args' label_for to populate the id inside the callback.
+				'label_for' => 'signups_cron_field_signups_information'		// Use $args' label_for to populate the id inside the callback.
 			)
 		);
 		
-		// Register a new field in the "signups_cron_section_settings" section, inside the "signups_cron_settings" page.
+		// Settings section fields.
 		add_settings_field(
 			'signups_cron_field_active_enabled',
 			__( 'Active Signups Cron', 'signups-cron' ),
@@ -247,7 +271,7 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'		=> 'signups_cron_field_active_enabled'
+				'label_for' => 'signups_cron_field_active_enabled'
 			)
 		);
 
@@ -258,7 +282,7 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'         => 'signups_cron_field_active_threshold'
+				'label_for' => 'signups_cron_field_active_threshold'
 			)
 		);
 
@@ -269,7 +293,7 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'         => 'signups_cron_field_pending_enabled'
+				'label_for' => 'signups_cron_field_pending_enabled'
 			)
 		);
 	
@@ -280,7 +304,7 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'         => 'signups_cron_field_pending_threshold'
+				'label_for' => 'signups_cron_field_pending_threshold'
 			)
 		);
 	
@@ -291,7 +315,7 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'         => 'signups_cron_field_send_email'
+				'label_for' => 'signups_cron_field_send_email'
 			)
 		);
 		
@@ -302,7 +326,7 @@ class Signups_Cron_Admin {
 			'signups_cron_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for'         => 'signups_cron_field_cron_schedule'
+				'label_for' => 'signups_cron_field_cron_schedule'
 			)
 		);
 	
@@ -310,6 +334,8 @@ class Signups_Cron_Admin {
 
 	/**
 	 * Signups Information field callback function.
+	 * 
+	 * Called internally by do_settings_sections()->do_settings_fields()
 	 *
 	 * @since	1.0.0
 	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
