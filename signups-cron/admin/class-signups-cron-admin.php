@@ -111,17 +111,17 @@ class Signups_Cron_Admin {
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<hr>
 			<?php
-				// settings_fields( 'signups_cron_information' );
-				do_settings_sections( 'signups_cron_information' );
+				// settings_fields( 'signups_cron_group_information' );
+				do_settings_sections( 'signups_cron_group_information' );
 			?>
 			<hr>
 			<form name="settings" action="options.php" method="post">
 				<?php
 				// output security fields for the registered setting
-				settings_fields( 'signups_cron_settings' );
+				settings_fields( 'signups_cron_group_settings' );
 
 				// output setting sections and their fields
-				do_settings_sections( 'signups_cron_settings' );
+				do_settings_sections( 'signups_cron_group_settings' );
 
 				// output save settings button for this form.
 				submit_button( 'Save Settings' );
@@ -155,8 +155,8 @@ class Signups_Cron_Admin {
 		 * @param   mixed       $args['default']            Default value when calling get_option().
 		 */
 
-		register_setting( 'signups_cron_information', 'signups_cron_information' );
-		register_setting( 'signups_cron_settings', 'signups_cron_settings' );
+		register_setting( 'signups_cron_group_information', 'signups_cron_information' );
+		register_setting( 'signups_cron_group_settings', 'signups_cron_settings' );
 	
 	}
 
@@ -187,7 +187,7 @@ class Signups_Cron_Admin {
 			'signups_cron_section_information',
 			__( 'Table Information', 'signups-cron' ),
 			array( $this, 'signups_cron_section_information_cb' ), // Called internally by do_settings_sections()->call_user_func()
-			'signups_cron_information'
+			'signups_cron_group_information'
 		);
 	
 		// Cron Settings Section 
@@ -196,7 +196,7 @@ class Signups_Cron_Admin {
 			'signups_cron_section_settings',
 			__( 'Cron Event Settings', 'signups-cron' ),
 			array( $this, 'signups_cron_section_settings_cb' ),
-			'signups_cron_settings'
+			'signups_cron_group_settings'
 		);
 			
 	}
@@ -256,7 +256,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_signups_information',						// As of WP 4.6 this value is used only internally.
 			__( 'Signups Table Information', 'signups-cron' ),
 			array( $this, 'signups_cron_field_signups_information_cb' ),	// Called internally by do_settings_sections()->do_settings_fields()->call_user_func()
-			'signups_cron_information',
+			'signups_cron_group_information',
 			'signups_cron_section_information',
 			array(
 				'label_for' => 'signups_cron_field_signups_information'		// Use $args' label_for to populate the id inside the callback.
@@ -268,7 +268,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_active_enabled',
 			__( 'Active Signups Cron', 'signups-cron' ),
 			array( $this, 'signups_cron_field_active_enabled_cb' ),
-			'signups_cron_settings',
+			'signups_cron_group_settings',
 			'signups_cron_section_settings',
 			array(
 				'label_for' => 'signups_cron_field_active_enabled'
@@ -279,7 +279,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_active_threshold',
 			__( 'Active Signups Threshold', 'signups-cron' ),
 			array( $this, 'signups_cron_field_active_threshold_cb' ),
-			'signups_cron_settings',
+			'signups_cron_group_settings',
 			'signups_cron_section_settings',
 			array(
 				'label_for' => 'signups_cron_field_active_threshold'
@@ -290,7 +290,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_pending_enabled',
 			__( 'Pending Signups Cron', 'signups-cron' ),
 			array( $this, 'signups_cron_field_pending_enabled_cb' ),
-			'signups_cron_settings',
+			'signups_cron_group_settings',
 			'signups_cron_section_settings',
 			array(
 				'label_for' => 'signups_cron_field_pending_enabled'
@@ -301,7 +301,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_pending_threshold',
 			__( 'Pending Signups Threshold', 'signups-cron' ),
 			array( $this, 'signups_cron_field_pending_threshold_cb' ),
-			'signups_cron_settings',
+			'signups_cron_group_settings',
 			'signups_cron_section_settings',
 			array(
 				'label_for' => 'signups_cron_field_pending_threshold'
@@ -312,7 +312,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_send_email',
 			__( 'Cron Email Report', 'signups-cron' ),
 			array( $this, 'signups_cron_field_send_email_cb' ),
-			'signups_cron_settings',
+			'signups_cron_group_settings',
 			'signups_cron_section_settings',
 			array(
 				'label_for' => 'signups_cron_field_send_email'
@@ -323,7 +323,7 @@ class Signups_Cron_Admin {
 			'signups_cron_field_cron_schedule',
 			__( 'Cron Schedule Recurrence', 'signups-cron' ),
 			array( $this, 'signups_cron_field_cron_schedule_cb' ),
-			'signups_cron_settings',
+			'signups_cron_group_settings',
 			'signups_cron_section_settings',
 			array(
 				'label_for' => 'signups_cron_field_cron_schedule'
