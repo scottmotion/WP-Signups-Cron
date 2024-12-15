@@ -46,9 +46,10 @@ class Signups_Cron_Table_Info {
 
         $signups_table_info = [];
     
-        $signups_table_info["signups_count_total"] = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name}" );
+        // $signups_table_info["signups_count_total"] = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name}" );
         $signups_table_info["signups_count_active"] = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE active = 1" );
         $signups_table_info["signups_count_pending"] = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE active = 0" );
+        $signups_table_info["signups_count_total"] = $signups_table_info["signups_count_active"] + $signups_table_info["signups_count_pending"];
 
         $signups_table_size = 0;
 
