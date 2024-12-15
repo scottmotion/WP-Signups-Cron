@@ -115,7 +115,7 @@ class Signups_Cron_Event_Exec {
      * @since   1.0.0
      * @access  private
      */
-    private function cron_event_exec() {
+    public function cron_event_exec() {
 
 		$options = $this->options;
 
@@ -148,7 +148,7 @@ class Signups_Cron_Event_Exec {
         }
 
         // Check if user wants to send admin email
-        if (isset($options['signups_cron_field_send_email']) && ($options['signups_cron_field_send_email'] == 1)) {
+        if (isset($options['signups_cron_field_send_email_report']) && ($options['signups_cron_field_send_email_report'] == 1)) {
             // send admin email is enabled
 
             // start building message
@@ -195,5 +195,42 @@ class Signups_Cron_Event_Exec {
      * add_action( 'signups_cron_event_hook', array( $this, 'cron_event_exec' ) ); // Inside $this class
      * 
      */
+
+    /**
+     * Function that gets executed when the scheduled cron event runs.
+     * 
+     * @since   1.0.0
+     * @access  private
+     */
+    public function cron_event_exec_test() {
+
+        $options = $this->options;
+
+        // $payload = $options['signups_cron_field_active_threshold'];
+
+        $count_deleted_signups_active = 123;
+
+        // start building message
+        $admin_email = get_option('admin_email');
+        $blog_name = get_option( 'blogname' );
+
+        $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
+
+        $message = "Signups Cron successfully ran on {$event_date_now}.";
+        $message .= "\nDeleted {$count_deleted_signups_active} Active Signups older than {$options['signups_cron_field_active_threshold']} days.";
+        
+        $message .= "\nActive Enabled: {$options['signups_cron_field_active_enabled']}";
+        $message .= "\nActive Threshold: {$options['signups_cron_field_active_threshold']}";
+        $message .= "\nPending Enabled: {$options['signups_cron_field_pending_enabled']}";
+        $message .= "\nPending Threshold: {$options['signups_cron_field_pending_threshold']}";
+        $message .= "\nEmail Enabled: {$options['signups_cron_field_send_email_report']}";
+
+
+
+
+        // Send email
+        wp_mail( $admin_email, "[$blog_name] Signups Cron Report TEST", $message  );
+
+    }
 
 }

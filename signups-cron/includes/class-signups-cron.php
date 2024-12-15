@@ -122,6 +122,11 @@ class Signups_Cron {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-signups-cron-public.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the cron event exec.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-event-exec.php';
+
 		$this->loader = new Signups_Cron_Loader();
 
 	}
@@ -161,6 +166,9 @@ class Signups_Cron {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		$plugin_cron_event_exec = new Signups_Cron_Event_Exec();
+		$this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
+		$this->loader->add_action( 'signups_cron_event_hook_test', $plugin_cron_event_exec, 'cron_event_exec_test' );
 	}
 
 	/**

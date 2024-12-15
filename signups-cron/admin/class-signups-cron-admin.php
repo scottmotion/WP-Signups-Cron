@@ -310,13 +310,13 @@ class Signups_Cron_Admin {
 		);
 	
 		add_settings_field(
-			'signups_cron_field_send_email',
+			'signups_cron_field_send_email_report',
 			__( 'Cron Email Report', 'signups-cron' ),
-			array( $this, 'signups_cron_field_send_email_cb' ),
+			array( $this, 'signups_cron_field_send_email_report_cb' ),
 			'signups_cron_page_settings',
 			'signups_cron_section_settings',
 			array(
-				'label_for' => 'signups_cron_field_send_email'
+				'label_for' => 'signups_cron_field_send_email_report'
 			)
 		);
 		
@@ -491,7 +491,7 @@ class Signups_Cron_Admin {
 	 * @since	1.0.0
 	 * @param 	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
-	public function signups_cron_field_send_email_cb( $args ) {
+	public function signups_cron_field_send_email_report_cb( $args ) {
 
 		$options = $this->options;
 
@@ -555,11 +555,11 @@ class Signups_Cron_Admin {
 		<p>
 			<?php
 				// get timestamp of next cron event
-				$scheduled_event_timestamp = wp_next_scheduled( 'signups_cron_delete_signups_cron_hook' );
+				$scheduled_event_timestamp = wp_next_scheduled( 'signups_cron_event_hook' );
 
 				if ($scheduled_event_timestamp) {
 					// get scheduled event display name
-					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_delete_signups_cron_hook' )->schedule]['display'];
+					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_event_hook' )->schedule]['display'];
 					$scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T'); // TODO: Check if site options uses timezone_string or gmt_offset
 
 					echo esc_html_e( "Next cron scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' );
