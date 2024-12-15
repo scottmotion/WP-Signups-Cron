@@ -69,6 +69,8 @@ class Signups_Cron_Admin {
 
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
+		$this->options = array();
+		
 		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
 		// $this->signups_table_info = new Signups_Cron_Table_Info();	// Todo: move to section callback?
 		// $this->options = get_option( 'signups_cron_settings' );		// Todo: move to admin render or load-{$page_hook}? // ex: load-users_page_signups-cron
@@ -102,7 +104,7 @@ class Signups_Cron_Admin {
 	public function render_admin_page() {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
-		$this->signups_table_info = new Signups_Cron_Table_Info();	// Todo: move to section callback?
+		$this->signups_table_info = new Signups_Cron_Table_Info();											// Todo: move to section callback?
 		$this->options = get_option( 'signups_cron_settings' );		// Todo: move to admin render or load-{$page_hook}? // ex: load-users_page_signups-cron
 
 		// check user capabilities
