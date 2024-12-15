@@ -173,7 +173,7 @@ class Signups_Cron_Admin {
     	 * add_settings_section( $id, $title, $callback, $page, $args = array( 'before_section', 'after_section', 'section_class' ) )
 		 * 
 		 * @param 	string    	$id							Slug-name to identify the section. Used in the 'id' attribute of tags.
-		 * @param 	string    	&title						Formatted title of the section. Shown as the heading for the section.
+		 * @param 	string    	$title						Formatted title of the section. Shown as the heading for the section.
 		 * @param 	callable 	$callback					Function that echos out any content at the top of the section (between heading and fields).
 		 * @param 	string    	$page						The slug-name of the settings page on which to show the section.
 		 * @param 	array     	$args						Arguments used to create the settings section.
@@ -243,7 +243,7 @@ class Signups_Cron_Admin {
 		 * add_settings_field( string $id, string $title, callable $callback, string $page, string $section = ‘default’, array $args = array( 'label_for', 'class') )
 		 * 
 		 * @param string    $id					Slug-name to identify the field. Used in the 'id' attribute of tags.
-		 * @param string    &title				Formatted title of the field. Shown as the label for the field during output.
+		 * @param string    $title				Formatted title of the field. Shown as the label for the field during output.
 		 * @param callable  $callback			Function that fills the field with the desired form inputs. The function should echo its output.
 		 * @param string    $page				The slug-name of the settings page on which to show the section.
 		 * @param string	$section			The slug-name of the section of the settings page in which to show the box.
