@@ -41,7 +41,7 @@ class Signups_Cron_Event_Exec {
 
         global $wpdb;
         $this->table_name = $wpdb->prefix . 'signups';
-		$this->options = get_option( 'signups_cron_settings' );
+		$this->options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
 
 	}
 
