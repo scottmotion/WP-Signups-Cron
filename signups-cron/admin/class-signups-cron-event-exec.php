@@ -39,9 +39,9 @@ class Signups_Cron_Event_Exec {
 	 */
 	public function __construct() {
 
-        global $wpdb;
-        $this->table_name = $wpdb->prefix . 'signups';
-		$this->options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
+        // global $wpdb;
+        // $this->table_name = $wpdb->prefix . 'signups';
+		// $this->options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
 
 	}
 
@@ -58,7 +58,8 @@ class Signups_Cron_Event_Exec {
 
         // Access Global database object
         global $wpdb;
-        $table_name = esc_sql( $this->table_name ); // Sanitize the table name.
+        // $table_name = esc_sql( $this->table_name ); // Sanitize the table name.
+        $table_name = esc_sql( $wpdb->prefix . 'signups' ); // Sanitize the table name.
 
         // Get signups from wp_signups table
         $chosen_signups = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE active = $status", ARRAY_A );
@@ -113,11 +114,13 @@ class Signups_Cron_Event_Exec {
      * Function that gets executed when the scheduled cron event runs.
      * 
      * @since   1.0.0
-     * @access  public
      */
     public function cron_event_exec() {
+        
+		// $this->options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
+		// $options = $this->options;
 
-		$options = $this->options;
+		$options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
 
         $count_deleted_signups_active = 0;
 
@@ -174,37 +177,14 @@ class Signups_Cron_Event_Exec {
     }
 
     /**
-     * See 'class-signups-cron.php' & 'class-signups-cron-loader.php' for how the plugin adds actions & filters
-     * 
-     * Example:
-     * 
-     * require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-loader.php';
-     * $this->loader = new Signups_Cron_Loader();
-     * $plugin_admin = new Signups_Cron_Admin( $this->get_signups_cron(), $this->get_version() );
-     * $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_page' );
-     * 
-     * So...
-     * 
-     * $plugin_cron_event_exec = Signups_Cron_Event_Exec();
-     * $this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
-     * 
-     * 
-     * Others useful examples:
-     * 
-     * add_action( 'signups_cron_event_hook', 'cron_event_exec' ); // Standard way
-     * add_action( 'signups_cron_event_hook', array( $this, 'cron_event_exec' ) ); // Inside $this class
-     * 
-     */
-
-    /**
      * Function that gets executed when the scheduled cron event runs.
      * 
      * @since   1.0.0
-     * @access  public
      */
     public function cron_event_exec_test() {
 
-        $options = $this->options;
+        // $options = $this->options;
+		$options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
 
         // $payload = $options['signups_cron_field_active_threshold'];
 
