@@ -18,7 +18,7 @@
  *
  * @package    Signups_Cron
  * @subpackage Signups_Cron/admin
- * @author     Your Name <email@example.com>
+ * @author     Scott Winn <hello@scottwinn.dev>
  */
 class Signups_Cron_Admin {
 
@@ -76,7 +76,7 @@ class Signups_Cron_Admin {
 	}
 
 	/**
-	 * Register the admin submenu item for 'Signups Cron' under 'Users'.
+	 * Register the 'Signups Cron' admin submenu page and insert under the 'Users' page.
 	 *
 	 * @since 1.0.0
 	 */
@@ -183,6 +183,7 @@ class Signups_Cron_Admin {
 		 */
 		
 		// Signups Table Information Section
+		// Called by render_admin_page()
 		 add_settings_section(
 			'signups_cron_section_information',
 			__( 'Table Information', 'signups-cron' ),
@@ -190,8 +191,8 @@ class Signups_Cron_Admin {
 			'signups_cron_group_information'
 		);
 	
-		// Cron Settings Section 
-		// Called as child of <form name="settings" action="options.php" method="post")>
+		// Cron Event Settings Section 
+		// Called by render_admin_page() as child of <form name="settings" action="options.php" method="post")>
 		add_settings_section(
 			'signups_cron_section_settings',
 			__( 'Cron Event Settings', 'signups-cron' ),
@@ -202,7 +203,7 @@ class Signups_Cron_Admin {
 	}
 
 	/**
-	 * Information section callback function.
+	 * Information Section callback function.
 	 * 
 	 * Function that echos out any content at the top of the section (between heading and fields).
 	 * 
