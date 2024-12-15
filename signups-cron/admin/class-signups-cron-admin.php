@@ -62,8 +62,9 @@ class Signups_Cron_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since	1.0.0
-	 * @param   string    $signups_cron      The name of this plugin.
-	 * @param   string    $version    		The version of this plugin.
+	 * @param   string		$signups_cron		The name of this plugin.
+	 * @param   string		$version    		The version of this plugin.
+	 * @var		array		$options			Plugin options from the database.
 	 */
 	public function __construct( $signups_cron, $version ) {
 
