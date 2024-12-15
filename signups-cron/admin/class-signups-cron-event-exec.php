@@ -113,7 +113,7 @@ class Signups_Cron_Event_Exec {
      * Function that gets executed when the scheduled cron event runs.
      * 
      * @since   1.0.0
-     * @access  private
+     * @access  public
      */
     public function cron_event_exec() {
 
@@ -200,7 +200,7 @@ class Signups_Cron_Event_Exec {
      * Function that gets executed when the scheduled cron event runs.
      * 
      * @since   1.0.0
-     * @access  private
+     * @access  public
      */
     public function cron_event_exec_test() {
 
