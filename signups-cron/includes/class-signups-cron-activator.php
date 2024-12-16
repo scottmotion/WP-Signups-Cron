@@ -33,7 +33,7 @@ class Signups_Cron_Activator {
 		 * TODO:
 		 * [] set option defaults in Signups_Cron_Admin
 		 * [?] Do we need to set empty ('0') values?
-		 * [] Check if option exists because plugin was deactivated but not uninstalled.
+		 * [?] Check if option exists because plugin was deactivated but not uninstalled?
 		 */
 		add_option(
 			'signups_cron_settings',				// Name of the option to add.
