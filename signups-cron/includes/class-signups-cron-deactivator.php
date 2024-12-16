@@ -31,7 +31,14 @@ class Signups_Cron_Deactivator {
 	 */
 	public static function deactivate() {
 
-		// TODO: Check if cron is scheduled and unschedule it.
+		// Remove this pungin's cron event
+
+		// Check if event with our hook is scheduled and unschedule it.
+		$timestamp = wp_next_scheduled( 'signups_cron_event_hook' );
+    	wp_unschedule_event( $timestamp, 'signups_cron_event_hook' );
+
+		// Clear all events with our hook
+		// wp_clear_scheduled_hook('signups_cron_event_hook'),
 
 	}
 
