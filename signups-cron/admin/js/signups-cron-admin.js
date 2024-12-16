@@ -37,19 +37,19 @@
 
 		if (checkbox_active.is(':checked')) {      // document ready
 			text_active.removeClass("text-disabled");
-			input_active.prop('readonly', false);
+			input_active.prop('disabled', false);
 		} else {
 			text_active.addClass("text-disabled");
-			input_active.prop('readonly', true);
+			input_active.prop('disabled', true);
 		}
 
 		checkbox_active.change(function () {        //event
 			if (checkbox_active.is(':checked')) {
 				text_active.removeClass("text-disabled");
-				input_active.prop('readonly', false);
+				input_active.prop('disabled', false);
 			} else {
 				text_active.addClass("text-disabled");
-				input_active.prop('readonly', true);
+				input_active.prop('disabled', true);
 			}
 		});
 
@@ -59,19 +59,19 @@
 
 		if (checkbox_pending.is(':checked')) {      // document ready
 			text_pending.removeClass("text-disabled");
-			input_pending.prop('readonly', false);
+			input_pending.prop('disabled', false);
 		} else {
 			text_pending.addClass("text-disabled");
-			input_pending.prop('readonly', true);
+			input_pending.prop('disabled', true);
 		}
 
 		checkbox_pending.change(function () {        //event
 			if (checkbox_pending.is(':checked')) {
 				text_pending.removeClass("text-disabled");
-				input_pending.prop('readonly', false);
+				input_pending.prop('disabled', false);
 			} else {
 				text_pending.addClass("text-disabled");
-				input_pending.prop('readonly', true);
+				input_pending.prop('disabled', true);
 			}
 		});
 
