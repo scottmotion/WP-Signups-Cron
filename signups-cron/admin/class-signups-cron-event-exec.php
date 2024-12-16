@@ -184,7 +184,7 @@ class Signups_Cron_Event_Exec {
     public function cron_event_exec_test() {
 
         // $options = $this->options;
-		$options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
+		$options = get_option( 'signups_cron_settings' );
 
         // $payload = $options['signups_cron_field_active_threshold'];
 
