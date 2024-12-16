@@ -117,10 +117,10 @@ class Signups_Cron_Event_Exec {
      */
     public function cron_event_exec() {
         
-		// $this->options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
+		// $this->options = get_option( 'signups_cron_settings' );
 		// $options = $this->options;
 
-		$options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
+		$options = get_option( 'signups_cron_settings' );
 
         $count_deleted_signups_active = 0;
 
