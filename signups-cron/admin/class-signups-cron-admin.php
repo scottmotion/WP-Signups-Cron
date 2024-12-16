@@ -40,6 +40,15 @@ class Signups_Cron_Admin {
 	 */
 	private $options;
 
+    /**
+	 * The Signups Cron default options.
+	 *
+	 * @since	1.0.0
+	 * @access	private
+	 * @var		array		$options	The plugin options.
+	 */
+	private $defaults;
+
 	/**
 	 * The ID of this plugin.
 	 *
@@ -71,6 +80,7 @@ class Signups_Cron_Admin {
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
 		$this->options = array();
+		$this->defaults = array();
 		
 		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
 		// $this->signups_table_info = new Signups_Cron_Table_Info();	// Todo: move to section callback?
