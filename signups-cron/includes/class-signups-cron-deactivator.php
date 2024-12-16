@@ -31,6 +31,8 @@ class Signups_Cron_Deactivator {
 	 */
 	public static function deactivate() {
 
+		// TODO: Check if cron is scheduled and unschedule it.
+
 	}
 
 }
