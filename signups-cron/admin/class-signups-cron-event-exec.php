@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Register all actions and filters for the plugin.
+ * Functionality for cron event.
  *
- * Maintain a list of all hooks that are registered throughout
- * the plugin, and register them with the WordPress API. Call the
- * run function to execute the list of actions and filters.
+ * Delete 'active' and 'pending' signups.
+ * Email a report to the admin.
  *
- * @package    Signups_Cron
- * @subpackage Signups_Cron/admin
- * @author     Scott Winn <hello@scottwinn.dev>
+ * @since       1.0.0
+ * @package     Signups_Cron
+ * @subpackage  Signups_Cron/admin
+ * @author      Scott Winn <hello@scottwinn.dev>
  */
 class Signups_Cron_Event_Exec {
 
@@ -30,7 +30,6 @@ class Signups_Cron_Event_Exec {
 	 * @var		array		$options		The plugin options.
 	 */
 	private $options;
-
 
 	/**
 	 * Initialize the class and set its properties.
