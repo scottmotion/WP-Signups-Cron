@@ -20,7 +20,7 @@ class Signups_Cron_Event_Exec {
 	 * @access private
 	 * @var string $table_name The name of the database table for signups.
 	 */
-	private $table_name;
+	// private $table_name;
 
     /**
 	 * The Signups Cron options from WP options table.
@@ -29,7 +29,7 @@ class Signups_Cron_Event_Exec {
 	 * @access	private
 	 * @var		array		$options		The plugin options.
 	 */
-	private $options;
+	// private $options;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -37,10 +37,6 @@ class Signups_Cron_Event_Exec {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-
-        // global $wpdb;
-        // $this->table_name = $wpdb->prefix . 'signups';
-		// $this->options = get_option( 'signups_cron_settings' ); // Todo: move to cron_event_exec?
 
 	}
 
@@ -115,9 +111,6 @@ class Signups_Cron_Event_Exec {
      * @since   1.0.0
      */
     public function cron_event_exec() {
-        
-		// $this->options = get_option( 'signups_cron_settings' );
-		// $options = $this->options;
 
 		$options = get_option( 'signups_cron_settings' );
 
@@ -157,8 +150,6 @@ class Signups_Cron_Event_Exec {
             $admin_email = get_option('admin_email');
             $blog_name = get_option( 'blogname' );
 
-            // $event_date_time = date('F j, Y, g:i a T', time());
-
             $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T'); // TODO: Check if site options uses timezone_string or gmt_offset
 
             $message = "Signups Cron successfully ran on {$event_date_now}.";
@@ -175,41 +166,5 @@ class Signups_Cron_Event_Exec {
         }
     }
 
-    /**
-     * Function that gets executed when the scheduled cron event runs.
-     * 
-     * @since   1.0.0
-     */
-    // public function cron_event_exec_test() {
-
-    //     // $options = $this->options;
-	// 	$options = get_option( 'signups_cron_settings' );
-
-    //     // $payload = $options['signups_cron_field_active_threshold'];
-
-    //     $count_deleted_signups_active = 123;
-
-    //     // start building message
-    //     $admin_email = get_option('admin_email');
-    //     $blog_name = get_option( 'blogname' );
-
-    //     $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
-
-    //     $message = "Signups Cron TEST successfully ran on {$event_date_now}.";
-
-    //     $message .= "\n\nSome variable from the function: {$count_deleted_signups_active}";
-
-    //     $message .= "\n\nOptions from the database:";
-    //     $message .= "\nActive Enabled: {$options['signups_cron_field_active_enabled']}";
-    //     $message .= "\nActive Threshold: {$options['signups_cron_field_active_threshold']}";
-    //     $message .= "\nPending Enabled: {$options['signups_cron_field_pending_enabled']}";
-    //     $message .= "\nPending Threshold: {$options['signups_cron_field_pending_threshold']}";
-    //     $message .= "\nEmail Enabled: {$options['signups_cron_field_send_email_report']}";
-    //     $message .= "\nCron Schedule: {$options['signups_cron_field_cron_schedule']}";
-
-    //     // Send email
-    //     wp_mail( $admin_email, "[$blog_name] Signups Cron Report TEST", $message  );
-
-    // }
 
 }
