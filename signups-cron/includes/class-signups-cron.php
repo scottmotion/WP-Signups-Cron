@@ -78,7 +78,6 @@ class Signups_Cron {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
 
 	}
 
@@ -90,7 +89,6 @@ class Signups_Cron {
 	 * - Signups_Cron_Loader. Orchestrates the hooks of the plugin.
 	 * - Signups_Cron_i18n. Defines internationalization functionality.
 	 * - Signups_Cron_Admin. Defines all hooks for the admin area.
-	 * - Signups_Cron_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -116,12 +114,6 @@ class Signups_Cron {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-signups-cron-public.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the cron event exec.
@@ -179,22 +171,6 @@ class Signups_Cron {
 
 		$plugin_cron_scheduler = new Signups_Cron_Scheduler();
 		$this->loader->add_action( 'update_option_signups_cron_settings', $plugin_cron_scheduler, 'schedule_cron_event' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Signups_Cron_Public( $this->get_signups_cron(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
