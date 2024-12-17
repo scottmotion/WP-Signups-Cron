@@ -32,3 +32,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Delete Signups Cron options from database.
 delete_option('signups_cron_settings');
+
+// Unschedules all events attached to the hook.
+wp_unschedule_hook('signups_cron_event_hook');
+
