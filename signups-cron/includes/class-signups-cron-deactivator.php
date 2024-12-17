@@ -31,6 +31,17 @@ class Signups_Cron_Deactivator {
 	 */
 	public static function deactivate() {
 
+		$options = get_option( 'signups_cron_settings');
+		unset($options['signups_cron_field_active_enabled'], $options['signups_cron_field_pending_enabled']);
+		update_option( 'signups_cron_settings', $options );
+
+		// $deactivate_options = array(
+		// 	'signups_cron_field_active_enabled',
+		// 	'signups_cron_field_pending_enabled'
+		// );
+
+		// $deactivate_options = wp_parse_args( $deactivate_options, get_option( 'signups_cron_settings') );
+		// update_option( 'signups_cron_settings', $deactivate_options );
 		// Unschedule all events attached to the hook.
 		wp_unschedule_hook('signups_cron_event_hook');
 
