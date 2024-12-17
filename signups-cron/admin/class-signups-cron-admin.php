@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://example.com
+ * @link       https://github.com/scottmotion/WP-Signups-Cron/
  * @since      1.0.0
  *
  * @package    Signups_Cron
@@ -143,14 +143,6 @@ class Signups_Cron_Admin {
 	 */
 	public function render_admin_page() {
 
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
-		// $this->signups_table_info = new Signups_Cron_Table_Info();											// Todo: move to section callback?
-		// $this->options = get_option( 'signups_cron_settings' );												// Todo: move to render_admin_page() or load-users_page_signups-cron hook?
-		// $this->options = get_option( 'signups_cron_settings', $this->default_options );
-		// $options_test = wp_parse_args( $this->options, $this->default_options );
-
-		// $$options_test_2 = wp_parse_args( get_option( 'signups_cron_settings', $this->default_options ), $this->default_options );
-
 		// check user capabilities
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -168,10 +160,10 @@ class Signups_Cron_Admin {
 			<form name="settings" action="options.php" method="post">
 				<?php
 				// output security fields for the registered setting
-				settings_fields( 'signups_cron_group_settings' );			// for $option_group
+				settings_fields( 'signups_cron_group_settings' );
 
 				// output setting sections and their fields
-				do_settings_sections( 'signups_cron_page_settings' );		// for $page
+				do_settings_sections( 'signups_cron_page_settings' );
 
 				// output save settings button for this form.
 				submit_button( 'Save Settings' );
@@ -394,7 +386,6 @@ class Signups_Cron_Admin {
 	public function signups_cron_field_signups_information_cb( $args ) {
 
 		$this->load_signups_cron_table_info();
-		// $signups_table_info = new Signups_Cron_Table_Info();
 		$data = $this->signups_table_info->get_signups_table_info();
 
 		?>
@@ -430,10 +421,6 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
-		// 	$options[ $args['label_for'] ] = '0';
-		// }
-
 		?>
 		<p>
 			<?php esc_html_e( 'Enable Active signups cron ', 'signups-cron' ); ?>
@@ -461,9 +448,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p
-			id="text_for_signups_cron_field_active_threshold"
-		>
+		<p id="text_for_signups_cron_field_active_threshold">
 			<?php esc_html_e( 'Delete Active signups after ', 'signups-cron' ); ?>
 			<input
 				type="number"
@@ -489,10 +474,6 @@ class Signups_Cron_Admin {
 	public function signups_cron_field_pending_enabled_cb( $args ) {
 
 		$options = $this->options;
-
-		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
-		// 	$options[ $args['label_for'] ] = '0';
-		// }
 
 		?>
 		<p>
@@ -521,9 +502,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p
-			id="text_for_signups_cron_field_pending_threshold"
-		>
+		<p id="text_for_signups_cron_field_pending_threshold">
 			<?php esc_html_e( 'Delete Pending signups after ', 'signups-cron' ); ?>
 			<input
 				type="number"
@@ -550,17 +529,11 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
-		// 	$options[ $args['label_for'] ] = '0';
-		// }
-
 		// Get admin email
 		$admin_email = get_option('admin_email');
 
 		?>
-		<p
-			id="text_for_signups_cron_field_send_email_report"
-		>
+		<p id="text_for_signups_cron_field_send_email_report">
 			<?php esc_html_e( 'Email cron report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
@@ -585,14 +558,8 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
-		// 	$options[ $args['label_for'] ] = 'daily';
-		// }
-
 		?>
-		<p
-			id="text_for_signups_cron_field_cron_schedule"
-		>
+		<p id="text_for_signups_cron_field_cron_schedule">
 			<?php esc_html_e( 'Schedule cron to run ', 'signups-cron' ); ?>
 			<select
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
