@@ -80,13 +80,12 @@ class Signups_Cron_Admin {
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
 		$this->options = array();
-		// $this->defaults = array();
 		$this->default_options = array(								// Default option value for 'signups_cron_settings'.
-			'signups_cron_field_active_enabled'			=> '0',	// Active Signups cron enabled.
+			'signups_cron_field_active_enabled'			=> '0',		// Active Signups cron enabled.
 			'signups_cron_field_active_threshold'		=> '365',	// Active Signups cron threshold.
-			'signups_cron_field_pending_enabled'		=> '0',	// Pending Signups cron enabled.
+			'signups_cron_field_pending_enabled'		=> '0',		// Pending Signups cron enabled.
 			'signups_cron_field_pending_threshold'		=> '365',	// Pending Signups cron threshold.
-			'signups_cron_field_send_email_report'		=> '0',	// Send cron email report enabled.
+			'signups_cron_field_send_email_report'		=> '0',		// Send cron email report enabled.
 			'signups_cron_field_cron_schedule'			=> 'daily'	// Cron schedule recurrence.
 		);
 
