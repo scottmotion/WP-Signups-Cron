@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://example.com
+ * @link       https://github.com/scottmotion/WP-Signups-Cron/
  * @since      1.0.0
  *
  * @package    Signups_Cron
@@ -25,7 +25,7 @@
  * @since      1.0.0
  * @package    Signups_Cron
  * @subpackage Signups_Cron/includes
- * @author     Your Name <email@example.com>
+ * @author     Scott Winn <hello@scottwinn.dev>
  */
 class Signups_Cron {
 
@@ -67,6 +67,7 @@ class Signups_Cron {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
+
 		if ( defined( 'SIGNUPS_CRON_VERSION' ) ) {
 			$this->version = SIGNUPS_CRON_VERSION;
 		} else {
@@ -174,9 +175,7 @@ class Signups_Cron {
 		$this->loader->add_action( 'users_page_signups-cron', $plugin_admin, 'load_signups_cron_options', 9 );
 
 		$plugin_cron_event_exec = new Signups_Cron_Event_Exec();
-
 		$this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
-		// $this->loader->add_action( 'signups_cron_event_hook_test', $plugin_cron_event_exec, 'cron_event_exec_test' );
 
 		$plugin_cron_scheduler = new Signups_Cron_Scheduler();
 		$this->loader->add_action( 'update_option_signups_cron_settings', $plugin_cron_scheduler, 'schedule_cron_event' );
