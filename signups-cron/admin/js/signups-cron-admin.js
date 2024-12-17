@@ -31,19 +31,19 @@
 
 	$(function () {
 
-		const checkbox_active = $("#signups_cron_field_active_enabled");
-		const text_active = $("#text_for_signups_cron_field_active_threshold");
-		const input_active = $("#signups_cron_field_active_threshold");
+		// const checkbox_active = $("#signups_cron_field_active_enabled");
+		// const text_active = $("#text_for_signups_cron_field_active_threshold");
+		// const input_active = $("#signups_cron_field_active_threshold");
 
-		const checkbox_pending = $("#signups_cron_field_pending_enabled");
-		const text_pending = $("#text_for_signups_cron_field_pending_threshold");
-		const input_pending = $("#signups_cron_field_pending_threshold");
+		// const checkbox_pending = $("#signups_cron_field_pending_enabled");
+		// const text_pending = $("#text_for_signups_cron_field_pending_threshold");
+		// const input_pending = $("#signups_cron_field_pending_threshold");
 
-		const text_email = $("#text_for_signups_cron_field_send_email_report");
-		const input_email = $("#signups_cron_field_send_email_report");
+		// const text_email = $("#text_for_signups_cron_field_send_email_report");
+		// const input_email = $("#signups_cron_field_send_email_report");
 
-		const text_schedule = $("#text_for_signups_cron_field_cron_schedule");
-		const input_schedule = $("#signups_cron_field_cron_schedule");
+		// const text_schedule = $("#text_for_signups_cron_field_cron_schedule");
+		// const input_schedule = $("#signups_cron_field_cron_schedule");
 
 		// checkbox_active.change(function () {        //event
 		// 	if (!checkbox_active.is(':checked') && !checkbox_pending.is(':checked')) {
