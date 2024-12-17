@@ -402,9 +402,9 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		if ( ! isset( $options[ $args['label_for'] ] ) ) {
-			$options[ $args['label_for'] ] = '0';
-		}
+		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
+		// 	$options[ $args['label_for'] ] = '0';
+		// }
 
 		?>
 		<p>
@@ -460,9 +460,9 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		if ( ! isset( $options[ $args['label_for'] ] ) ) {
-			$options[ $args['label_for'] ] = '0';
-		}
+		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
+		// 	$options[ $args['label_for'] ] = '0';
+		// }
 
 		?>
 		<p>
@@ -518,9 +518,10 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		if ( ! isset( $options[ $args['label_for'] ] ) ) {
-			$options[ $args['label_for'] ] = '0';
-		}
+		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
+		// 	$options[ $args['label_for'] ] = '0';
+		// }
+
 		// Get admin email
 		$admin_email = get_option('admin_email');
 
