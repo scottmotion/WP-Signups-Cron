@@ -463,7 +463,6 @@ class Signups_Cron_Admin {
 		?>
 		<p
 			id="text_for_signups_cron_field_active_threshold"
-			class="<?php echo isset( $options[ 'signups_cron_field_active_enabled' ] ) ? ( '' ) : ( 'text-disabled' ); ?>"
 		>
 			<?php esc_html_e( 'Delete Active signups after ', 'signups-cron' ); ?>
 			<input
@@ -473,7 +472,6 @@ class Signups_Cron_Admin {
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
 				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
-				<?php disabled( $options[ 'signups_cron_field_active_enabled' ], false ); ?>
 			>
 			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
@@ -525,7 +523,6 @@ class Signups_Cron_Admin {
 		?>
 		<p
 			id="text_for_signups_cron_field_pending_threshold"
-			class="<?php echo isset( $options[ 'signups_cron_field_pending_enabled' ] ) ? ( '' ) : ( 'text-disabled' ); ?>"
 		>
 			<?php esc_html_e( 'Delete Pending signups after ', 'signups-cron' ); ?>
 			<input
@@ -535,7 +532,6 @@ class Signups_Cron_Admin {
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
 				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
-				<?php disabled( $options[ 'signups_cron_field_pending_enabled' ], false ); ?>
 			>
 			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
@@ -564,7 +560,6 @@ class Signups_Cron_Admin {
 		?>
 		<p
 			id="text_for_signups_cron_field_send_email_report"
-			class="<?php echo (isset($options['signups_cron_field_active_enabled']) || isset($options['signups_cron_field_pending_enabled'])) ? ( '' ) : ( 'text-disabled' ); ?>"	
 		>
 			<?php esc_html_e( 'Email cron report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
 			<input
@@ -573,7 +568,6 @@ class Signups_Cron_Admin {
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
 				value="1"
 				<?php checked( $options[ $args['label_for'] ], 1 ); ?>
-				<?php disabled( ( $options[ 'signups_cron_field_active_enabled' ] || $options[ 'signups_cron_field_pending_enabled' ] ), false ); ?>
 			>
 			</input>
 		</p>
@@ -591,20 +585,18 @@ class Signups_Cron_Admin {
 
 		$options = $this->options;
 
-		if ( ! isset( $options[ $args['label_for'] ] ) ) {
-			$options[ $args['label_for'] ] = 'daily';
-		}
+		// if ( ! isset( $options[ $args['label_for'] ] ) ) {
+		// 	$options[ $args['label_for'] ] = 'daily';
+		// }
 
 		?>
 		<p
 			id="text_for_signups_cron_field_cron_schedule"
-			class="<?php echo (isset($options['signups_cron_field_active_enabled']) || isset($options['signups_cron_field_pending_enabled'])) ? ( '' ) : ( 'text-disabled' ); ?>"	
 		>
 			<?php esc_html_e( 'Schedule cron to run ', 'signups-cron' ); ?>
 			<select
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
-				<?php disabled( ( $options[ 'signups_cron_field_active_enabled' ] || $options[ 'signups_cron_field_pending_enabled' ] ), false ); ?>
 			>
 				<option
 					value="hourly"
