@@ -23,7 +23,7 @@
 class Signups_Cron_Admin {
 
     /**
-	 * The name of the signups table.
+	 * The class responsible for getting the signups table info.
 	 *
 	 * @since	1.0.0
 	 * @access	private
@@ -93,6 +93,31 @@ class Signups_Cron_Admin {
 	}
 
 	/**
+	 * Get the Signups Cron options.
+	 *
+	 * @since 1.0.0
+	 */
+	public function load_signups_cron_options() {
+
+		$this->options = get_option( 'signups_cron_settings' );
+
+		$this->options = wp_parse_args( $this->options, $this->default_options );
+
+	}
+
+	/**
+	 * Get the Signups Cron options.
+	 *
+	 * @since 1.0.0
+	 */
+	public function load_signups_cron_table_info() {
+		
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';
+		$this->signups_table_info = new Signups_Cron_Table_Info();
+
+	}
+
+	/**
 	 * Register the 'Signups Cron' admin submenu page and insert under the 'Users' page.
 	 *
 	 * @since 1.0.0
@@ -118,9 +143,9 @@ class Signups_Cron_Admin {
 	 */
 	public function render_admin_page() {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
-		$this->signups_table_info = new Signups_Cron_Table_Info();											// Todo: move to section callback?
-		$this->options = get_option( 'signups_cron_settings' );												// Todo: move to render_admin_page() or load-users_page_signups-cron hook?
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
+		// $this->signups_table_info = new Signups_Cron_Table_Info();											// Todo: move to section callback?
+		// $this->options = get_option( 'signups_cron_settings' );												// Todo: move to render_admin_page() or load-users_page_signups-cron hook?
 		// $this->options = get_option( 'signups_cron_settings', $this->default_options );
 		// $options_test = wp_parse_args( $this->options, $this->default_options );
 
@@ -367,7 +392,8 @@ class Signups_Cron_Admin {
 	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
 	 */
 	public function signups_cron_field_signups_information_cb( $args ) {
-		
+
+		$this->load_signups_cron_table_info();
 		// $signups_table_info = new Signups_Cron_Table_Info();
 		$data = $this->signups_table_info->get_signups_table_info();
 
