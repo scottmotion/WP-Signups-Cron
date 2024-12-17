@@ -127,6 +127,12 @@ class Signups_Cron {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-event-exec.php';
 
+		/**
+		 * The class responsible for scheduling the cron event.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-scheduler.php';
+
+
 		$this->loader = new Signups_Cron_Loader();
 
 	}
@@ -165,10 +171,16 @@ class Signups_Cron {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'add_settings_fields' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'users_page_signups-cron', $plugin_admin, 'load_signups_cron_options', 9 );
 
 		$plugin_cron_event_exec = new Signups_Cron_Event_Exec();
+
 		$this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
 		// $this->loader->add_action( 'signups_cron_event_hook_test', $plugin_cron_event_exec, 'cron_event_exec_test' );
+
+		$plugin_cron_scheduler = new Signups_Cron_Scheduler();
+		$this->loader->add_action( 'update_option_signups_cron_settings', $plugin_cron_scheduler, 'schedule_cron_event' );
+
 	}
 
 	/**
