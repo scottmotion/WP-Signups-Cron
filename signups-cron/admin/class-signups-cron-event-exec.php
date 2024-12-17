@@ -53,7 +53,6 @@ class Signups_Cron_Event_Exec {
 
         // Access Global database object
         global $wpdb;
-        // $table_name = esc_sql( $this->table_name ); // Sanitize the table name.
         $table_name = esc_sql( $wpdb->prefix . 'signups' ); // Sanitize the table name.
 
         // Get signups from wp_signups table
