@@ -8,7 +8,7 @@
  * @subpackage  Signups_Cron/admin
  * @author      Scott Winn <hello@scottwinn.dev>
  */
-class Signups_Cron_Event_Exec {
+class Signups_Cron_Scheduler {
 
 	/**
 	 * Initialize the class and set its properties.
