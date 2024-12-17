@@ -47,7 +47,7 @@ class Signups_Cron_Admin {
 	 * @access	private
 	 * @var		array		$options	The plugin options.
 	 */
-	private $defaults;
+	private $default_options;
 
 	/**
 	 * The ID of this plugin.
@@ -80,11 +80,15 @@ class Signups_Cron_Admin {
 		$this->signups_cron = $signups_cron;
 		$this->version = $version;
 		$this->options = array();
-		$this->defaults = array();
-		
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
-		// $this->signups_table_info = new Signups_Cron_Table_Info();	// Todo: move to section callback?
-		// $this->options = get_option( 'signups_cron_settings' );		// Todo: move to admin render or load-{$page_hook}? // ex: load-users_page_signups-cron
+		// $this->defaults = array();
+		$this->default_options = array(								// Default option value for 'signups_cron_settings'.
+			'signups_cron_field_active_enabled'			=> NULL,	// Active Signups cron enabled.
+			'signups_cron_field_active_threshold'		=> '365',	// Active Signups cron threshold.
+			'signups_cron_field_pending_enabled'		=> NULL,	// Pending Signups cron enabled.
+			'signups_cron_field_pending_threshold'		=> '365',	// Pending Signups cron threshold.
+			'signups_cron_field_send_email_report'		=> NULL,	// Send cron email report enabled.
+			'signups_cron_field_cron_schedule'			=> 'daily'	// Cron schedule recurrence.
+		);
 
 	}
 
@@ -116,7 +120,9 @@ class Signups_Cron_Admin {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-table-info.php';	// Todo: move to section callback?
 		$this->signups_table_info = new Signups_Cron_Table_Info();											// Todo: move to section callback?
-		$this->options = get_option( 'signups_cron_settings' );		// Todo: move to admin render or load-{$page_hook}? // ex: load-users_page_signups-cron
+		$this->options = get_option( 'signups_cron_settings' );												// Todo: move to render_admin_page() or load-users_page_signups-cron hook?
+		// $this->options = get_option( 'signups_cron_settings', $this->default_options );						// Todo: move to render_admin_page() or load-users_page_signups-cron hook?
+		// $options_test = wp_parse_args( $this->options, $this->default_options );
 
 		// check user capabilities
 		if ( ! current_user_can( 'manage_options' ) ) {
