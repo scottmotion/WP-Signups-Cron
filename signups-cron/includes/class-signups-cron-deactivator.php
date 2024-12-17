@@ -31,9 +31,8 @@ class Signups_Cron_Deactivator {
 	 */
 	public static function deactivate() {
 
-		// Clear all cron events with our hook
-		// wp_clear_scheduled_hook('signups_cron_event_hook'); // Unschedules all events attached to the hook with the specified arguments.
-		wp_unschedule_hook('signups_cron_event_hook'); // Unschedules all events attached to the hook.
+		// Unschedule all events attached to the hook.
+		wp_unschedule_hook('signups_cron_event_hook');
 
 	}
 
