@@ -168,7 +168,7 @@ class Signups_Cron {
 
 		$plugin_cron_event_exec = new Signups_Cron_Event_Exec();
 		$this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
-		$this->loader->add_action( 'signups_cron_event_hook_test', $plugin_cron_event_exec, 'cron_event_exec_test' );
+		// $this->loader->add_action( 'signups_cron_event_hook_test', $plugin_cron_event_exec, 'cron_event_exec_test' );
 	}
 
 	/**
