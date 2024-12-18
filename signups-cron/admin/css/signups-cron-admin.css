@@ -4,9 +4,33 @@
  */
 
 /* Signups Table Info */
-.signups-table-info td {
+table.signups-table-info {
+    border-collapse: collapse;
+    margin-top: 6px;
+}
+
+table.signups-table-info td {
     display: table-cell;
     clear: both;
+}
+
+table.signups-table-info tr:first-child td {
+    padding-top: 0;
+}
+
+table.signups-table-info td:first-child {
+    padding-left: 0;
+}
+
+@media screen and (max-width: 782px) {
+    table.signups-table-info {
+        margin-top: 10px;
+    }
+
+    table.signups-table-info tbody {
+        display: block;
+        margin-top: 10px;
+    }
 }
 
 /* Text on disabled inputs */
@@ -17,5 +41,5 @@
 /* Number inputs */
 input[type="number"] {
     width: 4.5em;
-    text-align: center
+    text-align: center;
 }
