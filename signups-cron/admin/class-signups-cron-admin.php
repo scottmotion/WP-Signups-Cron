@@ -373,7 +373,7 @@ class Signups_Cron_Admin {
 		
 		add_settings_field(
 			'signups_cron_field_cron_schedule',
-			__( 'Cron Schedule Recurrence', 'signups-cron' ),
+			__( 'Cron Event Schedule', 'signups-cron' ),
 			array( $this, 'signups_cron_field_cron_schedule_cb' ),
 			'signups_cron_page_settings',
 			'signups_cron_section_settings',
@@ -543,7 +543,7 @@ class Signups_Cron_Admin {
 
 		?>
 		<label>
-			<?php esc_html_e( 'Email cron report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Email a report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
@@ -569,7 +569,7 @@ class Signups_Cron_Admin {
 
 		?>
 		<label>
-			<?php esc_html_e( 'Schedule cron to run ', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Schedule event to run ', 'signups-cron' ); ?>
 			<select
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
