@@ -8,17 +8,6 @@
     padding-right: 3rem
 } */
 
-/* Delete Signups Now fields */
-.delete-signups-now_wrapper {
-    display: flex;
-    align-items: center
-}
-
-.delete-signups-now_submit-wrapper {
-    padding-left: 1rem
-}
-
-
 /* Text on disabled inputs */
 .text-disabled {
     opacity: 50%;
