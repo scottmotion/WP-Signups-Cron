@@ -28,9 +28,6 @@ class Signups_Cron_Table_Info {
 	 */
 	public function __construct() {
 
-        // global $wpdb;
-        // $this->table_name = $wpdb->prefix . 'signups';
-
 	}
 
     /**
@@ -42,7 +39,6 @@ class Signups_Cron_Table_Info {
     public function get_signups_table_info() {
 
         global $wpdb;
-        // $table_name = esc_sql( $this->table_name ); // Sanitize the table name.
         $table_name = esc_sql( $wpdb->prefix . 'signups' ); // Sanitize the table name.
 
         $signups_table_info = [];
