@@ -266,7 +266,7 @@ class Signups_Cron_Admin {
 	 */
 	public function signups_cron_section_information_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups table information.', 'signups-cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Information about the \'signups\' table retrieved from the site database.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -280,7 +280,7 @@ class Signups_Cron_Admin {
 	 */
 	public function signups_cron_section_settings_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Signups cron event settings.', 'signups-cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Enable a cron event that will remove \'active\' and \'pending\' signups from the database.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -569,7 +569,7 @@ class Signups_Cron_Admin {
 
 		?>
 		<label>
-			<?php esc_html_e( 'Schedule event to run ', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Schedule the event to run ', 'signups-cron' ); ?>
 			<select
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
