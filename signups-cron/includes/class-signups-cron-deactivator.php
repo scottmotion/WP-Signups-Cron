@@ -33,7 +33,7 @@ class Signups_Cron_Deactivator {
 
 		// Disable cron in options
 		$options = get_option( 'signups_cron_settings');
-		if (is_array($options)) {
+		if ( is_array($options) && ( isset($options['signups_cron_field_active_enabled'] ) || isset( $options['signups_cron_field_pending_enabled'] ) ) ) {
 			unset($options['signups_cron_field_active_enabled'], $options['signups_cron_field_pending_enabled']);
 			update_option( 'signups_cron_settings', $options );
 		}
