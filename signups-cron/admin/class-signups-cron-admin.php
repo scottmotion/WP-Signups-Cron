@@ -299,10 +299,7 @@ class Signups_Cron_Admin {
 			__( 'Signups Table Information', 'signups-cron' ),
 			array( $this, 'signups_cron_field_signups_information_cb' ),	// Called internally by do_settings_sections()->do_settings_fields()->call_user_func()
 			'signups_cron_page_information',
-			'signups_cron_section_information',
-			array(
-				'label_for' => 'signups_cron_field_signups_information'		// Use $args' label_for to populate the id inside the callback.
-			)
+			'signups_cron_section_information'
 		);
 		
 		// Settings section fields.
@@ -421,7 +418,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p>
+		<label>
 			<?php esc_html_e( 'Enable Active signups cron ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
@@ -431,7 +428,7 @@ class Signups_Cron_Admin {
 				<?php checked( $options[ $args['label_for'] ], 1 ); ?>
 			>
 			</input>
-		</p>
+		</label>
 		<?php
 
 	}
@@ -447,7 +444,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p id="text_for_signups_cron_field_active_threshold">
+		<label>
 			<?php esc_html_e( 'Delete Active signups after ', 'signups-cron' ); ?>
 			<input
 				type="number"
@@ -459,7 +456,7 @@ class Signups_Cron_Admin {
 			>
 			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
-		</p>
+		</label>
 		<?php
 
 	}
@@ -475,7 +472,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p>
+		<label>
 			<?php esc_html_e( 'Enable Pending signups cron ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
@@ -485,7 +482,7 @@ class Signups_Cron_Admin {
 				<?php checked( $options[ $args['label_for'] ], 1 ); ?>
 			>
 			</input>
-		</p>
+		</label>
 		<?php
 
 	}
@@ -501,7 +498,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p id="text_for_signups_cron_field_pending_threshold">
+		<label>
 			<?php esc_html_e( 'Delete Pending signups after ', 'signups-cron' ); ?>
 			<input
 				type="number"
@@ -513,7 +510,7 @@ class Signups_Cron_Admin {
 			>
 			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
-		</p>
+		</label>
 		<?php
 
 	}
@@ -532,7 +529,7 @@ class Signups_Cron_Admin {
 		$admin_email = get_option('admin_email');
 
 		?>
-		<p id="text_for_signups_cron_field_send_email_report">
+		<label>
 			<?php esc_html_e( 'Email cron report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
@@ -542,7 +539,7 @@ class Signups_Cron_Admin {
 				<?php checked( $options[ $args['label_for'] ], 1 ); ?>
 			>
 			</input>
-		</p>
+		</label>
 		<?php
 
 	}
@@ -558,7 +555,7 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		?>
-		<p id="text_for_signups_cron_field_cron_schedule">
+		<label>
 			<?php esc_html_e( 'Schedule cron to run ', 'signups-cron' ); ?>
 			<select
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
@@ -586,7 +583,7 @@ class Signups_Cron_Admin {
 				</option>
 			</select>
 			<?php esc_html_e( ' starting now.', 'signups-cron' ); ?>
-		</p>
+		</label>
 		<p>
 			<?php
 				// get timestamp of next cron event
@@ -595,7 +592,9 @@ class Signups_Cron_Admin {
 				if ($scheduled_event_timestamp) {
 					// get scheduled event display name
 					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_event_hook' )->schedule]['display'];
-					$scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T'); // TODO: Check if site options uses timezone_string or gmt_offset
+					$scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
+					// TODO: Check if site options uses timezone_string or gmt_offset
+					// TODO: maybe us WP date functions? see: https://github.com/WordPress/wordpress-develop/blob/6.7/src/wp-includes/functions.php#L174
 
 					echo esc_html_e( "Next cron scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' );
 				} else {
