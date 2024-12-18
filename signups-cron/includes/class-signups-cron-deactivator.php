@@ -33,8 +33,10 @@ class Signups_Cron_Deactivator {
 
 		// Disable cron in options
 		$options = get_option( 'signups_cron_settings');
-		unset($options['signups_cron_field_active_enabled'], $options['signups_cron_field_pending_enabled']);
-		update_option( 'signups_cron_settings', $options );
+		if (is_array($options)) {
+			unset($options['signups_cron_field_active_enabled'], $options['signups_cron_field_pending_enabled']);
+			update_option( 'signups_cron_settings', $options );
+		}
 
 		// Unschedule all events attached to the hook.
 		wp_unschedule_hook('signups_cron_event_hook');
