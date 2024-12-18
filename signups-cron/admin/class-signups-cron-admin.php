@@ -465,7 +465,7 @@ class Signups_Cron_Admin {
 				max="999"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
-				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
+				value=<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>
 			>
 			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
@@ -519,7 +519,7 @@ class Signups_Cron_Admin {
 				max="999"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
 				name="signups_cron_settings[<?php echo esc_attr( $args['label_for'] ); ?>]"
-				value=<?php echo isset( $options[ $args['label_for'] ] ) ? ( $options[ $args['label_for'] ] ) : ( '365' ); ?>
+				value=<?php echo esc_attr( $options[ $args['label_for'] ] ); ?>
 			>
 			</input>
 			<?php esc_html_e( ' days.', 'signups-cron' ); ?>
