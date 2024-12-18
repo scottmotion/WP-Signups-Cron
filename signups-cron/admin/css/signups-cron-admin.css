@@ -4,9 +4,10 @@
  */
 
 /* Signups Table Info */
-/* .signups-table-info_size {
-    padding-right: 3rem
-} */
+.signups-table-info td {
+    display: table-cell;
+    clear: both;
+}
 
 /* Text on disabled inputs */
 .text-disabled {
