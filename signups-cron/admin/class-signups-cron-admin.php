@@ -177,7 +177,8 @@ class Signups_Cron_Admin {
 				do_settings_sections( 'signups_cron_page_settings' );
 
 				// output save settings button for this form.
-				submit_button( 'Save Settings' );
+				// submit_button( 'Save Settings' );
+				submit_button( __( 'Save Settings', 'signups-cron' ) );
 				?>
 			</form>
 		</div>
