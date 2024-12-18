@@ -609,9 +609,9 @@ class Signups_Cron_Admin {
 					// TODO: Check if site options uses timezone_string or gmt_offset
 					// TODO: maybe us WP date functions? see: https://github.com/WordPress/wordpress-develop/blob/6.7/src/wp-includes/functions.php#L174
 
-					echo esc_html_e( "Next cron scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' );
+					esc_html_e( "Next cron scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' ); // Todo: Check if this is translatable with variables
 				} else {
-					echo esc_html_e( "Cron is not currently scheduled.", 'signups-cron' );
+					esc_html_e( "Cron is not currently scheduled.", 'signups-cron' );
 				}
 			?>
 		</p>
