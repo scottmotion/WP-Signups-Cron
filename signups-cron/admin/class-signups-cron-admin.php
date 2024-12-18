@@ -153,11 +153,11 @@ class Signups_Cron_Admin {
 		// WordPress will add the "settings-updated" $_GET parameter to the url
 		if ( isset( $_GET['settings-updated'] ) ) {
 			// add settings saved message with the class of "updated"
-			add_settings_error( 'wporg_messages', 'wporg_message', __( 'Settings Saved', 'wporg' ), 'updated' );
+			add_settings_error( 'signups_cron_messages', 'signups_cron_messages', __( 'Settings Saved', 'signups-cron' ), 'updated' );
 		}
 
 		// show error/update messages
-		settings_errors( 'wporg_messages' );
+		settings_errors( 'signups_cron_messages' );
 
 		?>
 		<div class="wrap">
