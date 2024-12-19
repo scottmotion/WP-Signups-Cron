@@ -50,13 +50,12 @@ class Signups_Cron_Table_Info {
 
         $signups_table_size = 0;
 
-        $rows = $wpdb->get_results( "SHOW TABLE STATUS LIKE '{$table_name}'", ARRAY_A );
+        $results = $wpdb->get_results( "SHOW TABLE STATUS LIKE '{$table_name}'", ARRAY_A );
 
-        if ( $wpdb->num_rows > 0 ) {
-            foreach ( $rows as $row ) {
-                $signups_table_size += round((($row['Data_length'] + $row['Index_length']) / 1024 / 1024), 2);
-            }
+        if ( $results ) {
+                $signups_table_size += round((($results[0]['Data_length'] + $results[0]['Index_length']) / 1024 / 1024), 2);
         }
+
 
         $signups_table_info["signups_table_size"] = $signups_table_size;
     
