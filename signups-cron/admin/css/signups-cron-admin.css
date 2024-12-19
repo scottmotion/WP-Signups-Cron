@@ -31,6 +31,14 @@ table.signups-table-info td:first-child {
         display: block;
         margin-top: 10px;
     }
+
+    table.signups-table-info td:first-child {
+        padding-right: 10px;
+    }
+
+    table.signups-table-info td:nth-child(2) {
+        padding-left: 10px;
+    }
 }
 
 /* Text on disabled inputs */
