@@ -56,7 +56,6 @@ class Signups_Cron_Table_Info {
                 $signups_table_size += round((($results[0]['Data_length'] + $results[0]['Index_length']) / 1024 / 1024), 2);
         }
 
-
         $signups_table_info["signups_table_size"] = $signups_table_size;
     
         return $signups_table_info;    
