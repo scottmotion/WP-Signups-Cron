@@ -53,7 +53,7 @@ class Signups_Cron_Event_Exec {
 
         // Access Global database object
         global $wpdb;
-        $table_name = esc_sql( $wpdb->prefix . 'signups' ); // Sanitize the table name.
+        $table_name = esc_sql( $wpdb->prefix . 'signups' ); // Sanitize the table name. // WP prefers wpdb->prepare() over esc_sql // WP includes $wpdb->signups table ref
 
         // Get signups from wp_signups table
         $chosen_signups = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE active = $status", ARRAY_A );
