@@ -53,10 +53,20 @@ class Signups_Cron_Event_Exec {
 
         // Access Global database object
         global $wpdb;
-        $table_name = esc_sql( $wpdb->prefix . 'signups' ); // Sanitize the table name. // WP prefers wpdb->prepare() over esc_sql // WP includes $wpdb->signups table ref
+        $table_name = $wpdb->prefix . 'signups';
 
         // Get signups from wp_signups table
-        $chosen_signups = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE active = $status", ARRAY_A );
+        // $chosen_signups = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE active = $status", ARRAY_A );
+
+        // $sql = $wpdb->prepare("SELECT * FROM %i WHERE active = %d", $table_name, $status);
+        $chosen_signups = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM %i WHERE active = %d",
+                $table_name,
+                $status
+            ), 
+            ARRAY_A
+        );
 
         $count_deleted_signups = 0;
 
@@ -74,14 +84,14 @@ class Signups_Cron_Event_Exec {
         //     // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
         // }
 
-        foreach ($chosen_signups as $x) {
+        foreach ($chosen_signups as $signup) {
 
             $signup_date = '';
 
             if ($status == 0) {
-                $signup_date = strtotime($x['registered']); // pending
+                $signup_date = strtotime($signup['registered']); // pending
             } elseif ($status == 1) {
-                $signup_date = strtotime($x['activated']); // active
+                $signup_date = strtotime($signup['activated']); // active
             }
 
             // Compare signup timestamp + threshold to current timestamp
@@ -89,12 +99,13 @@ class Signups_Cron_Event_Exec {
                 // Signup is older than threshold
 
                 // Get the signup id
-                $signup_id = $x['signup_id'];
+                $signup_id = $signup['signup_id'];
 
                 // Remove old signups from signups table
                 $wpdb->query(
                     $wpdb->prepare(
-                        "DELETE FROM {$table_name} WHERE signup_id = $signup_id")
+                        "DELETE FROM %i WHERE signup_id = %d", $table_name, $signup_id
+                    )
                 );
 
                 $count_deleted_signups++;
