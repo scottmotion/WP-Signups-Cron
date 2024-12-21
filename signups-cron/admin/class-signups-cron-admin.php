@@ -266,7 +266,7 @@ class Signups_Cron_Admin {
 	 */
 	public function signups_cron_section_information_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Information about the \'signups\' table retrieved from the site database.', 'signups-cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Information about the signups table retrieved from the site database.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -280,7 +280,7 @@ class Signups_Cron_Admin {
 	 */
 	public function signups_cron_section_settings_cb( $args ) {
 		?>
-			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Enable a cron event that will remove \'active\' and \'pending\' signups from the database.', 'signups-cron' ); ?></p>
+			<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Enable a cron event that will remove active and/or pending signups from the database.', 'signups-cron' ); ?></p>
 		<?php
 	}
 
@@ -543,7 +543,7 @@ class Signups_Cron_Admin {
 
 		?>
 		<label>
-			<?php esc_html_e( 'Email a report to Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Email a report to the Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
@@ -576,22 +576,26 @@ class Signups_Cron_Admin {
 			>
 				<option
 					value="hourly"
-					<?php selected( $options[ $args['label_for'] ], 'hourly' ); ?>>
+					<?php selected( $options[ $args['label_for'] ], 'hourly' ); ?>
+				>
 					<?php esc_html_e( 'Hourly', 'signups-cron' ); ?>
 				</option>
 				<option
 					value="twicedaily"
-					<?php selected( $options[ $args['label_for'] ], 'twicedaily' ); ?>>
+					<?php selected( $options[ $args['label_for'] ], 'twicedaily' ); ?>
+				>
 					<?php esc_html_e( 'Twice Daily', 'signups-cron' ); ?>
 				</option>
 				<option
 					value="daily"
-					<?php selected( $options[ $args['label_for'] ], 'daily' ); ?>>
+					<?php selected( $options[ $args['label_for'] ], 'daily' ); ?>
+				>
 					<?php esc_html_e( 'Daily', 'signups-cron' ); ?>
 				</option>
 				<option
 					value="weekly"
-					<?php selected( $options[ $args['label_for'] ], 'weekly' ); ?>>
+					<?php selected( $options[ $args['label_for'] ], 'weekly' ); ?>
+				>
 					<?php esc_html_e( 'Weekly', 'signups-cron' ); ?>
 				</option>
 			</select>
@@ -609,9 +613,9 @@ class Signups_Cron_Admin {
 					// TODO: Check if site options uses timezone_string or gmt_offset
 					// TODO: maybe us WP date functions? see: https://github.com/WordPress/wordpress-develop/blob/6.7/src/wp-includes/functions.php#L174
 
-					esc_html_e( "Next cron scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' ); // Todo: Check if this is translatable with variables
+					esc_html_e( "Next cron event scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' ); // Todo: Check if this is translatable with variables
 				} else {
-					esc_html_e( "Cron is not currently scheduled.", 'signups-cron' );
+					esc_html_e( "Cron event is not currently scheduled.", 'signups-cron' );
 				}
 			?>
 		</p>
