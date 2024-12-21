@@ -197,16 +197,6 @@ class Signups_Cron_Admin {
 				submit_button( __( 'Save Settings', 'signups-cron' ) );
 				?>
 			</form>
-			<hr>
-			<?php
-			
-			global $wpdb;
-
-			$last_query = $wpdb->last_query;
-
-			echo "<pre> {$last_query} <pre>";
-			
-			?>
 		</div>
 		<?php		
 
@@ -643,8 +633,8 @@ class Signups_Cron_Admin {
 					printf(
 						/* translators: 1: Date 2: Interval of time */
 						esc_html__( 'Next cron event scheduled for %1$s (%2$s)', 'signups-cron' ),
-						$scheduled_event_datetime,
-						$scheduled_event_display
+						esc_html($scheduled_event_datetime),
+						esc_html($scheduled_event_display)
 					);
 				} else {
 					esc_html_e( "Cron event is not currently scheduled.", 'signups-cron' );

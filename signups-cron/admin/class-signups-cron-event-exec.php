@@ -56,9 +56,6 @@ class Signups_Cron_Event_Exec {
         $table_name = $wpdb->prefix . 'signups';
 
         // Get signups from wp_signups table
-        // $chosen_signups = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE active = $status", ARRAY_A );
-
-        // $sql = $wpdb->prepare("SELECT * FROM %i WHERE active = %d", $table_name, $status);
         $chosen_signups = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT * FROM %i WHERE active = %d",
