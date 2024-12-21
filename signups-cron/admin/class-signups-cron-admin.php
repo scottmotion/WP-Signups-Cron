@@ -149,15 +149,31 @@ class Signups_Cron_Admin {
 	
 		// add error/update messages
 
-		// check if the user have submitted the settings
-		// WordPress will add the "settings-updated" $_GET parameter to the url
-		if ( isset( $_GET['settings-updated'] ) ) {
-			// add settings saved message with the class of "updated"
-			add_settings_error( 'signups_cron_messages', 'signups_cron_messages', __( 'Settings Saved', 'signups-cron' ), 'updated' );
-		}
+		// check if the user has submitted the settings
+		// WordPress will add the "settings-updated=true" $_GET parameter to the url on submission. // Does not mean db operation was successful.
+		// if ( isset( $_GET['settings-updated'] ) ) {
+		// 	add_settings_error(
+		// 		'signups_cron_settings',					// Slug title of the setting to which this error applies.
+		// 		'settings-updated',							// Slug-name to identify the error. Used as part of 'id' attribute in HTML output.
+		// 		__( 'Settings Saved', 'signups-cron' ),		// The formatted message text to display to the user (will be shown inside styled <div> and <p> tags).
+		// 		'updated'									// Message type, controls HTML class. Possible values include 'error', 'success', 'warning', 'info'. Default 'error'.
+		// 	);
+		// }
+
+		/**
+		 * From options.php:
+		 * 
+		 * add_settings_error( 'general', 'settings_updated', __( 'Settings saved.' ), 'success' );
+		 * or
+		 * add_settings_error( 'general', 'settings_updated', __( 'Settings save failed.' ), 'error' );
+		 * 
+		 * https://developer.wordpress.org/reference/functions/get_settings_errors/
+		 * https://developer.wordpress.org/reference/functions/settings_errors/
+		 */
 
 		// show error/update messages
-		settings_errors( 'signups_cron_messages' );
+		// settings_errors( 'signups_cron_settings' );
+		settings_errors( 'general' );
 
 		?>
 		<div class="wrap">
@@ -181,6 +197,16 @@ class Signups_Cron_Admin {
 				submit_button( __( 'Save Settings', 'signups-cron' ) );
 				?>
 			</form>
+			<hr>
+			<?php
+			
+			global $wpdb;
+
+			$last_query = $wpdb->last_query;
+
+			echo "<pre> {$last_query} <pre>";
+			
+			?>
 		</div>
 		<?php		
 
@@ -539,11 +565,11 @@ class Signups_Cron_Admin {
 		$options = $this->options;
 
 		// Get admin email
-		$admin_email = get_option('admin_email');
+		// $admin_email = get_option('admin_email');
 
 		?>
 		<label>
-			<?php esc_html_e( 'Email a report to the Site Admin (' . $admin_email . ') ', 'signups-cron' ); ?>
+			<?php esc_html_e( 'Email a report to the Site Admin ', 'signups-cron' ); ?>
 			<input
 				type="checkbox"
 				id="<?php echo esc_attr( $args['label_for'] ); ?>"
