@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Signups_Cron
  * @subpackage Signups_Cron/includes
- * @author     Your Name <email@example.com>
+ * @author     Scott Winn <hello@scottwinn.dev>
  */
 class Signups_Cron_Activator {
 
@@ -30,10 +30,10 @@ class Signups_Cron_Activator {
 	public static function activate() {
 
 		add_option(
-			'signups_cron_settings',	// Name of the option to add.
-			'',							// Option value. 
-			'',							// Description (Deprecated).
-			'off'						// Whether to load the option when WordPress starts up.
+			'signups_cron_settings',
+			'',
+			'',
+			'off'
 		);
 
 	}

@@ -639,7 +639,13 @@ class Signups_Cron_Admin {
 					// TODO: Check if site options uses timezone_string or gmt_offset
 					// TODO: maybe us WP date functions? see: https://github.com/WordPress/wordpress-develop/blob/6.7/src/wp-includes/functions.php#L174
 
-					esc_html_e( "Next cron event scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups_cron' ); // Todo: Check if this is translatable with variables
+					// esc_html_e( "Next cron event scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups-cron' ); // Todo: Check if this is translatable with variables // use printf()
+					printf(
+						/* translators: 1: Date 2: Interval of time */
+						esc_html__( 'Next cron event scheduled for %1$s (%2$s)', 'signups-cron' ),
+						$scheduled_event_datetime,
+						$scheduled_event_display
+					);
 				} else {
 					esc_html_e( "Cron event is not currently scheduled.", 'signups-cron' );
 				}
