@@ -24,6 +24,8 @@ class Signups_Cron_Activator {
 
 	/**
 	 * The code that runs during plugin activation.
+	 * 
+	 * Add plugin options during activation.
 	 *
 	 * @since    1.0.0
 	 */
