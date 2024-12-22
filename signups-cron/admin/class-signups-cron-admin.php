@@ -419,22 +419,22 @@ class Signups_Cron_Admin {
 		<table class="signups-table-info">
 			<tr>
                 <!-- <td>Signups Table Size:</td> -->
-                <td><?php esc_html_e('Signups Table Size:') ?></td>
+                <td><?php esc_html_e( 'Signups Table Size:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
             </tr>
             <tr>
                 <!-- <td>Total Signups Count:</td> -->
-                <td><?php esc_html_e('Total Signups Count:') ?></td>
+                <td><?php esc_html_e( 'Total Signups Count:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_count_total"] ); ?></td>
             </tr>
             <tr>
                 <!-- <td>Active Signups Count:</td> -->
-                <td><?php esc_html_e('Active Signups Count:') ?></td>
+                <td><?php esc_html_e( 'Active Signups Count:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_count_active"] ); ?></td>
             </tr>
             <tr>
                 <!-- <td>Pending Signups Count:</td> -->
-                <td><?php esc_html_e('Pending Signups Count:') ?></td>
+                <td><?php esc_html_e( 'Pending Signups Count:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_count_pending"] ); ?></td>
             </tr>
 		</table>
