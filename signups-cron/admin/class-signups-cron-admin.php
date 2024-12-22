@@ -225,7 +225,7 @@ class Signups_Cron_Admin {
 		 * @param   mixed       $args['default']            Default value when calling get_option().
 		 */
 
-		register_setting( 'signups_cron_group_information', 'signups_cron_information' ); // registered as $allowed_option['option_group']['option_name'] and used by options.php
+		// register_setting( 'signups_cron_group_information', 'signups_cron_information' ); // registered as $allowed_option['option_group']['option_name'] and used by options.php
 		// if ( ! empty( $args['sanitize_callback'] ) ) {add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] );}
 		// if ( array_key_exists( 'default', $args ) ) {add_filter( "default_option_{$option_name}", 'filter_default_option', 10, 3 );}
 		register_setting( 'signups_cron_group_settings', 'signups_cron_settings' );
@@ -418,19 +418,23 @@ class Signups_Cron_Admin {
 		?>
 		<table class="signups-table-info">
 			<tr>
-                <td>Signups Table Size:</td>
+                <!-- <td>Signups Table Size:</td> -->
+                <td><?php esc_html_e('Signups Table Size:') ?></td>
                 <td><?php echo number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
             </tr>
             <tr>
-                <td>Total Signups Count:</td>
+                <!-- <td>Total Signups Count:</td> -->
+                <td><?php esc_html_e('Total Signups Count:') ?></td>
                 <td><?php echo number_format( $data["signups_count_total"] ); ?></td>
             </tr>
             <tr>
-                <td>Active Signups Count:</td>
+                <!-- <td>Active Signups Count:</td> -->
+                <td><?php esc_html_e('Active Signups Count:') ?></td>
                 <td><?php echo number_format( $data["signups_count_active"] ); ?></td>
             </tr>
             <tr>
-                <td>Pending Signups Count:</td>
+                <!-- <td>Pending Signups Count:</td> -->
+                <td><?php esc_html_e('Pending Signups Count:') ?></td>
                 <td><?php echo number_format( $data["signups_count_pending"] ); ?></td>
             </tr>
 		</table>
