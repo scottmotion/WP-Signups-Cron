@@ -35,6 +35,9 @@ class Signups_Cron_Activator {
 			'',
 			'off'
 		);
+		// will call sanitize_option( $option, $value )
+		// maybe we can set sanitization add_filter once before adding the option here?
+		// add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] ) // some wp provided function as callback
 
 	}
 
