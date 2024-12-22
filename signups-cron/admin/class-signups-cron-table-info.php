@@ -39,18 +39,23 @@ class Signups_Cron_Table_Info {
     public function get_signups_table_info() {
 
         global $wpdb;
+
+        // Set the table name because it is not accessible in $wpdb if is_multisite() === false.
         $table_name = $wpdb->prefix . 'signups';
         
         $signups_table_info = [];
     
+        // Get the signups table count from the database.
         $signups_table_info["signups_count_active"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 1) );
         $signups_table_info["signups_count_pending"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 0) );
         $signups_table_info["signups_count_total"] = $signups_table_info["signups_count_active"] + $signups_table_info["signups_count_pending"];
 
         $signups_table_size = 0;
 
+        // Get the signups table status
         $results = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s", $table_name ), ARRAY_A );
 
+        // Calculate the signups table size in MB
         if ( $results ) {
                 $signups_table_size += round((($results[0]['Data_length'] + $results[0]['Index_length']) / 1024 / 1024), 2);
         }
