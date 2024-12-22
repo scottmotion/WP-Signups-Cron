@@ -23,9 +23,7 @@
 class Signups_Cron_Deactivator {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	 * Remove plugin data and cron events during deactivation.
 	 *
 	 * @since    1.0.0
 	 */
