@@ -33,7 +33,7 @@ class Signups_Cron_Activator {
 			'signups_cron_settings',
 			'',
 			'',
-			'off'
+			false
 		);
 		// will call sanitize_option( $option, $value )
 		// maybe we can set sanitization add_filter once before adding the option here?
