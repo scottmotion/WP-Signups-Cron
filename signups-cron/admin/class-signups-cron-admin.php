@@ -13,9 +13,6 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
  * @package    Signups_Cron
  * @subpackage Signups_Cron/admin
  * @author     Scott Winn <hello@scottwinn.dev>
@@ -147,32 +144,7 @@ class Signups_Cron_Admin {
 			return;
 		}
 	
-		// add error/update messages
-
-		// check if the user has submitted the settings
-		// WordPress will add the "settings-updated=true" $_GET parameter to the url on submission. // Does not mean db operation was successful.
-		// if ( isset( $_GET['settings-updated'] ) ) {
-		// 	add_settings_error(
-		// 		'signups_cron_settings',					// Slug title of the setting to which this error applies.
-		// 		'settings-updated',							// Slug-name to identify the error. Used as part of 'id' attribute in HTML output.
-		// 		__( 'Settings Saved', 'signups-cron' ),		// The formatted message text to display to the user (will be shown inside styled <div> and <p> tags).
-		// 		'updated'									// Message type, controls HTML class. Possible values include 'error', 'success', 'warning', 'info'. Default 'error'.
-		// 	);
-		// }
-
-		/**
-		 * From options.php:
-		 * 
-		 * add_settings_error( 'general', 'settings_updated', __( 'Settings saved.' ), 'success' );
-		 * or
-		 * add_settings_error( 'general', 'settings_updated', __( 'Settings save failed.' ), 'error' );
-		 * 
-		 * https://developer.wordpress.org/reference/functions/get_settings_errors/
-		 * https://developer.wordpress.org/reference/functions/settings_errors/
-		 */
-
 		// show error/update messages
-		// settings_errors( 'signups_cron_settings' );
 		settings_errors( 'general' );
 
 		?>
@@ -180,7 +152,6 @@ class Signups_Cron_Admin {
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<hr>
 			<?php
-				// settings_fields( 'signups_cron_group_information' );
 				do_settings_sections( 'signups_cron_page_information' );
 			?>
 			<hr>
@@ -193,7 +164,6 @@ class Signups_Cron_Admin {
 				do_settings_sections( 'signups_cron_page_settings' );
 
 				// output save settings button for this form.
-				// submit_button( 'Save Settings' );
 				submit_button( __( 'Save Settings', 'signups-cron' ) );
 				?>
 			</form>
@@ -405,7 +375,7 @@ class Signups_Cron_Admin {
 	/**
 	 * Signups Information field callback function.
 	 * 
-	 * Called internally by do_settings_sections()->do_settings_fields()
+	 * All fields callbacks are called internally by do_settings_sections()->do_settings_fields()
 	 *
 	 * @since	1.0.0
 	 * @param	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
@@ -629,13 +599,15 @@ class Signups_Cron_Admin {
 				$scheduled_event_timestamp = wp_next_scheduled( 'signups_cron_event_hook' );
 
 				if ($scheduled_event_timestamp) {
-					// get scheduled event display name
+
+					// Get scheduled event display name
 					$scheduled_event_display = wp_get_schedules()[wp_get_scheduled_event( 'signups_cron_event_hook' )->schedule]['display'];
-					$scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
+
+					// Convert scheduled event timestamp to date
 					// TODO: Check if site options uses timezone_string or gmt_offset
 					// TODO: maybe us WP date functions? see: https://github.com/WordPress/wordpress-develop/blob/6.7/src/wp-includes/functions.php#L174
+					$scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
 
-					// esc_html_e( "Next cron event scheduled for {$scheduled_event_datetime} ({$scheduled_event_display})", 'signups-cron' ); // Todo: Check if this is translatable with variables // use printf()
 					printf(
 						/* translators: 1: Date 2: Interval of time */
 						esc_html__( 'Next cron event scheduled for %1$s (%2$s)', 'signups-cron' ),
@@ -658,18 +630,6 @@ class Signups_Cron_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Signups_Cron_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Signups_Cron_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->signups_cron, plugin_dir_url( __FILE__ ) . 'css/signups-cron-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -680,18 +640,6 @@ class Signups_Cron_Admin {
 	 * @since	1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Signups_Cron_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Signups_Cron_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		wp_enqueue_script( $this->signups_cron, plugin_dir_url( __FILE__ ) . 'js/signups-cron-admin.js', array( 'jquery' ), $this->version, false );
 
