@@ -220,12 +220,14 @@ class Signups_Cron_Admin {
 		 * @param   string      $args['type']               The type of data associated with this setting.
 		 * @param   string      $args['label']              A label of the data attached to this setting.
 		 * @param   string      $args['description']        A description of the data attached to this setting.
-		 * @param   callable    $args['sanitize_callback']  A callback function that sanitizes the option’s value.
+		 * @param   callable    $args['sanitize_callback']  A callback function that sanitizes the option’s value. // Called by form submit to options.php->update_option() (& maybe add_option() if update fails)
 		 * @param   bool|array  $args['show_in_rest']       Whether data associated with this setting should be included in the REST API.
 		 * @param   mixed       $args['default']            Default value when calling get_option().
 		 */
 
 		register_setting( 'signups_cron_group_information', 'signups_cron_information' );
+		// if ( ! empty( $args['sanitize_callback'] ) ) {add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] );}
+		// if ( array_key_exists( 'default', $args ) ) {add_filter( "default_option_{$option_name}", 'filter_default_option', 10, 3 );}
 		register_setting( 'signups_cron_group_settings', 'signups_cron_settings' );
 	
 	}
