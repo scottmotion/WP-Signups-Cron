@@ -56,7 +56,7 @@ class Signups_Cron_Event_Exec {
         $table_name = $wpdb->prefix . 'signups';
 
         // Get signups from wp_signups table
-        $chosen_signups = $wpdb->get_results(
+        $chosen_signups = $wpdb->get_results(   // TODO: Use of a direct database call is discouraged.
             $wpdb->prepare(
                 "SELECT * FROM %i WHERE active = %d",
                 $table_name,
@@ -81,6 +81,15 @@ class Signups_Cron_Event_Exec {
         //     // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
         // }
 
+        // if ($status == 0) { // pending
+        //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 0 AND `registered` < SUBDATE(ADDTIME(NOW(), '08:00:00'), $threshold)", ARRAY_A );
+        // } elseif ($status == 1) { // active
+        //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 1 AND `activated` < SUBDATE(ADDTIME(NOW(), '08:00:00'), $threshold)", ARRAY_A );
+        //     // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
+        // }
+        
+        // SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 0 AND `registered` < SUBDATE(ADDTIME(NOW(), '08:00:00'), 60); // PENDING // '08:00:00' = gtm offset
+
         foreach ($chosen_signups as $signup) {
 
             $signup_date = '';
@@ -99,7 +108,7 @@ class Signups_Cron_Event_Exec {
                 $signup_id = $signup['signup_id'];
 
                 // Remove old signups from signups table
-                $wpdb->query(
+                $wpdb->query(   // TODO: Use of a direct database call is discouraged.
                     $wpdb->prepare(
                         "DELETE FROM %i WHERE signup_id = %d", $table_name, $signup_id
                     )
