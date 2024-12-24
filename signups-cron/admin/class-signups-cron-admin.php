@@ -606,7 +606,8 @@ class Signups_Cron_Admin {
 					// Convert scheduled event timestamp to date
 					// TODO: Check if site options uses timezone_string or gmt_offset
 					// TODO: maybe us WP date functions? see: https://github.com/WordPress/wordpress-develop/blob/6.7/src/wp-includes/functions.php#L174
-					$scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
+					// $scheduled_event_datetime = date_format(date_create()->setTimestamp($scheduled_event_timestamp)->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
+					$scheduled_event_datetime = wp_date('F j, Y, g:i a T', $scheduled_event_timestamp);
 
 					printf(
 						/* translators: 1: Date 2: Interval of time */
