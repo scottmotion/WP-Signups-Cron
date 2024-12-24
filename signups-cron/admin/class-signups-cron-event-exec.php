@@ -70,8 +70,8 @@ class Signups_Cron_Event_Exec {
         $count_deleted_signups = 0;
 
         // Set threshold to delete signups
-        $one_day_in_seconds = 60 * 60 * 24;
-        $delete_threshold = $one_day_in_seconds * $threshold;
+        // $one_day_in_seconds = 60 * 60 * 24; // use wp constant DAY_IN_SECONDS
+        $delete_threshold = DAY_IN_SECONDS * $threshold;
 
         // Get the current Unix timestamp
         $current_time = time();
