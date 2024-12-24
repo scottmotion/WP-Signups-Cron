@@ -46,6 +46,8 @@ class Signups_Cron_Table_Info {
         $signups_table_info = [];
     
         // Get the signups table count from the database.
+        // TODO: Use of a direct database call is discouraged.
+        // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
         $signups_table_info["signups_count_active"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 1) );
         $signups_table_info["signups_count_pending"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 0) );
         $signups_table_info["signups_count_total"] = $signups_table_info["signups_count_active"] + $signups_table_info["signups_count_pending"];
@@ -53,6 +55,8 @@ class Signups_Cron_Table_Info {
         $signups_table_size = 0;
 
         // Get the signups table status
+        // TODO: Use of a direct database call is discouraged.
+        // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
         $results = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s", $table_name ), ARRAY_A );
 
         // Calculate the signups table size in MB

@@ -56,7 +56,9 @@ class Signups_Cron_Event_Exec {
         $table_name = $wpdb->prefix . 'signups';
 
         // Get signups from wp_signups table
-        $chosen_signups = $wpdb->get_results(   // TODO: Use of a direct database call is discouraged.
+        // TODO: Use of a direct database call is discouraged.
+        // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
+        $chosen_signups = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT * FROM %i WHERE active = %d",
                 $table_name,
@@ -108,7 +110,9 @@ class Signups_Cron_Event_Exec {
                 $signup_id = $signup['signup_id'];
 
                 // Remove old signups from signups table
-                $wpdb->query(   // TODO: Use of a direct database call is discouraged.
+                // TODO: Use of a direct database call is discouraged.
+                // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
+                $wpdb->query(
                     $wpdb->prepare(
                         "DELETE FROM %i WHERE signup_id = %d", $table_name, $signup_id
                     )
