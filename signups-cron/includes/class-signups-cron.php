@@ -86,9 +86,12 @@ class Signups_Cron {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Signups_Cron_Loader. Orchestrates the hooks of the plugin.
-	 * - Signups_Cron_i18n. Defines internationalization functionality.
-	 * - Signups_Cron_Admin. Defines all hooks for the admin area.
+	 * - Signups_Cron_Loader.		Orchestrates the hooks of the plugin.
+	 * - Signups_Cron_i18n.			Defines internationalization functionality.
+	 * - Signups_Cron_Plugin_Row.	Defines hooks for the plugins list table.
+	 * - Signups_Cron_Admin.		Defines all hooks for the admin area.
+	 * - Signups_Cron_Scheduler.	Schedules the cron event.
+	 * - Signups_Cron_Event_Exec.	Functionality for cron event.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -111,20 +114,25 @@ class Signups_Cron {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-i18n.php';
 
 		/**
+		 * The class responsible for defining the plugins list table functionality
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-plugin-row.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the cron event exec.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-event-exec.php';
 
 		/**
 		 * The class responsible for scheduling the cron event.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-scheduler.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the cron event exec.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-signups-cron-event-exec.php';
 
 		$this->loader = new Signups_Cron_Loader();
 
@@ -156,6 +164,10 @@ class Signups_Cron {
 	 */
 	private function define_admin_hooks() {
 
+		$plugin_plugin_row = new Signups_Cron_Plugin_Row();
+
+		$this->loader->add_filter( 'plugin_action_links_'. plugin_basename(__FILE__), $plugin_plugin_row, 'signups_cron_add_action_links', 10, 5 );
+
 		$plugin_admin = new Signups_Cron_Admin( $this->get_signups_cron(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_page' );
@@ -166,11 +178,11 @@ class Signups_Cron {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'users_page_signups-cron', $plugin_admin, 'load_signups_cron_options', 9 );
 
-		$plugin_cron_event_exec = new Signups_Cron_Event_Exec();
-		$this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
-
 		$plugin_cron_scheduler = new Signups_Cron_Scheduler();
 		$this->loader->add_action( 'update_option_signups_cron_settings', $plugin_cron_scheduler, 'schedule_cron_event' );
+
+		$plugin_cron_event_exec = new Signups_Cron_Event_Exec();
+		$this->loader->add_action( 'signups_cron_event_hook', $plugin_cron_event_exec, 'cron_event_exec' );
 
 	}
 
