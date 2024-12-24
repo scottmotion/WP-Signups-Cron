@@ -169,7 +169,8 @@ class Signups_Cron_Event_Exec {
             $admin_email = get_option('admin_email');
             $blog_name = get_option( 'blogname' );
 
-            $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T'); // TODO: Check if site options uses timezone_string or gmt_offset
+            // $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
+            $event_date_now = wp_date('F j, Y, g:i a T');
 
             $message = "Signups Cron successfully ran on {$event_date_now}.";
 
