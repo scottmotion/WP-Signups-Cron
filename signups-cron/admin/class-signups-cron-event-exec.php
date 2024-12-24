@@ -80,14 +80,13 @@ class Signups_Cron_Event_Exec {
         //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}signups WHERE active = $status AND UNIX_TIMESTAMP('registered' + $delete_threshold) <= $current_time", ARRAY_A );
         // } elseif ($status == 1) { // active
         //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}signups WHERE active = $status AND UNIX_TIMESTAMP('activated' + $delete_threshold) <= $current_time", ARRAY_A );
-        //     // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
         // }
+        // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
 
         // if ($status == 0) { // pending
         //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 0 AND `registered` < SUBDATE(ADDTIME(NOW(), '08:00:00'), $threshold)", ARRAY_A );
         // } elseif ($status == 1) { // active
         //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 1 AND `activated` < SUBDATE(ADDTIME(NOW(), '08:00:00'), $threshold)", ARRAY_A );
-        //     // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
         // }
         
         // SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 0 AND `registered` < SUBDATE(ADDTIME(NOW(), '08:00:00'), 60); // PENDING // '08:00:00' = gtm offset
