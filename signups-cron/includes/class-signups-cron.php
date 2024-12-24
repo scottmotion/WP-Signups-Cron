@@ -166,7 +166,8 @@ class Signups_Cron {
 
 		$plugin_plugin_row = new Signups_Cron_Plugin_Row();
 
-		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), $plugin_plugin_row, 'signups_cron_add_action_links', 10, 1 );
+		// $this->loader->add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), $plugin_plugin_row, 'signups_cron_add_action_links', 10, 1 );
+		$this->loader->add_filter( 'plugin_action_links_signups-cron/signups-cron.php', $plugin_plugin_row, 'signups_cron_add_action_links', 10, 1 );
 
 		$plugin_admin = new Signups_Cron_Admin( $this->get_signups_cron(), $this->get_version() );
 
