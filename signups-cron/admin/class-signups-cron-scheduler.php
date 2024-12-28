@@ -54,7 +54,7 @@ class Signups_Cron_Scheduler {
                 // get next event object
                 $next_event_obj = wp_get_scheduled_event( 'signups_cron_event_hook' );
 
-                if ( $next_event_obj->schedule !== $options['signups_cron_field_cron_schedule'] ) {
+                if ( $next_event_obj->schedule != $options['signups_cron_field_cron_schedule'] ) {
                     // Schedule recurrence IS changed. Reschedule event
                     wp_unschedule_hook('signups_cron_event_hook'); // Unschedules all events attached to the hook.
                     wp_schedule_event( time(), $options['signups_cron_field_cron_schedule'], 'signups_cron_event_hook' );
