@@ -13,24 +13,6 @@
  */
 class Signups_Cron_Event_Exec {
 
-    /**
-	 * The name of the signups table.
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 * @var string $table_name The name of the database table for signups.
-	 */
-	// private $table_name;
-
-    /**
-	 * The Signups Cron options from WP options table.
-	 *
-	 * @since	1.0.0
-	 * @access	private
-	 * @var		array		$options		The plugin options.
-	 */
-	// private $options;
-
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -56,8 +38,6 @@ class Signups_Cron_Event_Exec {
         $table_name = $wpdb->prefix . 'signups';
 
         // Get signups from wp_signups table
-        // TODO: Use of a direct database call is discouraged.
-        // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
         $chosen_signups = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT * FROM %i WHERE active = %d",
@@ -70,26 +50,10 @@ class Signups_Cron_Event_Exec {
         $count_deleted_signups = 0;
 
         // Set threshold to delete signups
-        // $one_day_in_seconds = 60 * 60 * 24; // use wp constant DAY_IN_SECONDS
         $delete_threshold = DAY_IN_SECONDS * $threshold;
 
         // Get the current Unix timestamp
         $current_time = time();
-
-        // if ($status == 0) { // pending
-        //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}signups WHERE active = $status AND UNIX_TIMESTAMP('registered' + $delete_threshold) <= $current_time", ARRAY_A );
-        // } elseif ($status == 1) { // active
-        //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}signups WHERE active = $status AND UNIX_TIMESTAMP('activated' + $delete_threshold) <= $current_time", ARRAY_A );
-        // }
-        // SELECT * FROM `wp_7iykh3_signups` WHERE active = 1 AND (UNIX_TIMESTAMP(`activated`) + 31536000) <= UNIX_TIMESTAMP();
-
-        // if ($status == 0) { // pending
-        //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 0 AND `registered` < SUBDATE(ADDTIME(NOW(), '08:00:00'), $threshold)", ARRAY_A );
-        // } elseif ($status == 1) { // active
-        //     $chosen_signups_2 = $wpdb->get_results( "SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 1 AND `activated` < SUBDATE(ADDTIME(NOW(), '08:00:00'), $threshold)", ARRAY_A );
-        // }
-        
-        // SELECT * FROM `wp_7iykh3_signups` WHERE `active` = 0 AND `registered` < SUBDATE(ADDTIME(NOW(), '08:00:00'), 60); // PENDING // '08:00:00' = gtm offset
 
         foreach ($chosen_signups as $signup) {
 
@@ -109,8 +73,6 @@ class Signups_Cron_Event_Exec {
                 $signup_id = $signup['signup_id'];
 
                 // Remove old signups from signups table
-                // TODO: Use of a direct database call is discouraged.
-                // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
                 $wpdb->query(
                     $wpdb->prepare(
                         "DELETE FROM %i WHERE signup_id = %d", $table_name, $signup_id
@@ -169,7 +131,6 @@ class Signups_Cron_Event_Exec {
             $admin_email = get_option('admin_email');
             $blog_name = get_option( 'blogname' );
 
-            // $event_date_now = date_format(date_create()->setTimezone(new DateTimeZone(wp_timezone_string())), 'F j, Y, g:i a T');
             $event_date_now = wp_date('F j, Y, g:i a T');
 
             $message = "Signups Cron successfully ran on {$event_date_now}.";
