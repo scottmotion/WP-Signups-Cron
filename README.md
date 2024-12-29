@@ -18,15 +18,11 @@ Enable a cron event that will remove active and/or pending signups from the data
 
 ## Installation
 
-The Boilerplate can be installed directly into your plugins folder "as-is". You will want to rename it and the classes inside of it to fit your needs. For example, if your plugin is named 'example-me' then:
+This plugin can be installed the same as any other WordPress plugin. Options are as follows:
 
-* rename files from `plugin-name` to `example-me`
-* change `plugin_name` to `example_me`
-* change `plugin-name` to `example-me`
-* change `Plugin_Name` to `Example_Me`
-* change `PLUGIN_NAME_` to `EXAMPLE_ME_`
-
-It's safe to activate the plugin at this point. Because the Boilerplate has no real functionality there will be no menu items, meta boxes, or custom post types added until you write the code.
+* Clone the project and upload the signups-cron folder to wp-content/plugins/ via ftp.
+* Clone the project, create a zip file of the signups-cron folder, and install via WordPress Admin.
+* Download the latest release and install via WordPress Admin.
 
 ## License
 
