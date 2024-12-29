@@ -128,22 +128,42 @@ class Signups_Cron_Event_Exec {
             // send admin email is enabled
 
             // start building message
-            $admin_email = get_option('admin_email');
+            $admin_email = get_option('admin_email');            
             $blog_name = get_option( 'blogname' );
-
             $event_date_now = wp_date('F j, Y, g:i a T');
 
-            $message = "Signups Cron successfully ran on {$event_date_now}.";
+            $email_recipient = $admin_email;
+            $email_subject = "[$blog_name] Signups Cron Report";
+
+            // $message = "Signups Cron successfully ran on {$event_date_now}.";
+            $email_message = sprintf(
+                /* translators: Date and time. */
+                esc_html__( 'Signups Cron successfully ran on %s.', 'signups-cron'),
+                esc_html($event_date_now)
+            ) . "\n";
 
             if (isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1)) {
-                $message .= "\nDeleted {$count_deleted_signups_active} Active Signups older than {$options['signups_cron_field_active_threshold']} days.";
+                // $message .= "\nDeleted {$count_deleted_signups_active} Active Signups older than {$options['signups_cron_field_active_threshold']} days.";
+                $email_message .= sprintf(
+                    /* translators: 1: Number of items. 2: Number of days. */
+                    esc_html__( 'Deleted %1$s Active Signups older than %2$s days.', 'signups-cron'),
+                    esc_html($count_deleted_signups_active),
+                    esc_html($options['signups_cron_field_active_threshold'])
+                ) . "\n";
             }
+
             if (isset($options['signups_cron_field_pending_enabled']) && ($options['signups_cron_field_pending_enabled'] == 1)) {
-                $message .= "\nDeleted {$count_deleted_signups_pending} Pending Signups older than {$options['signups_cron_field_pending_threshold']} days.";
+                // $message .= "\nDeleted {$count_deleted_signups_pending} Pending Signups older than {$options['signups_cron_field_pending_threshold']} days.";
+                $email_message .= sprintf(
+                    /* translators: 1: Number of items. 2: Number of days. */
+                    esc_html__( 'Deleted %1$s Pending Signups older than %2$s days.', 'signups-cron'),
+                    esc_html($count_deleted_signups_pending),
+                    esc_html($options['signups_cron_field_pending_threshold'])
+                ) . "\n";
             }
 
             // Send email
-            wp_mail( $admin_email, "[$blog_name] Signups Cron Report", $message  );
+            wp_mail( $email_recipient, $email_subject, $email_message  );
         }
     }
 
