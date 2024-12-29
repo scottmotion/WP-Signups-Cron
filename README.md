@@ -24,6 +24,8 @@ This plugin can be installed the same as any other WordPress plugin. Options are
 * Clone the project, create a zip file of the signups-cron folder, and install via WordPress Admin.
 * Clone the project and upload the signups-cron folder to wp-content/plugins/ via ftp.
 
+Once installation is complete, activate the plugin, then  go to Users > Signups Cron to change settings.
+
 ## License
 
 WordPress Signups Cron is licensed under the GPL v2 or later.
