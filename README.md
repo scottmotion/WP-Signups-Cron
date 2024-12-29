@@ -20,9 +20,9 @@ Enable a cron event that will remove active and/or pending signups from the data
 
 This plugin can be installed the same as any other WordPress plugin. Options are as follows:
 
-* Clone the project and upload the signups-cron folder to wp-content/plugins/ via ftp.
-* Clone the project, create a zip file of the signups-cron folder, and install via WordPress Admin.
 * Download the latest release and install via WordPress Admin.
+* Clone the project, create a zip file of the signups-cron folder, and install via WordPress Admin.
+* Clone the project and upload the signups-cron folder to wp-content/plugins/ via ftp.
 
 ## License
 
