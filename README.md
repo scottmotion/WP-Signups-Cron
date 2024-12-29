@@ -1,22 +1,18 @@
-# WordPress Plugin Boilerplate
+# WordPress Signups Cron
 
-A standardized, organized, object-oriented foundation for building high-quality WordPress Plugins.
+Manage WordPress signups via WP-Cron.
 
-## Contents
+## Description
 
-The WordPress Plugin Boilerplate includes the following files:
-
-* `.gitignore`. Used to exclude certain files from the repository.
-* `CHANGELOG.md`. The list of changes to the core project.
-* `README.md`. The file that you’re currently reading.
-* A `plugin-name` directory that contains the source code - a fully executable WordPress plugin.
+Enable a cron event that will remove active and/or pending signups from the database.
 
 ## Features
 
-* The Boilerplate is based on the [Plugin API](http://codex.wordpress.org/Plugin_API), [Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards), and [Documentation Standards](https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).
-* All classes, functions, and variables are documented so that you know what you need to change.
-* The Boilerplate uses a strict file organization scheme that corresponds both to the WordPress Plugin Repository structure, and that makes it easy to organize the files that compose the plugin.
-* The project includes a `.pot` file as a starting point for internationalization.
+* Displays information about the signups table such as size and number of signups.
+* Enable or disable removal of active and pending signups independently.
+* Set separate thresholds for how old the signups should be before removal.
+* Choose to email a report to the Site Admin.
+* Set how often the cron event will run and see when the next event is scheduled for.
 
 ## Installation
 
@@ -29,22 +25,6 @@ The Boilerplate can be installed directly into your plugins folder "as-is". You 
 * change `PLUGIN_NAME_` to `EXAMPLE_ME_`
 
 It's safe to activate the plugin at this point. Because the Boilerplate has no real functionality there will be no menu items, meta boxes, or custom post types added until you write the code.
-
-## WordPress.org Preparation
-
-The original launch of this version of the boilerplate included the folder structure needed for using your plugin on WordPress.org. That folder structure has been moved to its own repo here: https://github.com/DevinVinson/Plugin-Directory-Boilerplate
-
-## Recommended Tools
-
-### i18n Tools
-
-The WordPress Plugin Boilerplate uses a variable to store the text domain used when internationalizing strings throughout the Boilerplate. To take advantage of this method, there are tools that are recommended for providing correct, translatable files:
-
-* [Poedit](http://www.poedit.net/)
-* [makepot](http://i18n.svn.wordpress.org/tools/trunk/)
-* [i18n](https://github.com/grappler/i18n)
-
-Any of the above tools should provide you with the proper tooling to internationalize the plugin.
 
 ## License
 
@@ -65,18 +45,6 @@ A copy of the license is included in the root of the plugin’s directory. The f
 The WordPress Plugin Boilerplate is licensed under the GPL v2 or later; however, if you opt to use third-party code that is not compatible with v2, then you may need to switch to using code that is GPL v3 compatible.
 
 For reference, [here's a discussion](http://make.wordpress.org/themes/2013/03/04/licensing-note-apache-and-gpl/) that covers the Apache 2.0 License used by [Bootstrap](http://twitter.github.io/bootstrap/).
-
-### Includes
-
-Note that if you include your own classes, or third-party libraries, there are three locations in which said files may go:
-
-* `plugin-name/includes` is where functionality shared between the admin area and the public-facing parts of the site reside
-* `plugin-name/admin` is for all admin-specific functionality
-* `plugin-name/public` is for all public-facing functionality
-
-Note that previous versions of the Boilerplate did not include `Plugin_Name_Loader` but this class is used to register all filters and actions with WordPress.
-
-The example code provided shows how to register your hooks with the Loader class.
 
 ### What About Other Features?
 
