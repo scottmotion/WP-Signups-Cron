@@ -26,6 +26,11 @@ This plugin can be installed the same as any other WordPress plugin. Options are
 
 Once installation is complete, activate the plugin, then  go to Users > Signups Cron to change settings.
 
+## Changelog
+
+### 1.0.0
+* Initial public release.
+
 ## License
 
 WordPress Signups Cron is licensed under the GPL v2 or later.
