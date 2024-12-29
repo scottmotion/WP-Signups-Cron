@@ -29,6 +29,7 @@ Once installation is complete, activate the plugin, then  go to Users > Signups 
 ## Changelog
 
 ### 1.0.0
+
 * Initial public release.
 
 ## License
