@@ -2,6 +2,8 @@
 
 Manage WordPress signups via WP-Cron.
 
+![](./screenshot.png)
+
 ## Description
 
 Enable a cron event that will remove active and/or pending signups from the database.
