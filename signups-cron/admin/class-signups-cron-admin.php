@@ -122,7 +122,7 @@ class Signups_Cron_Admin {
 
 		add_submenu_page(
 			'users.php',								// $parent_slug	string		required - The slug name for the parent menu (or the file name of a standard WordPress admin page).
-			__('Signups Cron Home', 'signups-cron'),	// $page_title	string		required - The text to be displayed in the title tags of the page when the menu is selected.
+			__('Signups Cron', 'signups-cron'),			// $page_title	string		required - The text to be displayed in the title tags of the page when the menu is selected.
 			__('Signups Cron', 'signups-cron'),			// $menu_title	string		required - The text to be used for the menu.
 			'manage_options',							// $capability	string		required - The capability required for this menu to be displayed to the user.
 			'signups-cron',								// $menu_slug	string		required - The slug name to refer to this menu by.
