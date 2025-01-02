@@ -154,6 +154,19 @@ class Signups_Cron_Admin {
 			<?php
 				do_settings_sections( 'signups_cron_page_information' );
 			?>
+			<p>
+			<?php 
+				if (defined('BP_VERSION')) {
+					if ( version_compare( BP_VERSION, '2.0', '>=' ) ) {
+						echo 'BuddyPress ' . bp_get_version() . ' active. Plugin ready!';
+					} else {
+						echo 'BuddyPress ' . bp_get_version() . ' active. This plugin requires BuddyPress 2.0 or later.';
+					}
+				} else {
+					echo 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later.';
+				}
+			?>
+			</p>
 			<hr>
 			<form name="settings" action="options.php" method="post">
 				<?php
