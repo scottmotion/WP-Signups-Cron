@@ -55,7 +55,6 @@ class Signups_Cron_Plugin_Row {
 	 * @param	string	$plugin_file	Path to the plugin file relative to the plugins directory.
 	 * @param	array	$plugin_data	An array of plugin data.
 	 */
-
 	public function signups_cron_add_multisite_warning( $plugin_file, $plugin_data ) {
 
 		if ( is_multisite() && $plugin_file == 'signups-cron/signups-cron.php' ) {
@@ -64,7 +63,7 @@ class Signups_Cron_Plugin_Row {
 				__( 'Signups Cron is not designed for use on multisite installations.', 'signups-cron' )
 			);	
 		}
-		
+
 	}
 
 
