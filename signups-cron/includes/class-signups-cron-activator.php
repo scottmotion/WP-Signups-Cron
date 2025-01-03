@@ -31,6 +31,10 @@ class Signups_Cron_Activator {
 	 */
 	public static function activate() {
 
+		if ( is_multisite() ) {
+			die;
+		}
+
 		add_option(
 			'signups_cron_settings',
 			'',
