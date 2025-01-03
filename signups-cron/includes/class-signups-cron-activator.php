@@ -31,6 +31,11 @@ class Signups_Cron_Activator {
 	 */
 	public static function activate() {
 
+		// check for multisite and skip adding option
+		// if ( is_multisite() ) {
+		// 	return;
+		// }
+
 		if ( !is_multisite() ) {
 			add_option(
 				'signups_cron_settings',
