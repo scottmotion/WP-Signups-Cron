@@ -69,10 +69,10 @@ class Signups_Cron {
 	public function __construct() {
 
 		// If we are on multisite then deactivate and die.
-		if ( is_multisite() ) {
-			deactivate_plugins( 'signups-cron/signups-cron.php' );
-			die;	
-		}
+		// if ( is_multisite() ) {
+		// 	deactivate_plugins( 'signups-cron/signups-cron.php' );
+		// 	die;	
+		// }
 
 		if ( defined( 'SIGNUPS_CRON_VERSION' ) ) {
 			$this->version = SIGNUPS_CRON_VERSION;
