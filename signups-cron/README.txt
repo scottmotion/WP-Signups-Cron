@@ -1,7 +1,7 @@
 === Signups Cron ===
 Contributors: scottmotion
 Tags: users, members, signups, cron, buddypress
-Requires at least: 3.0.1
+Requires at least: 6.2.0
 Tested up to: 6.7.1
 Stable tag: 1.0.0
 License: GPLv2 or later
