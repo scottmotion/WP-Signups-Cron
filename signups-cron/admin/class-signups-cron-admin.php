@@ -120,6 +120,11 @@ class Signups_Cron_Admin {
 	 */
 	public function add_admin_page() {
 
+		// check for multisite and skip submenu page
+		if ( is_multisite() ) {
+			return;
+		}
+
 		add_submenu_page(
 			'users.php',								// $parent_slug	string		required - The slug name for the parent menu (or the file name of a standard WordPress admin page).
 			__('Signups Cron', 'signups-cron'),			// $page_title	string		required - The text to be displayed in the title tags of the page when the menu is selected.
@@ -141,6 +146,11 @@ class Signups_Cron_Admin {
 
 		// check user capabilities
 		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// check for multisite and skip render
+		if ( is_multisite() ) {
 			return;
 		}
 	

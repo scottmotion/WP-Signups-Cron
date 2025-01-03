@@ -36,6 +36,11 @@ class Signups_Cron_Plugin_Row {
 	 * @return	array	$actions	The updated array of links including the 'Settings' link.
 	 */
 	public function signups_cron_add_action_links( $actions ) {
+
+		// check for multisite and return default actions
+		if ( is_multisite() ) {
+			return $actions;
+		}
 		
 		$settings_link = array('settings' => '<a href="'. esc_url( get_admin_url(null, 'users.php?page=signups-cron') ) .'">' . __('Settings', 'signups-cron') . '</a>');
 		
