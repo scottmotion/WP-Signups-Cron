@@ -43,4 +43,23 @@ class Signups_Cron_Plugin_Row {
 
 	}
 
+	// public function signups_cron_add_multisite_warning( $data, $response ) {
+	// 	if ( !is_multisite() ) {
+	// 		printf(
+	// 			'<div class="update-message"><p><strong>%s</strong></p></div>',
+	// 			__( 'Signups Cron is not designed for use on multisite installations.', 'signups-cron' )
+	// 		);	
+	// 	}
+	// }
+
+	public function signups_cron_add_multisite_warning( $plugin_file, $plugin_data ) {
+		if ( is_multisite() && $plugin_file == 'signups-cron/signups-cron.php' ) {
+			printf(
+				'<div class="notice inline notice-warning notice-alt"><p>%s</p></div>',
+				__( 'Signups Cron is not designed for use on multisite installations.', 'signups-cron' )
+			);	
+		}
+	}
+
+
 }
