@@ -173,9 +173,7 @@ class Signups_Cron {
 		$plugin_plugin_row = new Signups_Cron_Plugin_Row();
 
 		$this->loader->add_filter( 'plugin_action_links_signups-cron/signups-cron.php', $plugin_plugin_row, 'signups_cron_add_action_links', 10, 1 );
-		// $this->loader->add_action( 'in_plugin_update_message-signups-cron/signups-cron.php', $plugin_plugin_row, 'signups_cron_add_multisite_warning', 10, 2 );
 		$this->loader->add_action( 'after_plugin_row_meta', $plugin_plugin_row, 'signups_cron_add_multisite_warning', 10, 2 );
-
 
 		$plugin_admin = new Signups_Cron_Admin( $this->get_signups_cron(), $this->get_version() );
 
