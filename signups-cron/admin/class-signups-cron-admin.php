@@ -168,12 +168,20 @@ class Signups_Cron_Admin {
 			<?php 
 				if (defined('BP_VERSION')) {
 					if ( version_compare( BP_VERSION, '2.0', '>=' ) ) {
-						echo 'BuddyPress ' . bp_get_version() . ' active. Plugin ready!';
+						printf(
+							/* translators: Software version number */
+							esc_html__( 'BuddyPress %s active. Plugin ready!', 'signups-cron' ),
+							esc_html(BP_VERSION)
+						);
 					} else {
-						echo 'BuddyPress ' . bp_get_version() . ' active. This plugin requires BuddyPress 2.0 or later.';
+						printf(
+							/* translators: Software version number */
+							esc_html__( 'BuddyPress %s active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' ),
+							esc_html(BP_VERSION)
+						);
 					}
 				} else {
-					echo 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later.';
+					esc_html_e( 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' );
 				}
 			?>
 			</p>
