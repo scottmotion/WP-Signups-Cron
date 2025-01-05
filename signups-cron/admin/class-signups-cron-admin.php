@@ -233,12 +233,70 @@ class Signups_Cron_Admin {
 		 */
 
 		// register_setting( 'signups_cron_group_information', 'signups_cron_information' ); // registered as $allowed_option['option_group']['option_name'] and used by options.php
-		// if ( ! empty( $args['sanitize_callback'] ) ) {add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] );}
-		// if ( array_key_exists( 'default', $args ) ) {add_filter( "default_option_{$option_name}", 'filter_default_option', 10, 3 );}
+		// from option.php: if ( ! empty( $args['sanitize_callback'] ) ) {add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] );}
+		// from option.php: if ( array_key_exists( 'default', $args ) ) {add_filter( "default_option_{$option_name}", 'filter_default_option', 10, 3 );}
 		// TODO: Sanitize
-		register_setting( 'signups_cron_group_settings', 'signups_cron_settings' );
+		register_setting(
+			'signups_cron_group_settings',
+			'signups_cron_settings',
+			array(
+				'type'              => 'array',
+				'sanitize_callback' => array( $this, 'signups_cron_settings_sanitize_cb' )
+			)
+		);
 	
 	}
+
+	/**
+	 * Sanitize registered setting 'signups_cron_settings'.
+	 *
+	 * @since	1.0.0
+	 */
+	public function signups_cron_settings_sanitize_cb( $input ) {
+
+		// Create our output array for storing the validated options 
+		$output = array();
+		
+		// Allowed values for checkboxes: '_field_active_enabled' & '_field_pending_enabled' & '_field_send_email_report'
+		// 1, (0)
+
+		// Allowed values for numbers: '_field_active_threshold' & '_field_pending_threshold'
+		// 0 - 999
+
+		// Allowed values for select options: 'signups_cron_field_cron_schedule'
+		$allowed_schedules = array('hourly', 'twicedaily', 'daily', 'weekly');
+
+		// Loop through each of the incoming options 
+		foreach( $input as $key => $value ) {
+			
+			// Check to see if the current option has a value. If so, process it. 
+			if( isset( $input[$key] ) ) {
+			
+				// Strip all HTML and PHP tags and properly handle quoted strings 
+				$output[$key] = strip_tags( stripslashes( $input[ $key ] ) );
+				
+			} // end if 
+			
+		} // end foreach 
+		
+		// Return the array processing any additional functions filtered by this action 
+		return apply_filters( 'signups_cron_settings_sanitize_cb', $output, $input );
+
+	}
+
+	// Sanitize and validate input. Accepts an array, return a sanitized array.
+	// function ozh_sampleoptions_validate($input) {
+	// 	// Our first value is either 0 or 1
+	// 	$input['option1'] = ( $input['option1'] == 1 ? 1 : 0 );
+	
+	// 	// Say our second option must be safe text with no HTML tags
+	// 	$input['sometext'] =  wp_filter_nohtml_kses($input['sometext']);
+	
+	// 	return $input;
+	// }
+
+	// filter_var( $value, FILTER_VALIDATE_BOOLEAN )
+	// https://www.php.net/manual/en/filter.constants.php
 
 	/**
 	 * Add settings sections for Signups Cron.
@@ -559,7 +617,7 @@ class Signups_Cron_Admin {
 	}
 
 	/**
-	 * Signups Send Email field callback function.
+	 * Cron Email Report field callback function.
 	 * 
 	 * @since	1.0.0
 	 * @param 	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
@@ -588,7 +646,7 @@ class Signups_Cron_Admin {
 	}
 
 	/**
-	 * Signups Send Email field callback function.
+	 * Cron Event Schedule field callback function.
 	 * 
 	 * @since	1.0.0
 	 * @param 	array $args  The settings array ($id, $title, $callback, $page, $section, $args).
