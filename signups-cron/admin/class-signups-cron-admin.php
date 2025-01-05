@@ -153,6 +153,11 @@ class Signups_Cron_Admin {
 		if ( is_multisite() ) {
 			return;
 		}
+
+		// check for BuddyPress 2.0 and skip render
+		if ( !defined('BP_VERSION') || version_compare( BP_VERSION, '2.0', '<' ) ) {
+			return;
+		}		
 	
 		// show error/update messages
 		settings_errors( 'general' );
@@ -166,7 +171,7 @@ class Signups_Cron_Admin {
 			?>
 			<p>
 			<?php 
-				if (defined('BP_VERSION')) {
+				if ( defined('BP_VERSION') ) {
 					if ( version_compare( BP_VERSION, '2.0', '>=' ) ) {
 						printf(
 							/* translators: Software version number */
