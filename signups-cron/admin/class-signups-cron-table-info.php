@@ -40,12 +40,13 @@ class Signups_Cron_Table_Info {
 
         global $wpdb;
 
-        // Set the table name because it is not accessible in $wpdb if is_multisite() === false.
+        // Set the table name to 'signups'
         $table_name = $wpdb->prefix . 'signups';
         
         $signups_table_info = [];
     
         // Get the signups table count from the database.
+        // Must use a direct database call since 'signups' table is not accessible on $wpdb if is_multisite() === false.
         // TODO: Use of a direct database call is discouraged.
         // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
         $signups_table_info["signups_count_active"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 1) );
@@ -55,6 +56,7 @@ class Signups_Cron_Table_Info {
         $signups_table_size = 0;
 
         // Get the signups table status
+        // Must use a direct database call since 'signups' table is not accessible on $wpdb if is_multisite() === false.
         // TODO: Use of a direct database call is discouraged.
         // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
         $results = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s", $table_name ), ARRAY_A );
