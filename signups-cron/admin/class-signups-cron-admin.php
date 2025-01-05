@@ -257,24 +257,68 @@ class Signups_Cron_Admin {
 		// Create our output array for storing the validated options 
 		$output = array();
 		
-		// Allowed values for checkboxes: '_field_active_enabled' & '_field_pending_enabled' & '_field_send_email_report'
-		// 1, (0)
+		// Checkbox input keys to process
+		$allowed_keys_checkbox = array( 'signups_cron_field_active_enabled', 'signups_cron_field_pending_enabled', 'signups_cron_field_send_email_report' );
+		// Allowed values for checkboxes: 1, (0?)
+		$allowed_values_checkbox = 1; // use array?
 
-		// Allowed values for numbers: '_field_active_threshold' & '_field_pending_threshold'
-		// 0 - 999
+		// Threshold number input keys to process
+		$allowed_keys_threshold = array( 'signups_cron_field_active_threshold', 'signups_cron_field_pending_threshold' );
+		// Allowed values for threshold numbers: 0 - 999
+		$allowed_values_threshold_min = 0;
+		$allowed_values_threshold_max = 999;
 
-		// Allowed values for select options: 'signups_cron_field_cron_schedule'
-		$allowed_schedules = array('hourly', 'twicedaily', 'daily', 'weekly');
+		// Schedule select options keys to process
+		$allowed_keys_schedule = array( 'signups_cron_field_cron_schedule' );
+		// Allowed values for schedule select options
+		$allowed_values_schedule = array( 'hourly', 'twicedaily', 'daily', 'weekly' );
+
+		 //TODO: get $default_options keys
+		$all_allowed_keys = array_merge( $allowed_keys_checkbox, $allowed_keys_threshold, $allowed_keys_schedule );
 
 		// Loop through each of the incoming options 
 		foreach( $input as $key => $value ) {
 			
+			// Check if input is not any of allowed and skip out. continue/break?
+			if ( !in_array( $key, $all_allowed_keys ) ) {
+				unset( $input[$key] );
+				continue;
+			}
+			
 			// Check to see if the current option has a value. If so, process it. 
-			if( isset( $input[$key] ) ) {
+			if ( isset( $input[$key] ) ) {
+
+				// Check if input is not any of allowed and skip out. continue/break?
+				if ( !in_array( $key, $all_allowed_keys ) ) {
+
+				}
 			
 				// Strip all HTML and PHP tags and properly handle quoted strings 
-				$output[$key] = strip_tags( stripslashes( $input[ $key ] ) );
-				
+				$output[$key] = wp_strip_all_tags( stripslashes( $input[$key] ) );
+
+				// Check if key is for checkbox
+				if ( in_array( $key, $allowed_keys_checkbox ) ) {
+					if ( $output[$key] != $allowed_values_checkbox ) {
+						$output[$key] = ''; // use unset()?
+					};
+				}
+
+				// Check if key is for threshold number
+				if ( in_array( $key, $allowed_keys_threshold ) ) {
+					$min = $allowed_values_threshold_min;
+					$max = $allowed_values_threshold_max;
+					if ( filter_var( $output[$key], FILTER_VALIDATE_INT, array( "options" => array( "min_range"=>$min, "max_range"=>$max ) ) ) === false ) {
+						$output[$key] = ''; // use unset()?
+					};
+				}
+
+				// Check if key is schedule select options
+				if ( in_array( $key, $allowed_keys_schedule ) ) {
+					if ( !in_array( $output[$key], $allowed_values_schedule ) ) {
+						$output[$key] = ''; // use unset()?
+					};
+				}
+
 			} // end if 
 			
 		} // end foreach 
