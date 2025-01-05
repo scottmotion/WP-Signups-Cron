@@ -121,6 +121,7 @@ class Signups_Cron_Admin {
 	public function add_admin_page() {
 
 		// check for multisite and skip submenu page
+		// TODO: When page is accessed (i.e. by 'Settings' link) it displays "Sorry, you are not allowed to access this page."
 		if ( is_multisite() ) {
 			return;
 		}
