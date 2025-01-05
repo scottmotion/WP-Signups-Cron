@@ -235,6 +235,7 @@ class Signups_Cron_Admin {
 		// register_setting( 'signups_cron_group_information', 'signups_cron_information' ); // registered as $allowed_option['option_group']['option_name'] and used by options.php
 		// if ( ! empty( $args['sanitize_callback'] ) ) {add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] );}
 		// if ( array_key_exists( 'default', $args ) ) {add_filter( "default_option_{$option_name}", 'filter_default_option', 10, 3 );}
+		// TODO: Sanitize
 		register_setting( 'signups_cron_group_settings', 'signups_cron_settings' );
 	
 	}
