@@ -72,13 +72,6 @@ class Signups_Cron_Plugin_Row {
 			</div>
 			<?php
 
-			// $message = esc_html__( 'Signups Cron is not designed for use on multisite installations.', 'signups-cron' );
-			// echo '<div class="notice inline notice-warning notice-alt"><p>', $message, '</p></div>';
-
-			// printf(
-			// 	'<div class="notice inline notice-warning notice-alt"><p>%s</p></div>',
-			// 	esc_html__( 'Signups Cron is not designed for use on multisite installations.', 'signups-cron' )
-			// );	
 		}
 
 	}
