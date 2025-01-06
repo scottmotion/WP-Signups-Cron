@@ -294,7 +294,7 @@ class Signups_Cron_Admin {
 				// Check if key is for checkbox
 				if ( in_array( $key, $allowed_keys_checkbox ) ) {
 					if ( $output[$key] != $allowed_values_checkbox ) {
-						$output[$key] = ''; // use unset()?
+						unset( $input[$key] );
 					};
 				}
 
@@ -303,14 +303,14 @@ class Signups_Cron_Admin {
 					$min = $allowed_values_threshold_min;
 					$max = $allowed_values_threshold_max;
 					if ( filter_var( $output[$key], FILTER_VALIDATE_INT, array( "options" => array( "min_range"=>$min, "max_range"=>$max ) ) ) === false ) {
-						$output[$key] = ''; // use unset()?
+						unset( $input[$key] );
 					};
 				}
 
 				// Check if key is schedule select options
 				if ( in_array( $key, $allowed_keys_schedule ) ) {
 					if ( !in_array( $output[$key], $allowed_values_schedule ) ) {
-						$output[$key] = ''; // use unset()?
+						unset( $input[$key] );
 					};
 				}
 
