@@ -24,10 +24,6 @@ class Signups_Cron_Scheduler {
      * 
      * Hooked to update_option_{$option}
      * 
-     * wp_unschedule_event( $next_timestamp, 'signups_cron_event_hook' ); // Unschedules a previously scheduled event with timestamp.
-     * wp_clear_scheduled_hook('signups_cron_event_hook'); // Unschedules all events attached to the hook with the specified arguments.
-     * wp_unschedule_hook('signups_cron_event_hook'); // Unschedules all events attached to the hook.
-     * 
      * @since   1.0.0
      */
     public function schedule_cron_event() {
