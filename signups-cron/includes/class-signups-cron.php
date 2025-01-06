@@ -176,7 +176,7 @@ class Signups_Cron {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'add_settings_sections' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'add_settings_fields' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'users_page_signups-cron', $plugin_admin, 'load_signups_cron_options', 9 );
 
 		$plugin_cron_scheduler = new Signups_Cron_Scheduler();
