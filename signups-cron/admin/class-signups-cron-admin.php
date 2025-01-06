@@ -286,7 +286,7 @@ class Signups_Cron_Admin {
 			
 			// Check to see if the current option has a value. If so, process it. 
 			if ( isset( $input[$key] ) ) {
-			
+
 				// Check if key is for checkbox
 				if ( in_array( $key, $allowed_keys_checkbox ) ) {
 					if ( $input[$key] != $allowed_values_checkbox ) {
