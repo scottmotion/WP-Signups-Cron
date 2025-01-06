@@ -38,7 +38,7 @@ class Signups_Cron_Scheduler {
                 wp_unschedule_hook( 'signups_cron_event_hook' ); // Unschedules all events attached to the hook.
             } else {
                 // Next event NOT scheduled.
-                // everything is ok!
+                // Everything is ok!
             }
         } else {
             // Cron IS enabled. Check if event is scheduled.
@@ -47,7 +47,7 @@ class Signups_Cron_Scheduler {
                 wp_schedule_event( time(), $options['signups_cron_field_cron_schedule'], 'signups_cron_event_hook' );
             } else {
                 // Next event IS scheduled. Check if schedule recurrence has changed.
-                // get next event object
+                // Get next event object
                 $next_event_obj = wp_get_scheduled_event( 'signups_cron_event_hook' );
 
                 if ( $next_event_obj->schedule != $options['signups_cron_field_cron_schedule'] ) {
@@ -56,7 +56,7 @@ class Signups_Cron_Scheduler {
                     wp_schedule_event( time(), $options['signups_cron_field_cron_schedule'], 'signups_cron_event_hook' );
                 } else {
                     // Schedule recurrence NOT changed
-                    // everything is ok!
+                    // Everything is ok!
                 }
             }
         }
