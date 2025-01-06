@@ -288,13 +288,11 @@ class Signups_Cron_Admin {
 			// Check to see if the current option has a value. If so, process it. 
 			if ( isset( $input[$key] ) ) {
 			
-				// Strip all HTML and PHP tags and properly handle quoted strings 
-				$output[$key] = wp_strip_all_tags( stripslashes( $input[$key] ) );
 
 				// Check if key is for checkbox
 				if ( in_array( $key, $allowed_keys_checkbox ) ) {
-					if ( $output[$key] != $allowed_values_checkbox ) {
-						unset( $input[$key] );
+					if ( $input[$key] != $allowed_values_checkbox ) {
+						continue;
 					};
 				}
 
@@ -302,17 +300,20 @@ class Signups_Cron_Admin {
 				if ( in_array( $key, $allowed_keys_threshold ) ) {
 					$min = $allowed_values_threshold_min;
 					$max = $allowed_values_threshold_max;
-					if ( filter_var( $output[$key], FILTER_VALIDATE_INT, array( "options" => array( "min_range"=>$min, "max_range"=>$max ) ) ) === false ) {
-						unset( $input[$key] );
+					if ( filter_var( $input[$key], FILTER_VALIDATE_INT, array( "options" => array( "min_range"=>$min, "max_range"=>$max ) ) ) === false ) {
+						continue;
 					};
 				}
 
 				// Check if key is schedule select options
 				if ( in_array( $key, $allowed_keys_schedule ) ) {
-					if ( !in_array( $output[$key], $allowed_values_schedule ) ) {
-						unset( $input[$key] );
+					if ( !in_array( $input[$key], $allowed_values_schedule ) ) {
+						continue;
 					};
 				}
+
+				// Strip all HTML and PHP tags and properly handle quoted strings 
+				$output[$key] = wp_strip_all_tags( stripslashes( $input[$key] ) );
 
 			} // end if 
 			
@@ -322,20 +323,6 @@ class Signups_Cron_Admin {
 		return apply_filters( 'signups_cron_settings_sanitize_cb', $output, $input );
 
 	}
-
-	// Sanitize and validate input. Accepts an array, return a sanitized array.
-	// function ozh_sampleoptions_validate($input) {
-	// 	// Our first value is either 0 or 1
-	// 	$input['option1'] = ( $input['option1'] == 1 ? 1 : 0 );
-	
-	// 	// Say our second option must be safe text with no HTML tags
-	// 	$input['sometext'] =  wp_filter_nohtml_kses($input['sometext']);
-	
-	// 	return $input;
-	// }
-
-	// filter_var( $value, FILTER_VALIDATE_BOOLEAN )
-	// https://www.php.net/manual/en/filter.constants.php
 
 	/**
 	 * Add settings sections for Signups Cron.
