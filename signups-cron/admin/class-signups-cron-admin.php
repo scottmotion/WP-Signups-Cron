@@ -120,7 +120,7 @@ class Signups_Cron_Admin {
 	 */
 	public function add_admin_page() {
 
-		// check for multisite and skip submenu page
+		// TODO: check for multisite and skip submenu page?
 		// TODO: When page is accessed (i.e. by 'Settings' link) it displays "Sorry, you are not allowed to access this page."
 		if ( is_multisite() ) {
 			return;
@@ -235,7 +235,6 @@ class Signups_Cron_Admin {
 		// register_setting( 'signups_cron_group_information', 'signups_cron_information' ); // registered as $allowed_option['option_group']['option_name'] and used by options.php
 		// from option.php: if ( ! empty( $args['sanitize_callback'] ) ) {add_filter( "sanitize_option_{$option_name}", $args['sanitize_callback'] );}
 		// from option.php: if ( array_key_exists( 'default', $args ) ) {add_filter( "default_option_{$option_name}", 'filter_default_option', 10, 3 );}
-		// TODO: Sanitize
 		register_setting(
 			'signups_cron_group_settings',
 			'signups_cron_settings',
@@ -406,9 +405,9 @@ class Signups_Cron_Admin {
 		 * 
 		 * add_settings_field( string $id, string $title, callable $callback, string $page, string $section = ‘default’, array $args = array( 'label_for', 'class') )
 		 * 
-		 * @param string    $id					Slug-name to identify the field. Used in the 'id' attribute of tags.
+		 * @param string    $id					Slug-name to identify the field. Used in the 'id' attribute of tags. // As of WP 4.6 this value is used only internally.
 		 * @param string    $title				Formatted title of the field. Shown as the label for the field during output.
-		 * @param callable  $callback			Function that fills the field with the desired form inputs. The function should echo its output.
+		 * @param callable  $callback			Function that fills the field with the desired form inputs. The function should echo its output. // Called internally by do_settings_sections()->do_settings_fields()->call_user_func()
 		 * @param string    $page				The slug-name of the settings page on which to show the section.
 		 * @param string	$section			The slug-name of the section of the settings page in which to show the box.
 		 * @param array     $args				Extra arguments that get passed to the callback function.
@@ -418,9 +417,9 @@ class Signups_Cron_Admin {
 
 		// Information section fields.
 		add_settings_field(
-			'signups_cron_field_signups_information',						// As of WP 4.6 this value is used only internally.
+			'signups_cron_field_signups_information',
 			__( 'Signups Table Information', 'signups-cron' ),
-			array( $this, 'signups_cron_field_signups_information_cb' ),	// Called internally by do_settings_sections()->do_settings_fields()->call_user_func()
+			array( $this, 'signups_cron_field_signups_information_cb' ),
 			'signups_cron_page_information',
 			'signups_cron_section_information'
 		);
@@ -510,22 +509,18 @@ class Signups_Cron_Admin {
 		?>
 		<table class="signups-table-info">
 			<tr>
-                <!-- <td>Signups Table Size:</td> -->
                 <td><?php esc_html_e( 'Signups Table Size:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_table_size"], 2, '.' ); ?> MB</td>
             </tr>
             <tr>
-                <!-- <td>Total Signups Count:</td> -->
                 <td><?php esc_html_e( 'Total Signups Count:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_count_total"] ); ?></td>
             </tr>
             <tr>
-                <!-- <td>Active Signups Count:</td> -->
                 <td><?php esc_html_e( 'Active Signups Count:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_count_active"] ); ?></td>
             </tr>
             <tr>
-                <!-- <td>Pending Signups Count:</td> -->
                 <td><?php esc_html_e( 'Pending Signups Count:', 'signups-cron' ) ?></td>
                 <td><?php echo number_format( $data["signups_count_pending"] ); ?></td>
             </tr>
@@ -759,10 +754,10 @@ class Signups_Cron_Admin {
 	 *
 	 * @since	1.0.0
 	 */
-	public function enqueue_scripts() {
+	// public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->signups_cron, plugin_dir_url( __FILE__ ) . 'js/signups-cron-admin.js', array( 'jquery' ), $this->version, false );
+	// 	wp_enqueue_script( $this->signups_cron, plugin_dir_url( __FILE__ ) . 'js/signups-cron-admin.js', array( 'jquery' ), $this->version, false );
 
-	}
+	// }
 
 }
