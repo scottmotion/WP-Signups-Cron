@@ -287,11 +287,6 @@ class Signups_Cron_Admin {
 			
 			// Check to see if the current option has a value. If so, process it. 
 			if ( isset( $input[$key] ) ) {
-
-				// Check if input is not any of allowed and skip out. continue/break?
-				if ( !in_array( $key, $all_allowed_keys ) ) {
-
-				}
 			
 				// Strip all HTML and PHP tags and properly handle quoted strings 
 				$output[$key] = wp_strip_all_tags( stripslashes( $input[$key] ) );
