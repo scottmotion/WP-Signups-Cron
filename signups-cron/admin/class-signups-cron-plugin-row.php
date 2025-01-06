@@ -41,8 +41,10 @@ class Signups_Cron_Plugin_Row {
 		if ( is_multisite() ) {
 			return $actions;
 		}
-		
-		$settings_link = array('settings' => '<a href="'. esc_url( get_admin_url(null, 'users.php?page=signups-cron') ) .'">' . __('Settings', 'signups-cron') . '</a>');
+
+		$settings_url = get_admin_url(null, 'users.php?page=signups-cron');
+
+		$settings_link = array('settings' => '<a href="'. esc_url( $settings_url ) .'">' . __('Settings', 'signups-cron') . '</a>');
 		
 		$actions = array_merge($settings_link, $actions);
 		
