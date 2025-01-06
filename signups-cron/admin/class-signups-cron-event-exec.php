@@ -82,7 +82,9 @@ class Signups_Cron_Event_Exec {
                 // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
                 $wpdb->query(
                     $wpdb->prepare(
-                        "DELETE FROM %i WHERE signup_id = %d", $table_name, $signup_id
+                        "DELETE FROM %i WHERE signup_id = %d",
+                        $table_name,
+                        $signup_id
                     )
                 );
 
