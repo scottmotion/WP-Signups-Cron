@@ -144,7 +144,6 @@ class Signups_Cron_Event_Exec {
             $email_recipient = $admin_email;
             $email_subject = "[$blog_name] Signups Cron Report";
 
-            // $message = "Signups Cron successfully ran on {$event_date_now}.";
             $email_message = sprintf(
                 /* translators: Date and time. */
                 esc_html__( 'Signups Cron successfully ran on %s.', 'signups-cron'),
@@ -152,7 +151,6 @@ class Signups_Cron_Event_Exec {
             ) . "\n";
 
             if (isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1)) {
-                // $message .= "\nDeleted {$count_deleted_signups_active} Active Signups older than {$options['signups_cron_field_active_threshold']} days.";
                 $email_message .= sprintf(
                     /* translators: 1: Number of items. 2: Number of days. */
                     esc_html__( 'Deleted %1$s Active Signups older than %2$s days.', 'signups-cron'),
@@ -162,7 +160,6 @@ class Signups_Cron_Event_Exec {
             }
 
             if (isset($options['signups_cron_field_pending_enabled']) && ($options['signups_cron_field_pending_enabled'] == 1)) {
-                // $message .= "\nDeleted {$count_deleted_signups_pending} Pending Signups older than {$options['signups_cron_field_pending_threshold']} days.";
                 $email_message .= sprintf(
                     /* translators: 1: Number of items. 2: Number of days. */
                     esc_html__( 'Deleted %1$s Pending Signups older than %2$s days.', 'signups-cron'),
