@@ -63,14 +63,14 @@ class Signups_Cron_Event_Exec {
 
             $signup_date = '';
 
-            if ($status == 0) {
+            if ( $status == 0 ) {
                 $signup_date = strtotime($signup['registered']); // pending
-            } elseif ($status == 1) {
+            } elseif ( $status == 1 ) {
                 $signup_date = strtotime($signup['activated']); // active
             }
 
             // Compare signup timestamp + threshold to current timestamp
-            if (($signup_date + $delete_threshold) <= $current_time) {
+            if ( ($signup_date + $delete_threshold) <= $current_time ) {
                 // Signup is older than threshold
 
                 // Get the signup id
@@ -107,9 +107,9 @@ class Signups_Cron_Event_Exec {
         $count_deleted_signups_active = 0;
 
         // Check if user wants to delete active signups
-        if (isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1)) {
+        if ( isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1) ) {
             // active signups cron is enabled
-            if (isset($options['signups_cron_field_active_threshold'])) {
+            if ( isset($options['signups_cron_field_active_threshold']) ) {
                 // active signups threshold is set
                 $active_status = 1;
                 $active_threshold = $options['signups_cron_field_active_threshold'];
@@ -121,9 +121,9 @@ class Signups_Cron_Event_Exec {
         $count_deleted_signups_pending = 0;
 
         // Check if user wants to delete pending signups
-        if (isset($options['signups_cron_field_pending_enabled']) && ($options['signups_cron_field_pending_enabled'] == 1)) {
+        if ( isset($options['signups_cron_field_pending_enabled']) && ($options['signups_cron_field_pending_enabled'] == 1) ) {
             // pending signups cron is enabled
-            if (isset($options['signups_cron_field_pending_threshold'])) {
+            if ( isset($options['signups_cron_field_pending_threshold']) ) {
                 // pending signups threshold is set
                 $pending_status = 0;
                 $pending_threshold = $options['signups_cron_field_pending_threshold'];
@@ -133,10 +133,9 @@ class Signups_Cron_Event_Exec {
         }
 
         // Check if user wants to send admin email
-        if (isset($options['signups_cron_field_send_email_report']) && ($options['signups_cron_field_send_email_report'] == 1)) {
-            // send admin email is enabled
+        if ( isset($options['signups_cron_field_send_email_report']) && ($options['signups_cron_field_send_email_report'] == 1) ) {
+            // Send admin email is enabled. Create and send the email.
 
-            // start building message
             $admin_email = get_option('admin_email');            
             $blog_name = get_option( 'blogname' );
             $event_date_now = wp_date('F j, Y, g:i a T');
@@ -144,32 +143,35 @@ class Signups_Cron_Event_Exec {
             $email_recipient = $admin_email;
             $email_subject = "[$blog_name] Signups Cron Report";
 
+            // Report time cron ran
             $email_message = sprintf(
                 /* translators: Date and time. */
-                esc_html__( 'Signups Cron successfully ran on %s.', 'signups-cron'),
+                esc_html__( 'Signups Cron successfully ran on %s.', 'signups-cron' ),
                 esc_html($event_date_now)
             ) . "\n";
 
-            if (isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1)) {
+            // Report Active signups deleted
+            if ( isset($options['signups_cron_field_active_enabled']) && ($options['signups_cron_field_active_enabled'] == 1) ) {
                 $email_message .= sprintf(
                     /* translators: 1: Number of items. 2: Number of days. */
-                    esc_html__( 'Deleted %1$s Active Signups older than %2$s days.', 'signups-cron'),
+                    esc_html__( 'Deleted %1$s Active Signups older than %2$s days.', 'signups-cron' ),
                     esc_html($count_deleted_signups_active),
                     esc_html($options['signups_cron_field_active_threshold'])
                 ) . "\n";
             }
 
-            if (isset($options['signups_cron_field_pending_enabled']) && ($options['signups_cron_field_pending_enabled'] == 1)) {
+            // Report Pending signups deleted
+            if ( isset($options['signups_cron_field_pending_enabled']) && ($options['signups_cron_field_pending_enabled'] == 1) ) {
                 $email_message .= sprintf(
                     /* translators: 1: Number of items. 2: Number of days. */
-                    esc_html__( 'Deleted %1$s Pending Signups older than %2$s days.', 'signups-cron'),
+                    esc_html__( 'Deleted %1$s Pending Signups older than %2$s days.', 'signups-cron' ),
                     esc_html($count_deleted_signups_pending),
                     esc_html($options['signups_cron_field_pending_threshold'])
                 ) . "\n";
             }
 
-            // Send email
-            wp_mail( $email_recipient, $email_subject, $email_message  );
+            // Send the email
+            wp_mail( $email_recipient, $email_subject, $email_message );
         }
     }
 
