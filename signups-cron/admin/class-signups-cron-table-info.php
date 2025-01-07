@@ -59,11 +59,11 @@ class Signups_Cron_Table_Info {
         // Must use a direct database call since 'signups' table is not accessible on $wpdb if is_multisite() === false.
         // TODO: Use of a direct database call is discouraged.
         // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
-        $results = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s", $table_name ), ARRAY_A );
+        $signups_table_status = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s", esc_like($table_name) ), ARRAY_A );
 
         // Calculate the signups table size in MB
-        if ( $results ) {
-                $signups_table_size += round((($results[0]['Data_length'] + $results[0]['Index_length']) / 1024 / 1024), 2);
+        if ( $signups_table_status ) {
+                $signups_table_size += round((($signups_table_status[0]['Data_length'] + $signups_table_status[0]['Index_length']) / 1024 / 1024), 2);
         }
 
         $signups_table_info["signups_table_size"] = $signups_table_size;
