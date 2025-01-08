@@ -41,6 +41,7 @@ class Signups_Cron_Event_Exec {
         // Get signups from wp_signups table
         // Must use a direct database call since $wpdb->get_results uses an SQL statement, and 'signups' table is not accessible on $wpdb if is_multisite() === false.
         // TODO: cache this?
+        // TODO: "SELECT signup_id, registered, activated" ?
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $chosen_signups = $wpdb->get_results(
             $wpdb->prepare(
@@ -77,7 +78,7 @@ class Signups_Cron_Event_Exec {
                 $signup_id = $signup['signup_id'];
 
                 // Remove old signups from signups table
-                // Must use a direct database call since 'signups' table is not accessible on $wpdb if is_multisite() === false.
+                // Must use a direct database call since $wpdb->query uses an SQL statement, and 'signups' table is not accessible on $wpdb if is_multisite() === false.
                 // TODO: cache this?
                 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $wpdb->query(
@@ -87,6 +88,13 @@ class Signups_Cron_Event_Exec {
                         $signup_id
                     )
                 );
+
+                // TODO:
+                // $wpdb->delete(
+                //     $table_name, 		                // table name with dynamic prefix
+                //     ['signup_id' => $signup_id], 		// which id need to delete
+                //     ['%d'], 							    // make sure the id format
+                // );
 
                 $count_deleted_signups++;
             }
