@@ -89,13 +89,6 @@ class Signups_Cron_Event_Exec {
                     )
                 );
 
-                // TODO:
-                // $wpdb->delete(
-                //     $table_name, 		                // table name with dynamic prefix
-                //     ['signup_id' => $signup_id], 		// which id need to delete
-                //     ['%d'], 							    // make sure the id format
-                // );
-
                 $count_deleted_signups++;
             }
         }
