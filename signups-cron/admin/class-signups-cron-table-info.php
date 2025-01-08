@@ -57,7 +57,7 @@ class Signups_Cron_Table_Info {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_info["signups_count_pending"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 0) );
         
-        // Calculate the the signups count.
+        // Calculate the total signups count.
         $signups_table_info["signups_count_total"] = $signups_table_info["signups_count_active"] + $signups_table_info["signups_count_pending"];
 
         $signups_table_size = 0;
