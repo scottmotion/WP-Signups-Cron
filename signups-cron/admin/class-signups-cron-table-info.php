@@ -44,24 +44,31 @@ class Signups_Cron_Table_Info {
         $table_name = $wpdb->prefix . 'signups';
         
         $signups_table_info = [];
-    
-        // Get the signups table count from the database.
-        // Must use a direct database call since 'signups' table is not accessible on $wpdb if is_multisite() === false.
-        // TODO: Use of a direct database call is discouraged.
-        // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
+
+        // Get the active signups count from the database.
+        // Must use direct database call since $wpdb->get_var uses an SQL statement, and $wpdb does not provide a function to COUNT.
+        // TODO: cache this?
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_info["signups_count_active"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 1) );
+        
+        // Get the pending signups count from the database.
+        // Must use direct database call since $wpdb->get_var uses an SQL statement, and $wpdb does not provide a function to COUNT.
+        // TODO: cache this?
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_info["signups_count_pending"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 0) );
+        
+        // Calculate the the signups count.
         $signups_table_info["signups_count_total"] = $signups_table_info["signups_count_active"] + $signups_table_info["signups_count_pending"];
 
         $signups_table_size = 0;
 
-        // Get the signups table status
-        // Must use a direct database call since 'signups' table is not accessible on $wpdb if is_multisite() === false.
-        // TODO: Use of a direct database call is discouraged.
-        // TODO: Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().	
+        // Get the signups table status from the database.
+        // Must use direct database call since $wpdb->get_results uses an SQL statement, and $wpdb does not provide a function to SHOW TABLE STATUS.
+        // TODO: cache this?
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_status = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s",  $wpdb->esc_like($table_name) ), ARRAY_A );
 
-        // Calculate the signups table size in MB
+        // Calculate the signups table size in MB.
         if ( $signups_table_status ) {
                 $signups_table_size += round((($signups_table_status[0]['Data_length'] + $signups_table_status[0]['Index_length']) / 1024 / 1024), 2);
         }
