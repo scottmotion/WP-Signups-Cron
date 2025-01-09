@@ -46,14 +46,12 @@ class Signups_Cron_Table_Info {
         $signups_table_info = [];
 
         // Get the active signups count from the database.
-        // Must use direct database call since $wpdb->get_var uses an SQL statement, and $wpdb does not provide a function to COUNT.
-        // TODO: cache this?
+        // Must use direct database call since WP does not provide a function to count signups.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_info["signups_count_active"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 1) );
         
         // Get the pending signups count from the database.
-        // Must use direct database call since $wpdb->get_var uses an SQL statement, and $wpdb does not provide a function to COUNT.
-        // TODO: cache this?
+        // Must use direct database call since WP does not provide a function to count signups.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_info["signups_count_pending"] = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM %i WHERE active = %d", $table_name, 0) );
         
@@ -63,8 +61,7 @@ class Signups_Cron_Table_Info {
         $signups_table_size = 0;
 
         // Get the signups table status from the database.
-        // Must use direct database call since $wpdb->get_results uses an SQL statement, and $wpdb does not provide a function to SHOW TABLE STATUS.
-        // TODO: cache this?
+        // Must use direct database call since WP does not provide a function to SHOW TABLE STATUS.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $signups_table_status = $wpdb->get_results( $wpdb->prepare( "SHOW TABLE STATUS LIKE %s",  $wpdb->esc_like($table_name) ), ARRAY_A );
 
