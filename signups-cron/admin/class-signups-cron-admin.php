@@ -253,32 +253,32 @@ class Signups_Cron_Admin {
 	 */
 	public function signups_cron_settings_sanitize_cb( $input ) {
 
-		// Create our output array for storing the validated options 
+		// Create our output array for storing the validated options.
 		$output = array();
 		
 		// Checkbox input keys to process
 		$allowed_keys_checkbox = array( 'signups_cron_field_active_enabled', 'signups_cron_field_pending_enabled', 'signups_cron_field_send_email_report' );
-		// Allowed values for checkboxes: 1, (0?)
-		$allowed_values_checkbox = 1; // use array?
+		// Allowed values for checkboxes: 1. See <input type="checkbox" value="1">.
+		$allowed_values_checkbox = 1;
 
-		// Threshold number input keys to process
+		// Threshold number input keys to process.
 		$allowed_keys_threshold = array( 'signups_cron_field_active_threshold', 'signups_cron_field_pending_threshold' );
-		// Allowed values for threshold numbers: 0 - 999
+		// Allowed values for threshold numbers: 0 - 999. See <input type="number" min="0" max="999">.
 		$allowed_values_threshold_min = 0;
 		$allowed_values_threshold_max = 999;
 
 		// Schedule select options keys to process
 		$allowed_keys_schedule = array( 'signups_cron_field_cron_schedule' );
-		// Allowed values for schedule select options
+		// Allowed values for schedule select options. Copied from WP default schedules. See <select><option value=*>.
 		$allowed_values_schedule = array( 'hourly', 'twicedaily', 'daily', 'weekly' );
 
-		 //TODO: get $default_options keys
+		 // All allowable keys. Corresponds to default options keys.
 		$all_allowed_keys = array_merge( $allowed_keys_checkbox, $allowed_keys_threshold, $allowed_keys_schedule );
 
-		// Loop through each of the incoming options 
+		// Loop through each of the incoming options.
 		foreach( $input as $key => $value ) {
 			
-			// Check if input is not any of allowed and skip out. continue/break?
+			// Check if input is not any of allowed and exit (continue) foreach loop.
 			if ( !in_array( $key, $all_allowed_keys ) ) {
 				unset( $input[$key] );
 				continue;
