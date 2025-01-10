@@ -11,7 +11,7 @@ Manage WordPress signups via WP-Cron.
 
 == Description ==
 
-Enable a cron event that will remove active and/or pending signups from the database.
+Enable a cron event that will remove active and/or user pending signups from the database.
 
 Features:
 * Displays information about the signups table such as size and number of signups.
