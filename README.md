@@ -1,6 +1,6 @@
 # WordPress Signups Cron
 
-Manage WordPress signups via WP-Cron.
+Manage WordPress user signups via WP-Cron.
 
 ![](./screenshot.png)
 
