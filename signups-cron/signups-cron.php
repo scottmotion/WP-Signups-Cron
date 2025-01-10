@@ -18,7 +18,7 @@
  * @wordpress-plugin
  * Plugin Name:       Signups Cron
  * Plugin URI:        https://github.com/scottmotion/WP-Signups-Cron/
- * Description:       Manage WordPress signups via WP-Cron.
+ * Description:       Manage WordPress user signups via WP-Cron.
  * Version:           1.0.0
  * Requires at least: 6.2.0
  * Author:            Scott Winn
