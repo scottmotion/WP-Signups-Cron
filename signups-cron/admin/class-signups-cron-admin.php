@@ -204,17 +204,6 @@ class Signups_Cron_Admin {
 			<?php
 				do_settings_sections( 'signups_cron_page_information' );
 			?>
-			<p>
-			<?php 
-				if ( defined('BP_VERSION') && version_compare( BP_VERSION, '2.0', '>=' ) ) {
-					printf(
-						/* translators: Software version number */
-						esc_html__( 'BuddyPress %s active. Signups Cron is ready!', 'signups-cron' ),
-						esc_html(BP_VERSION)
-					);
-				}
-			?>
-			</p>
 			<hr>
 			<form name="settings" action="options.php" method="post">
 				<?php
