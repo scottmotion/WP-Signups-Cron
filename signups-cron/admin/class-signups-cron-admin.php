@@ -120,7 +120,7 @@ class Signups_Cron_Admin {
 	 */
 	public function add_admin_page() {
 
-		// TODO: check for multisite and skip submenu page? Move checks to define_admin_hooks() ?
+		// TODO: Move multisite/BP_VERSION checks to define_admin_hooks() ?
 		// TODO: When page is accessed (i.e. by 'Settings' link) it displays "Sorry, you are not allowed to access this page." Show admin warning?
 		if ( is_multisite() ) {
 			return;
@@ -152,11 +152,45 @@ class Signups_Cron_Admin {
 
 		// check for multisite and skip render
 		if ( is_multisite() ) {
+
+			?>
+				<div class="wrap">
+				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+				<hr>
+				<p>
+				<?php
+					esc_html_e( 'Signups Cron is not yet compatible with Multisite installations.', 'signups-cron' );
+				?>
+				</p>
+			<?php
+
 			return;
 		}
 
 		// check for BuddyPress 2.0 and skip render
 		if ( !defined('BP_VERSION') || version_compare( BP_VERSION, '2.0', '<' ) ) {
+
+			?>
+				<div class="wrap">
+				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+				<hr>
+				<p>
+				<?php
+					if ( !defined('BP_VERSION') ) {
+						printf(
+							esc_html__( 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' )
+						);
+					} else {
+						printf(
+							/* translators: Software version number */
+							esc_html__( 'BuddyPress %s active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' ),
+							esc_html(BP_VERSION)
+						);
+					}
+				?>
+				</p>
+			<?php
+
 			return;
 		}		
 	
@@ -172,22 +206,12 @@ class Signups_Cron_Admin {
 			?>
 			<p>
 			<?php 
-				if ( defined('BP_VERSION') ) {
-					if ( version_compare( BP_VERSION, '2.0', '>=' ) ) {
-						printf(
-							/* translators: Software version number */
-							esc_html__( 'BuddyPress %s active. Plugin ready!', 'signups-cron' ),
-							esc_html(BP_VERSION)
-						);
-					} else {
-						printf(
-							/* translators: Software version number */
-							esc_html__( 'BuddyPress %s active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' ),
-							esc_html(BP_VERSION)
-						);
-					}
-				} else {
-					esc_html_e( 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' );
+				if ( defined('BP_VERSION') && version_compare( BP_VERSION, '2.0', '>=' ) ) {
+					printf(
+						/* translators: Software version number */
+						esc_html__( 'BuddyPress %s active. Signups Cron is ready!', 'signups-cron' ),
+						esc_html(BP_VERSION)
+					);
 				}
 			?>
 			</p>
