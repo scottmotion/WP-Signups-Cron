@@ -27,7 +27,6 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       signups-cron
  * Domain Path:       /languages
- * Requires Plugins:  buddypress
  */
 
 // If this file is called directly, abort.
