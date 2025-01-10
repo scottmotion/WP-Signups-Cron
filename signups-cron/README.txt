@@ -7,11 +7,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Manage WordPress signups via WP-Cron.
+Manage WordPress user signups via WP-Cron.
 
 == Description ==
 
-Enable a cron event that will remove active and/or user pending signups from the database.
+Enable a cron event that will remove active and/or pending user signups from the database.
 
 Features:
 * Displays information about the signups table such as size and number of signups.
