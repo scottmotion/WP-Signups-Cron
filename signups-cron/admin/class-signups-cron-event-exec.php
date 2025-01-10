@@ -40,11 +40,10 @@ class Signups_Cron_Event_Exec {
 
         // Get signups from wp_signups table
         // Must use direct database call since WP does not provide a function to get signups.
-        // TODO: "SELECT signup_id, registered, activated" ?
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $chosen_signups = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT * FROM %i WHERE active = %d",
+                "SELECT signup_id, registered, activated FROM %i WHERE active = %d",
                 $table_name,
                 $status
             ), 
