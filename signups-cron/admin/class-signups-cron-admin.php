@@ -178,12 +178,12 @@ class Signups_Cron_Admin {
 				<?php
 					if ( !defined('BP_VERSION') ) {
 						printf(
-							esc_html__( 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' )
+							esc_html__( 'BuddyPress is not active. This plugin requires BuddyPress 2.0 or later (or BuddyBoss).', 'signups-cron' )
 						);
 					} else {
 						printf(
 							/* translators: Software version number */
-							esc_html__( 'BuddyPress %s active. This plugin requires BuddyPress 2.0 or later.', 'signups-cron' ),
+							esc_html__( 'BuddyPress %s active. This plugin requires BuddyPress 2.0 or later (or BuddyBoss).', 'signups-cron' ),
 							esc_html(BP_VERSION)
 						);
 					}
