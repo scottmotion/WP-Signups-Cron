@@ -68,5 +68,3 @@ Alternatively, disabling the plugin will automatically uncheck both settings and
 
 = 1.0.0 =
 * Initial public release.
-
-== Upgrade Notice ==
