@@ -60,7 +60,13 @@ On the plugin's settings page uncheck both 'Enable Active signups cron' and 'Ena
 
 Alternatively, disabling the plugin will automatically uncheck both settings and remove the scheduled cron event. All other settings will be kept.
 
+== Screenshots ==
+
+1. The Signups Cron settings page.
+
 == Changelog ==
 
 = 1.0.0 =
 * Initial public release.
+
+== Upgrade Notice ==
