@@ -145,7 +145,7 @@ class Signups_Cron {
 	 * with WordPress.
 	 * 
 	 * Deprecated as of 4.6
-	 * Optionally move to 'init'
+	 * Optionally move to 'init'. see: https://make.wordpress.org/core/2024/10/21/i18n-improvements-6-7/
 	 *
 	 * @since    1.0.0
 	 * @access   private
