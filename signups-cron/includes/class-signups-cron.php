@@ -111,7 +111,7 @@ class Signups_Cron {
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-i18n.php';
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-i18n.php';
 
 		/**
 		 * The class responsible for defining the plugins list table functionality
@@ -145,6 +145,7 @@ class Signups_Cron {
 	 * with WordPress.
 	 * 
 	 * Deprecated as of 4.6
+	 * Optionally move to 'init'
 	 *
 	 * @since    1.0.0
 	 * @access   private
