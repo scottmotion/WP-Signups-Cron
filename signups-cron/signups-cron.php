@@ -20,7 +20,7 @@
  * Plugin URI:        https://github.com/scottmotion/WP-Signups-Cron/
  * Description:       Manage WordPress user signups via WP-Cron.
  * Version:           1.0.0
- * Requires at least: 6.2.0
+ * Requires at least: 6.2
  * Author:            Scott Winn
  * Author URI:        https://www.scottwinn.dev/
  * License:           GPL-2.0+
@@ -45,7 +45,7 @@ define( 'SIGNUPS_CRON_VERSION', '1.0.0' );
  * The code that runs during plugin activation.
  * This action is documented in includes/class-signups-cron-activator.php
  */
-function activate_signups_cron() {
+function signups_cron_activate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-signups-cron-activator.php';
 	Signups_Cron_Activator::activate();
 }
@@ -54,13 +54,13 @@ function activate_signups_cron() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-signups-cron-deactivator.php
  */
-function deactivate_signups_cron() {
+function signups_cron_deactivate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-signups-cron-deactivator.php';
 	Signups_Cron_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_signups_cron' );
-register_deactivation_hook( __FILE__, 'deactivate_signups_cron' );
+register_activation_hook( __FILE__, 'signups_cron_activate' );
+register_deactivation_hook( __FILE__, 'signups_cron_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -77,10 +77,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-signups-cron.php';
  *
  * @since    1.0.0
  */
-function run_signups_cron() {
+function signups_cron_run() {
 
 	$plugin = new Signups_Cron();
 	$plugin->run();
 
 }
-run_signups_cron();
+signups_cron_run();

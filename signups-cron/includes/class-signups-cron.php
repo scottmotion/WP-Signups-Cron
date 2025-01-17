@@ -76,7 +76,7 @@ class Signups_Cron {
 		$this->signups_cron = 'signups-cron';
 
 		$this->load_dependencies();
-		$this->set_locale();
+		// $this->set_locale(); // Deprecated as of 4.6
 		$this->define_admin_hooks();
 
 	}
@@ -143,17 +143,19 @@ class Signups_Cron {
 	 *
 	 * Uses the Signups_Cron_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
+	 * 
+	 * Deprecated as of 4.6
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	// private function set_locale() {
 
-		$plugin_i18n = new Signups_Cron_i18n();
+	// 	$plugin_i18n = new Signups_Cron_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+	// 	$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
-	}
+	// }
 
 	/**
 	 * Register all of the hooks related to the admin area functionality

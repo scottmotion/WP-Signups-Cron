@@ -29,18 +29,20 @@ class Signups_Cron_i18n {
 
 	/**
 	 * Load the plugin text domain for translation.
+	 * 
+	 * Deprecated as of 4.6
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_textdomain() {
+	// public function load_plugin_textdomain() {
 
-		load_plugin_textdomain(
-			'signups-cron',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
+	// 	load_plugin_textdomain(
+	// 		'signups-cron',
+	// 		false,
+	// 		dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+	// 	);
 
-	}
+	// }
 
 
 
