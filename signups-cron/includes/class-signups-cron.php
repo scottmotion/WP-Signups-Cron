@@ -151,7 +151,7 @@ class Signups_Cron {
 	 * If you still support older WordPress versions or do not host your plugin/theme on WordPress.org, move the function call to a later hook such as init.
 	 * See: https://make.wordpress.org/core/2024/10/21/i18n-improvements-6-7/
 	 * 
-	 * To use this function, uncomment Signups_Cron_i18n::load_plugin_textdomain() and the 'require_once' in 'load_dependencies()' above.
+	 * To use this function, uncomment Signups_Cron_i18n::load_plugin_textdomain() and the 'require_once' in 'load_dependencies()' above and the call to '$this->set_locale()' in the constructor for this class.
 	 * 
 	 * @since    1.0.0
 	 * @access   private
