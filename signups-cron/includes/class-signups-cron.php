@@ -141,12 +141,18 @@ class Signups_Cron {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Signups_Cron_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
+	 * Uses the Signups_Cron_i18n class in order to set the domain and to register the hook with WordPress.
 	 * 
-	 * Deprecated as of 4.6
-	 * Optionally move to 'init'. see: https://make.wordpress.org/core/2024/10/21/i18n-improvements-6-7/
-	 *
+	 * Since WordPress 6.7.0 translations are no longer immediately loaded, but handed off to the just-in-time loading mechanism.
+	 * Since WordPress 4.6.0 the function 'load_plugin_textdomain' now tries to load the .mo file from the languages directory first.
+	 * 
+	 * Since WordPress 4.6, plugins and themes no longer need load_plugin_textdomain() or load_theme_textdomain().
+	 * WordPress automatically loads the translations for you when needed.
+	 * If you still support older WordPress versions or do not host your plugin/theme on WordPress.org, move the function call to a later hook such as init.
+	 * See: https://make.wordpress.org/core/2024/10/21/i18n-improvements-6-7/
+	 * 
+	 * To use this function, uncomment Signups_Cron_i18n::load_plugin_textdomain() and the 'require_once' in 'load_dependencies()' above.
+	 * 
 	 * @since    1.0.0
 	 * @access   private
 	 */
@@ -154,7 +160,7 @@ class Signups_Cron {
 
 	// 	$plugin_i18n = new Signups_Cron_i18n();
 
-	// 	$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+	// 	$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
 
 	// }
 
