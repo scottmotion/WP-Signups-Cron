@@ -87,7 +87,6 @@ class Signups_Cron {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - Signups_Cron_Loader.		Orchestrates the hooks of the plugin.
-	 * - Signups_Cron_i18n.			Defines internationalization functionality.
 	 * - Signups_Cron_Plugin_Row.	Defines hooks for the plugins list table.
 	 * - Signups_Cron_Admin.		Defines all hooks for the admin area.
 	 * - Signups_Cron_Scheduler.	Schedules the cron event.
@@ -106,12 +105,6 @@ class Signups_Cron {
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-signups-cron-i18n.php';
 
 		/**
 		 * The class responsible for defining the plugins list table functionality
@@ -137,32 +130,6 @@ class Signups_Cron {
 		$this->loader = new Signups_Cron_Loader();
 
 	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Signups_Cron_i18n class in order to set the domain and to register the hook with WordPress.
-	 * 
-	 * Since WordPress 6.7.0 translations are no longer immediately loaded, but handed off to the just-in-time loading mechanism.
-	 * Since WordPress 4.6.0 the function 'load_plugin_textdomain' now tries to load the .mo file from the languages directory first.
-	 * 
-	 * Since WordPress 4.6, plugins and themes no longer need load_plugin_textdomain() or load_theme_textdomain().
-	 * WordPress automatically loads the translations for you when needed.
-	 * If you still support older WordPress versions or do not host your plugin/theme on WordPress.org, move the function call to a later hook such as init.
-	 * See: https://make.wordpress.org/core/2024/10/21/i18n-improvements-6-7/
-	 * 
-	 * To use this function, uncomment Signups_Cron_i18n::load_plugin_textdomain() and the 'require_once' in 'load_dependencies()' above and the call to '$this->set_locale()' in the constructor for this class.
-	 * 
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	// private function set_locale() {
-
-	// 	$plugin_i18n = new Signups_Cron_i18n();
-
-	// 	$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
-
-	// }
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
