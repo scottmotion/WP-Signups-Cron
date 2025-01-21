@@ -22,6 +22,7 @@ WordPress.org Plugin Page: https://wordpress.org/plugins/signups-cron/
 
 This plugin can be installed the same as any other WordPress plugin. Options are as follows:
 
+* In WordPress Admin got to 'Plugins > Add New Plugin' and search for 'Signups Cron', then click 'Install Now'
 * Download the latest release and install via WordPress Admin.
 * Clone the project, create a zip file of the signups-cron folder, and install via WordPress Admin.
 * Clone the project and upload the signups-cron folder to /wp-content/plugins via ftp.
