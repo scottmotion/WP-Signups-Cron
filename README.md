@@ -18,6 +18,8 @@ Enable a cron event that will remove active and/or pending user signups from the
 
 ## Installation
 
+WordPress.org Plugin Page: https://wordpress.org/plugins/signups-cron/
+
 This plugin can be installed the same as any other WordPress plugin. Options are as follows:
 
 * Download the latest release and install via WordPress Admin.
