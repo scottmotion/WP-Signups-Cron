@@ -41,7 +41,7 @@ This plugin is designed to work with single-site installations running BuddyPres
 
 = I have a multisite installation. Will this plugin work on my network? =
 
-While multsite installations do use the signups table, this plugin is not yet designed to work with networks, regardless of whether or not BuddyPress or BuddyBoss is installed. Check have been made to prevent the plugin from being used on such sites. Please do not install this plugin on multisite networks.
+While multsite installations do use the signups table, this plugin is not yet designed to work with networks, regardless of whether or not BuddyPress or BuddyBoss is installed. Checks have been made to prevent the plugin from being used on such sites. Please do not install this plugin on multisite networks.
 
 = What time will the scheduled cron event run? =
 
@@ -51,7 +51,7 @@ The event will run once immediately and be scheduled to recur at the time the su
 
 Currently you cannot choose the event time. If you change the schedule (i.e. from Daily to Weekly) the event will be rescheduled to the time the submit button is clicked. You can reset the time of the event by disabling both Active and Pending cron, clicking submit, then enable either cron and click submit again at the time you wish the event to run.
 
-Other plugin that modify WP-Cron events may allow you to change the event time.
+Other plugins that modify WP-Cron events may allow you to change the event time.
 
 = How do I disable the cron event from running? =
 
