@@ -31,6 +31,7 @@ class Signups_Cron_Scheduler {
         $options = get_option( 'signups_cron_settings' );
         $next_timestamp = wp_next_scheduled( 'signups_cron_event_hook' );
 
+        // First check if user has enabled cron for active or pending signups.
         if ( !isset($options['signups_cron_field_active_enabled']) && !isset($options['signups_cron_field_pending_enabled']) ) {
             // Cron NOT enabled. Check if event is scheduled.
             if ( $next_timestamp ) {
